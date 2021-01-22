@@ -37,8 +37,8 @@ body
 
 .header-div
 {
-	height: 550px;
-    background-color: #65cd00;
+	height: 80px;
+    background-color: #2c00cd;
 }
 
 .logo-div a
@@ -129,10 +129,10 @@ body
 {
     background: #f8f8f8;
     border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;	
+    border-bottom: 1px solid #ddd;
     margin: 70px 0px;
-    margin-bottom: 0px;      
-    padding: 50px 0px;  
+    margin-bottom: 0px;
+    padding: 50px 0px;
 }
 
 .more-feature-div .col-md-6 img
@@ -160,7 +160,7 @@ body
     float: right;
     width: 86%;
     margin-top: 0;
-    font-weight: 400;    
+    font-weight: 400;
 }
 
 .more-features-div-description
@@ -304,13 +304,13 @@ body
 .call-action-bg
 {
 	background-image: url(../images/dashboard-img.jpg);
-	margin:60px 0px; 
+	margin:60px 0px;
     text-align: center;
     padding-bottom: 50px;
     font-size: 16px;
     line-height: 30px;
     font-weight: 300;
-	background-size: cover;    
+	background-size: cover;
 }
 
 .call-action-color {
@@ -389,7 +389,7 @@ body
 
 footer {
     padding: 40px 0 35px 0;
-    text-align: center;    
+    text-align: center;
     margin-bottom: 10px;
 }
 
@@ -436,7 +436,7 @@ footer {
 	}
 		.header-div
 	{
-		height: 350px;
+		height: 80px;
 	}
 
 	.slide-text {
@@ -485,7 +485,7 @@ footer {
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -523,8 +523,8 @@ body
 
 .header-div
 {
-	height: 550px;
-    background-color: #65cd00;
+	height: 80px;
+    background-color: #2c00cd;
 }
 
 .logo-div a
@@ -615,10 +615,10 @@ body
 {
     background: #f8f8f8;
     border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;	
+    border-bottom: 1px solid #ddd;
     margin: 70px 0px;
-    margin-bottom: 0px;      
-    padding: 50px 0px;  
+    margin-bottom: 0px;
+    padding: 50px 0px;
 }
 
 
@@ -641,7 +641,7 @@ body
     float: right;
     width: 86%;
     margin-top: 0;
-    font-weight: 400;    
+    font-weight: 400;
 }
 
 .more-features-div-description
