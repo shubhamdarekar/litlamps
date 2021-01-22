@@ -3,7 +3,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
-class Users(models.Model):
+class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     gender = models.BooleanField()
@@ -11,44 +11,48 @@ class Users(models.Model):
     mobile_no = PhoneNumberField(null=False, blank=False, unique=True)
 
 class Password(models.Model):
-    customer_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     password = models.CharField(max_length=255)
 
-class Products(models.Model):
+class Product(models.Model):
     product_name = models.CharField(max_length=255)
     product_desc = models.TextField()
     product_quantity = models.IntegerField()
     product_price_rupees = models.FloatField()
     product_price_dollars = models.FloatField()
-    bestselling = models.IntegerField()
+    bestselling = models.IntegerField(null=True)
     image_path = models.TextField()
 
-class Orders(models.Model):
-    customer_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+class Order(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.TextField()
     amount = models.BigIntegerField()
     order_success = models.BooleanField()
     payment = models.BooleanField()
 
-class Order_items(models.Model):
-    order_id = models.ForeignKey(Orders, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
+class Order_item(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     quantity = models.IntegerField()
 
-class Customer_reviews(models.Model):
-    customer_id = models.ForeignKey(Users, on_delete=models.DO_NOTHING)
-    product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
+class Customer_review(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     review = models.TextField()
 
-class FAQs(models.Model):
+class FAQ(models.Model):
     question = models.TextField()
     answer = models.TextField()
 
-class Ratings(models.Model):
-    product_id = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
-    customer_id = models.ForeignKey(Users, on_delete=models.DO_NOTHING)
+class Rating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     rating = models.IntegerField()
 
 class Recently_viewed(models.Model):
-    product_id = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
-    customer_id = models.ForeignKey(Users, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+class Cart(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
