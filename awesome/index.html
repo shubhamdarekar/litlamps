@@ -328,7 +328,7 @@
         }
 
         .bottom_border {
-            border-bottom: 1px solid #323f45;
+            border-bottom: 10px solid #323f45;
             padding-bottom: 20px;
         }
 
@@ -377,7 +377,19 @@
     </style>
 
 
+    <!--  Products button -->
 
+    <style>
+        .products_button {
+            background-color: black;
+            padding: 2vh;
+            text-align: center;
+        }
+
+        .products_button li a:hover {
+            text-decoration: none;
+        }
+    </style>
 
 </head>
 
@@ -572,6 +584,19 @@
 </div>
 <!-- Modal login end-->
 
+<div class="" container>
+    <br>
+    <br>
+</div>
+
+<div class="products_button bottom_border">
+    <a href='www.google.com'>
+        <div id='clickable'>
+            <p class="products_button_text">I'm content. Click me to go to google</p>
+        </div>
+    </a>
+</div>
+
 <!-- Feature -->
 <div class="container" id="features">
     <div class="row">
@@ -619,6 +644,27 @@
     </div><!-- End row -->
 </div><!-- End Container -->
 
+
+<form action="#" method="POST">
+    {% csrf_token %}
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_XgSvcOhAnzdFER"
+    data-amount="1000"
+    data-currency="INR"
+    data-order_id="{{ payment.id }}"
+    data-buttontext="Pay with Razorpay"
+    data-name="Lit Lamp"
+    data-description="Pay for me"
+    data-prefill.name="Mihir Butala"
+    data-prefill.email="mihirbutala@gmail.com"
+    data-prefill.phone = "7545562135"
+    data-theme.color="#E3E3E3"
+></script>
+<input type="hidden" custom="Hidden Element" name="hidden">
+</form>
+
+
 <div class="more-feature-div">
     <div class="container">
         <div class="row">
@@ -653,78 +699,78 @@
 <!-- End Feature -->
 
 <!-- Products -->
-<div class="col-lg-2 container" >
+<div class="col-lg-2 container">
     <h1>Products</h1>
 </div>
-  <div class="row">
-  <div class="col-md-4">
-    <!-- Card -->
-    <div class="card">
-      <!-- Custom class for applying ripple -->
-      <a href="#!" class="example-class">
-        <img
-          src="https://mdbootstrap.com/img/new/standard/city/024.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the
-          card's content.
-        </p>
-        <a href="#!" class="btn btn-primary">Button</a>
-      </div>
+<div class="row">
+    <div class="col-md-4">
+        <!-- Card -->
+        <div class="card">
+            <!-- Custom class for applying ripple -->
+            <a href="#!" class="example-class">
+                <img
+                        src="https://mdbootstrap.com/img/new/standard/city/024.jpg"
+                        class="card-img-top"
+                        alt="..."
+                />
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the
+                    card's content.
+                </p>
+                <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+        </div>
+        <!-- Card -->
     </div>
-    <!-- Card -->
-  </div>
 
-  <div class="col-md-4">
-    <!-- Card -->
-    <div class="card">
-      <!-- Custom class for applying ripple -->
-      <a href="#!" class="example-class">
-        <img
-          src="https://mdbootstrap.com/img/new/standard/city/025.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the
-          card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Button</a>
-      </div>
+    <div class="col-md-4">
+        <!-- Card -->
+        <div class="card">
+            <!-- Custom class for applying ripple -->
+            <a href="#!" class="example-class">
+                <img
+                        src="https://mdbootstrap.com/img/new/standard/city/025.jpg"
+                        class="card-img-top"
+                        alt="..."
+                />
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the
+                    card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Button</a>
+            </div>
+        </div>
+        <!-- Card -->
     </div>
-    <!-- Card -->
-  </div>
 
-  <div class="col-md-4">
-    <!-- Card -->
-    <div class="card">
-      <!-- Custom class for applying ripple -->
-      <a href="#!" class="example-class">
-        <img
-          src="https://mdbootstrap.com/img/new/standard/city/032.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the
-          card's content.
-        </p>
-        <a href="#!" class="btn btn-primary">Button</a>
-      </div>
+    <div class="col-md-4">
+        <!-- Card -->
+        <div class="card">
+            <!-- Custom class for applying ripple -->
+            <a href="#!" class="example-class">
+                <img
+                        src="https://mdbootstrap.com/img/new/standard/city/032.jpg"
+                        class="card-img-top"
+                        alt="..."
+                />
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the
+                    card's content.
+                </p>
+                <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+        </div>
+        <!-- Card -->
     </div>
-    <!-- Card -->
-  </div>
 </div>
 
 <!-- End Products -->
@@ -1042,10 +1088,10 @@
         <p class="text-center">Copyright @2017 | Designed With by <a href="#">LiT</a></p>
 
         <ul class="social_footer_ul">
-            <li><a href="#"><img src="{% static 'images/facebook.png' %}" width="30px" height="30px" /></a></li>
-            <li><a href="#"><img src="{% static 'images/instagram.png' %}" width="30px" height="30px" /></a></li>
-{#            <li><a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a></li>#}
-{#            <li><a href="http://webenlance.com"><i class="fab fa-instagram"></i></a></li>#}
+            <li><a href="#"><img src="{% static 'images/facebook.png' %}" width="30px" height="30px"/></a></li>
+            <li><a href="#"><img src="{% static 'images/instagram.png' %}" width="30px" height="30px"/></a></li>
+            {#            <li><a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a></li>#}
+            {#            <li><a href="http://webenlance.com"><i class="fab fa-instagram"></i></a></li>#}
         </ul>
         <!--social_footer_ul ends here-->
     </div>
@@ -1096,8 +1142,8 @@
 <!-- script for ripple effect on card -->
 <script>
     document.querySelectorAll('.example-class').forEach((cardRipple) => {
-  new mdb.Ripple(cardRipple, { color: 'light' })
-});
+        new mdb.Ripple(cardRipple, {color: 'light'})
+    });
 </script>
 <!-- end script -->
 

@@ -13,6 +13,7 @@ phonenumbers = "==8.12.16"
 pytz = "==2020.5"
 sqlparse = "==0.4.1"
 Django = "==3.1.5"
+razorpay = "*"
 
 [requires]
 python_version = "3.8"
