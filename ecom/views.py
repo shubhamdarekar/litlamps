@@ -1,5 +1,7 @@
 import razorpay
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from razorpay import client
 
 from .models import *
@@ -18,7 +20,11 @@ def template(request):
 
 
 def product_page(request):
-    return render(request, 'product.html')
+    id=0
+    if request.method == 'GET':
+        id = request.GET['id']
+        product_details = Product.objects.get(id=id)
+    return render(request, 'product.html', {id: id, 'product_details': product_details})
 
 
 def homepage(request):
@@ -33,19 +39,21 @@ def homepage(request):
                 'payment_capture': '1'}
         # payment = temp_client.order.create(data=data)
     bestselling = Product.objects.all().order_by('bestselling')
-    products = Product.objects.all()
     faq = FAQ.objects.all()
     recently_viewed = recent_viewed()
     return render(request, 'index2.html',
-                  {'bestselling': bestselling, 'products': products, 'faq': faq, 'payment': payment})
+                  {'bestselling': bestselling, 'faq': faq, 'payment': payment})
 
 
 def login(request):
     pass
 
-
 def cart_items():
     cart = Cart.objects.all()
     return cart
+
+def products(request):
+    products = Product.objects.all()
+    return render(request, 'products.html', {'products': products});
 
 

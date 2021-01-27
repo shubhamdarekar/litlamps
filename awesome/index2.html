@@ -1,5 +1,7 @@
 {% extends "template.html" %}
 {% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
 {% block title %}Lit Lamps{% endblock %}
 
 
@@ -212,7 +214,7 @@
 
     <!-- Products Button -->
     <div class="row">
-        <a href="" class="btn col-12" style="margin-top: 2px; font-size: 30px; background-color: #ffdf00; color: black">
+        <a href="/products" class="btn col-12" style="margin-top: 2px; font-size: 30px; background-color: #ffdf00; color: black">
             <span class="glyphicon glyphicon-lamp"></span>
             Products
         </a>
@@ -298,7 +300,11 @@
         ></script>
         <input type="hidden" custom="Hidden Element" name="hidden">
     </form>
-
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }} !</p>
+    {% else %}
+    <a class="btn" href="{% provider_login_url 'google' %}">Login</a>
+    {% endif %}
 
     <!-- Products -->
     <div class="col-lg-2 container">
