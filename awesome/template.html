@@ -264,9 +264,9 @@
 <body>
 
 <!-- Navbar 1 -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background:#000000">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark" role="navigation" style="background:#000000">
     <div class="container">
-        <a class="navbar-brand" href="#">LiT</a>
+        <a class="navbar-brand" href="/">LiT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -275,7 +275,7 @@
         <div class="collapse navbar-collapse container" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
 
             <ul class="nav nav-pills ml-auto">
@@ -495,8 +495,8 @@
     new WOW().init();
 </script>
 <!-- Style -->
-    {% block script %}
-    {% endblock script %}
+{% block script %}
+{% endblock script %}
 <!-- End Style -->
 </body>
 </html>
