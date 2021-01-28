@@ -1,6 +1,7 @@
 # Create your models here.
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import User as authUser
 
 # Create your models here.
 
@@ -29,7 +30,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(authUser, on_delete=models.CASCADE)
     address = models.TextField()
     amount = models.BigIntegerField()
     order_success = models.BooleanField()
@@ -43,7 +44,7 @@ class Order_item(models.Model):
 
 
 class Customer_review(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(authUser, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     review = models.TextField()
 
@@ -55,15 +56,21 @@ class FAQ(models.Model):
 
 class Rating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
-    customer = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(authUser, on_delete=models.DO_NOTHING)
     rating = models.IntegerField()
 
 
 class Recently_viewed(models.Model):
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
-    customer = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(authUser, on_delete=models.DO_NOTHING)
 
 
 class Cart(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(authUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+
+class Address(models.Model):
+    customer = models.ForeignKey(authUser, on_delete=models.CASCADE)
+    address = models.TextField()

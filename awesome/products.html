@@ -8,23 +8,32 @@
         .products:hover {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
+
         .card {
             font-family: Copperplate;
+            {#background-color: rgba(183,178,190,0.32);#}
+            border-color: #ffdf00;
+            border-radius: 25px ;
         }
+
         .btn {
             background-color: #ffdf00;
             color: black;
             border-radius: 8px;
         }
+
         .btn:hover {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
+
         h4:hover {
             cursor: pointer;
         }
+
         img:hover {
             cursor: pointer;
         }
+
         h5 {
             font-size: 25px;
         }
@@ -46,20 +55,25 @@
         </div><!-- End col-md-12 -->
     </div>
     <hr>
-    <div class="row justify-content-md-center justify-content-lg-center justify-content-sm-center">
+    <div class="row justify-content-md-center justify-content-lg-center justify-content-sm-center p-5">
         {% for product in products %}
-            <div class="card col-lg-3 col-md-5 col-sm-5 products" style="margin: 1vh; height: 425px" id="{{ product.product_id }}">
-                <img class="card-img" src="{{ product.image_path }}" alt="image" style="margin-top: 2%;" onclick="location.href='/product/'">
+            <div class="card col-lg-2 col-md-5 col-sm-5 products" style="margin: 15px; height: 425px"
+                 id="{{ product.product_id }}">
+                <div class="row justify-content-center" >
+                    <img src="{{ product.image_path }}" height="275px" alt="image" style="margin-top: 2%;"
+                         onclick="location.href='/product/?id={{ product.id }}'">
+                </div>
+
                 <div class="card-body justify-content-lg-start">
                     <div class="row">
-                        <h4 onclick="location.href='/product/'">{{ product.product_name }}</h4>
+                        <h4 onclick="location.href='/product/?id={{ product.id }}'">{{ product.product_name }}</h4>
                     </div>
                     <br>
                     <div class="row justify-content-lg-between justify-content-md-between justify-content-sm-between">
                         <div class="row">
                             <div class="col-lg-1 col-md-1 col-sm-1"></div>
                             <i class="fa fa-inr" aria-hidden="true" style="margin-top: 5px"></i>
-                            <h5>{{ product.product_price_rupees }}0</h5>
+                            <h5><b>{{ product.product_price_rupees }}0</b></h5>
                         </div>
                         <a class="btn"><i class="fa fa-cart-plus"> Add to Cart</i></a>
                         {#                                {% for i in "x"|ljust:"3" %}#}

@@ -1,4 +1,6 @@
 {% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     <!-- Animation Css -->
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    {#    <link rel="stylesheet" href="{% static 'css/animate.css' %}">#}
 
     <!-- Header and carousel CSS -->
     <style>
@@ -135,6 +137,63 @@
     {% block style %}
     {% endblock %}
     <!-- End style -->
+    <!-- Modal CSS -->
+    <style>
+        .modal-full {
+            min-width: 20%;
+        }
+
+        .modal-full .modal-content {
+            min-height: 70vh;
+            background-color: black;
+        }
+
+        .modal.right .modal-dialog {
+            position: fixed;
+            margin: auto;
+            width: 550px;
+            height: 100%;
+            -webkit-transform: translate3d(0%, 0, 0);
+            -ms-transform: translate3d(0%, 0, 0);
+            -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+        }
+
+
+        .modal.right .modal-content {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .modal.right .modal-body {
+            padding: 15px 15px 15px 15px;
+        }
+
+        /*Right*/
+        .modal.right.fade .modal-dialog {
+            right: -550px;
+            -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+            transition: opacity 0.3s linear, right 0.3s ease-out;
+        }
+
+        .modal.right.fade.in .modal-dialog {
+            right: 0;
+        }
+
+        /* ----- MODAL STYLE ----- */
+        .modal-content {
+            border-radius: 15px;
+        {#border: 25px #1e7e34;#}
+        }
+
+        .modal-header {
+            border-bottom-color: #EEEEEE;
+            background-color: #FAFAFA;
+        }
+    </style>
+
 
     <!-- Footer CSS -->
     <style>
@@ -258,6 +317,7 @@
             height: 20px;
             text-align: center;
         }
+
     </style>
 </head>
 
@@ -293,14 +353,31 @@
                 <li title="Contact Us" class="nav-item">
                     <a class="nav-link" href="#"><i class="fa fa-envelope-o fa-2x"></i></a>
                 </li>
-                <li title="Cart" class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#myModal2" href="#"><i
-                            class="fa fa-shopping-basket fa-2x"></i></a>
-                </li>
-                <li title="Account" class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#"><i
-                            class="fa fa-user fa-2x"></i></a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li title="Cart" class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#myModal2" href="#"><i
+                                class="fa fa-shopping-basket fa-2x"></i></a>
+                    </li>
+                    <li title="Account" class="nav-item">
+                        <a class="nav-link" href="#"><i
+                                class="fa fa-user fa-2x"></i></a>
+                    </li>
+                    <li title="Logout" class="nav-item">
+                        <a class="nav-link" href="/logout/"><i
+                                class="fa fa-sign-out fa-2x"></i></a>
+                    </li>
+                {% else %}
+                    {#                    <li title="Login" class="nav-item">#}
+                    {#                        <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#"><i#}
+                    {#                                class="fa fa-sign-in fa-2x"></i></a>#}
+                    {#                    </li>#}
+                    {#                    #}
+                    <li title="Login" class="nav-item">
+                        <a class="nav-link" href="{% provider_login_url 'google' %}"><i
+                                class="fa fa-sign-in fa-2x"></i></a>
+                    </li>
+                {% endif %}
+
             </ul>
         </div>
     </div>
@@ -310,23 +387,65 @@
 <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+            <div class="row modal-header">
+                <button type="button" class="close ml-0" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel2">CART</h4>
+                <h4 class="modal-title mx-auto" id="myModalLabel2">CART</h4>
             </div>
 
             <div class="modal-body">
-                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                    wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                    assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-                    labore sustainable VHS.
-                </p>
+                <table class="table table-borderless table-shopping-cart">
+                    <thead class="text-muted">
+                    <tr class="small text-uppercase">
+                        <th scope="col">Product</th>
+                        <th scope="col" width="120">Quantity</th>
+                        <th scope="col" width="120">Price</th>
+                        <th scope="col" class="text-right" width="200"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cartitem in cart %}
+                        <tr>
+                            <td>
+                                <figure class="itemside align-items-center">
+                                    <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm">
+                                    </div>
+                                    <figcaption class="info">
+                                        <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
+                                        {#                                        <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>#}
+                                    </figcaption>
+                                </figure>
+                            </td>
+                            <td>
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="price-wrap">
+                                    <var class="price">₹{{ cartitem.product.product_price_rupees }}</var>
+                                    <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
+                                        each </small>
+                                </div> <!-- price-wrap .// -->
+                            </td>
+                            <td class="text-right">
+                                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"
+                                   data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+                                <a href="" class="btn btn-light"> Remove</a>
+                            </td>
+                        </tr>
+                        <tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
-
+            <div class="container d-flex flex-column bg-dark justify-content-center" style="height: 100px">
+                <a class="btn btn-outline-warning" href="/checkout/">Checkout</a>
+            </div>
         </div><!-- modal-content -->
     </div><!-- modal-dialog -->
 </div>
@@ -340,7 +459,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Sign In</h3>
-                            <div class="d-flex justify-content-end social_icon">
+                            <div class="d-flex justify-content-end social_icon" style="cursor: pointer;"
+                                 onclick="window.location='{% provider_login_url 'google' %}';">
 
                                 <span><i class="fa fa-google-plus-square"></i></span>
 
@@ -483,11 +603,11 @@
     </div>
 
 </footer>
+
 <!-- End footer -->
 
 
 <script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/wow.min.js' %}"></script>
 
