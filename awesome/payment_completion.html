@@ -1,0 +1,101 @@
+{% extends "template.html" %}
+{% load static %}
+
+{% block title %}Payment{% endblock %}
+
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+    <br><br><br>
+    {{ payment }}
+    <div class="container">
+        <form action="/successRedirect/" method="POST">
+            {% csrf_token %}
+            <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_XgSvcOhAnzdFER"
+                    data-amount="{{ payment.amount }}"
+                    data-currency="{{ payment.currency }}"
+                    data-order_id="{{ payment.id }}"
+                    data-buttontext=" Pay with Razorpay"
+                    data-name="Laser Innovation Technology"
+                    data-description="Pay for your order"
+                    data-image="{% static '/images/facebook.png' %}"
+                    data-prefill.name="{{ user.first_name }}"
+                    data-prefill.email="{{ user.email }}"
+                    data-theme.color="#ffdf00"
+            ></script>
+            <input type="hidden" custom="Hidden Element" name="hidden">
+        </form>
+    </div>
+    <div class="container" id="Services">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_heading">
+                    <h1>Services</h1>
+                    <div class="text-center"><span class="underline"></span></div>
+                </div>
+            </div><!-- End col-md-12 -->
+        </div><!-- End row -->
+
+        <div class="col-md-4 services-box-gray col-sm-6">
+            <div class="services-box">
+                <i class="fa fa-support"></i>
+                <h4>24/7 Support</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s</p>
+            </div>
+        </div><!-- End col-md-4-->
+        <div class="col-md-4 col-sm-6">
+            <div class="services-box">
+                <i class="fa fa-rocket"></i>
+                <h4>Quick Install</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s</p>
+            </div>
+        </div><!-- End col-md-4-->
+        <div class="col-md-4 services-box-gray col-sm-6">
+            <div class="services-box">
+                <i class="fa fa-cogs"></i>
+                <h4>Easy to Customize</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s</p>
+            </div>
+        </div><!-- End col-md-4-->
+        <div class="col-md-4 col-sm-6">
+            <div class="services-box">
+                <i class="fa fa-magic"></i>
+                <h4>Another Feature</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s</p>
+            </div>
+        </div><!-- End col-md-4-->
+        <div class="col-md-4 services-box-gray col-sm-6">
+            <div class="services-box">
+                <i class="fa fa-support"></i>
+                <h4>24/7 Support</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s</p>
+            </div>
+        </div><!-- End col-md-4-->
+        <div class="col-md-4 col-sm-6">
+            <div class="services-box">
+                <i class="fa fa-rocket"></i>
+                <h4>Quick Install</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s</p>
+            </div>
+        </div><!-- End col-md-4-->
+
+
+    </div><!-- End container -->
+
+    <!-- End Services -->
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
