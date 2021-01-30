@@ -27,19 +27,28 @@ class Product(models.Model):
     product_price_dollars = models.FloatField()
     bestselling = models.IntegerField(null=True)
     image_path = models.TextField()
+    image_path_2 = models.TextField(null=True, default=None)
+    image_path_3 = models.TextField(null=True, default=None)
+    image_path_4 = models.TextField(null=True, default=None)
+    dimensions = models.TextField(null=True, default=None)
+    power = models.TextField(default=None)
 
 
 class Order(models.Model):
     customer = models.ForeignKey(authUser, on_delete=models.CASCADE)
-    address = models.TextField()
-    amount = models.BigIntegerField()
-    order_success = models.BooleanField()
-    payment = models.BooleanField()
+    address = models.TextField(null=True, default=None)
+    amount = models.BigIntegerField(default=0)
+    order_success = models.BooleanField(default=False)
+    payment = models.BooleanField(default=False)
+    payment_id = models.CharField(max_length=255, default="0")
+    status = models.CharField(max_length=255)
+    time = models.DateTimeField(auto_now_add=True)
+    razorpay_order_id = models.CharField(max_length=255)
 
 
 class Order_item(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     quantity = models.IntegerField()
 
 

@@ -1,8 +1,7 @@
 import razorpay
+from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
-from razorpay import client
 from django.contrib.auth import logout
 from django.db import connection
 from django.contrib.auth.models import User as authUser
@@ -33,12 +32,18 @@ def product_page(request):
         product_details = Product.objects.get(id=id)
         cart = cart_items(request)
         # print(product_detail)
-    return render(request, 'product.html', {'id': id, 'product_details': product_details, 'cart': cart})
+        if request.user.is_authenticated:
+            temp = Recently_viewed()
+            temp.product_id = id
+            temp.customer_id = request.user.id
+            temp.save()
+    return render(request, 'product_page.html', {'id': id, 'product_details': product_details, 'cart': cart})
 
 
 def checkout(request):
     cart = cart_items(request)
-    return render(request, 'checkout.html', {'cart': cart})
+    totalPrice = Cart.objects.filter(customer_id=request.user.id).aggregate(Sum('product__product_price_rupees'))
+    return render(request, 'checkout.html', {'cart': cart, 'totalPrice': totalPrice['product__product_price_rupees__sum']})
 
 
 def homepage(request):
@@ -78,6 +83,7 @@ def products(request):
     products = Product.objects.all()
     cart = cart_items(request)
     return render(request, 'products.html', {'products': products, 'cart': cart, 'cart_visible': cart_visible});
+
 
 def add_to_cart(request):
     if request.user.is_authenticated:
@@ -138,3 +144,58 @@ def update_profile(request):
     else:
         return redirect('/')
 
+def create_razorpay_order(request):
+    if request.method == 'GET' and request.GET['type'] == 'cart':
+        # Find total price
+        total_price = Cart.objects.filter(customer_id=request.user.id).aggregate(Sum('product__product_price_rupees'))
+        order_amount = total_price['product__product_price_rupees__sum']
+
+        # Make razorpay order
+        order_currency = 'INR'
+        notes = {'Shipping address': 'test', 'amount': order_amount}
+        temp_client = razorpay.Client(auth=("rzp_test_XgSvcOhAnzdFER", "4gwNXfK8dXaeAkkKAKGIByhT"))
+        data = {'amount': order_amount * 100, 'currency': order_currency, 'notes': notes,
+                'payment_capture': '1'}
+        payment = temp_client.order.create(data=data)
+        print(payment)
+
+        # create new order
+        new_order = Order()
+        new_order.amount = order_amount
+        new_order.customer_id = request.user.id
+        new_order.razorpay_order_id = payment['id']
+        new_order.save()
+
+        # fill all the items in order
+        cart_all = cart_items(request)
+        for item in cart_all:
+            new_order_item = Order_item()
+            new_order_item.order_id = new_order.id
+            new_order_item.quantity = item.quantity
+            new_order_item.product_id = item.product_id
+            new_order_item.save()
+
+    return render(request, 'payment_completion.html', {'payment': payment})
+
+
+def success_redirect(request):
+    razorpay_payment_id = request.POST['razorpay_payment_id']
+    razorpay_order_id = request.POST['razorpay_order_id']
+    razorpay_signature = request.POST['razorpay_signature']
+    temp_client = razorpay.Client(auth=("rzp_test_XgSvcOhAnzdFER", "4gwNXfK8dXaeAkkKAKGIByhT"))
+    params_dict = {
+        'razorpay_order_id': razorpay_order_id,
+        'razorpay_payment_id': razorpay_payment_id,
+        'razorpay_signature': razorpay_signature
+    }
+    temp_client.utility.verify_payment_signature(params_dict)
+    order_obj = Order.objects.get(razorpay_order_id=razorpay_order_id)
+    order_obj.payment = True
+    order_obj.payment_id = razorpay_payment_id
+    order_obj.save()
+    Cart.objects.filter(customer_id=request.user.id).delete()
+    return render(request, 'payment_success.html', {'data': request.POST})
+
+
+def orders_page(request):
+    return render(request, "orders_page.html")
