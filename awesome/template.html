@@ -361,10 +361,14 @@
                         <a class="nav-link" data-toggle="modal" data-target="#myModal2" href="#"><i
                                 class="fa fa-shopping-basket fa-2x"></i></a>
                     </li>
-                    <li title="Account" class="nav-item">
-                        <a class="nav-link" href="#"><i
-                                class="fa fa-user fa-2x"></i></a>
-                    </li>
+                    <li title="Currency" class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x"></i></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile/"><i class="fa fa-user"></i> Your profile</a>
+                        <a class="dropdown-item" href="/orders/"><i class="fa fa-shopping-cart"></i> Your orders</a>
+                    </div>
+                </li>
                     <li title="Logout" class="nav-item">
                         <a class="nav-link" href="/logout/"><i
                                 class="fa fa-sign-out fa-2x"></i></a>

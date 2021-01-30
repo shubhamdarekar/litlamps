@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from razorpay import client
 from django.contrib.auth import logout
 from django.db import connection
+from django.contrib.auth.models import User as authUser
 
 from .models import *
 
@@ -115,4 +116,25 @@ def remove_from_cart(request):
     else:
         return redirect('/')
 
+def profile(request):
+    address = Address.objects.all()
+    return render(request, 'profile.html', {'addresses': address})
+
+def update_profile(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            username = request.POST['username']
+            user = authUser.objects.get(email=request.POST['email'])
+            user.first_name = first_name
+            user.last_name = last_name
+            user.username = username
+            user.save()
+
+            return redirect('/profile/')
+        else:
+            return redirect('/')
+    else:
+        return redirect('/')
 

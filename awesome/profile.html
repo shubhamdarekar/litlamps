@@ -1,0 +1,147 @@
+{% extends "template.html" %}
+{% load static %}
+
+{% block title %}Products{% endblock %}
+
+{% block style %}
+    <style>
+        .profile {
+            margin: 25px;
+        }
+
+        .text {
+            color: black;
+        }
+
+        .profile-input {
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main_heading">
+                <h1>Profile</h1>
+                <div class="text-center"><span class="underline"
+                                               style="background-color: #ffdf00!important; width: 150px"></span></div>
+            </div>
+        </div><!-- End col-md-12 -->
+    </div>
+    <div class="profile">
+        <div class="row justify-content-start">
+            <div style="padding-top: 18px; padding-right: 30px; padding-left: 30px;
+            background-color: #ffdf00; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19); margin-left: 100px">
+                <p style="font-size: 50px">{{ user.first_name|slice:":1" }}</p>
+            </div>
+            <div class="flex-row-reverse align-self-center">
+                <h3 class="text"> &nbsp&nbsp{{ user.first_name }}&nbsp{{ user.last_name }}</h3>
+                <h4>&nbsp&nbsp{{ user.email }}</h4>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="card col-lg-8">
+                <div class="card-header"
+                     style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
+                    <div class="row">
+                        <img src="{% static 'images/user_profile.png' %}" width="70px" height="70px">
+                        <h2 class="align-self-center">&nbsp&nbspProfile Settings</h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="/update_profile/" method="post" class="form">
+                        {% csrf_token %}
+                        <table style="width: 100%">
+                            <tr class="form-group">
+                                <td>Email</td>
+                                {#                            <td class="col-lg-1"></td>#}
+                                <td><input type="text" name="email" value="{{ user.email }}"
+                                           class="profile-input form-control" readonly></td>
+                            </tr>
+                            <tr class="form-group">
+                                <td>First Name</td>
+                                <td><input type="text" name="first_name" value="{{ user.first_name }}"
+                                           class="profile-input form-control" required></td>
+                            </tr>
+                            {#                            <tr>#}
+                            {#                                <p>{{ first_name_error }}</p>#}
+                            {#                            </tr>#}
+                            <tr class="form-group">
+                                <td>Last Name</td>
+                                <td><input type="text" name="last_name" value="{{ user.last_name }}"
+                                           class="profile-input form-control" required></td>
+                            </tr>
+                            {#                            <tr>#}
+                            {#                                <p>{{ last_name_error }}</p>#}
+                            {#                            </tr>#}
+                            <tr class="form-group">
+                                <td>Username</td>
+                                <td><input type="text" name="username" value="{{ user.username }}"
+                                           class="profile-input form-control" required></td>
+                            </tr>
+                            <div class="align-self-end">
+                                <button type="submit"
+                                            style="background-color: #ffdf00; color: black; border: 0; border-radius: 5px; padding: 10px">
+                                        <i class="fa fa-check" style="background-color: #ffdf00">Submit</i>
+                                    </button>
+                            </div>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile">
+        <hr>
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="card col-lg-8">
+                <div class="card-header"
+                     style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
+                    <div class="row">
+                        <img src="{% static 'images/address.png' %}" width="70px" height="70px">
+                        <h2 class="align-self-center">&nbsp&nbspAddress Settings</h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% for address in addresses %}
+                        <div class="row">
+                            <div class="col-2">
+                                <h5>Address {{ forloop.counter }}</h5>
+                            </div>
+                            <div class="col-1">
+
+                            </div>
+                            <div style="width: 500px; background-color: #00b4c6">
+                                {{ address.address }}
+                            </div>
+                        </div>
+                        <br>
+                    {% endfor %}
+                    <hr>
+                <div class="card-header">
+                    <h3 style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19); color: black">Add address</h3>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
