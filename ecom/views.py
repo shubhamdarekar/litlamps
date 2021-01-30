@@ -199,3 +199,20 @@ def success_redirect(request):
 
 def orders_page(request):
     return render(request, "orders_page.html")
+
+def add_address(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            temp = request.POST['address']
+            address = Address()
+            address.address = temp
+            address.customer_id = request.user.id
+            address.save()
+    return redirect('/profile')
+
+def delete_address(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            id = request.POST['id']
+            Address.objects.filter(id=id).delete()
+    return redirect('/profile')

@@ -18,6 +18,16 @@
             border-left: 0;
             border-right: 0;
         }
+
+        {#.address-box:hover {#}
+        {#    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);#}
+        {#    padding: 5px;#}
+        {#}#}
+
+        button:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
     </style>
 {% endblock %}
 
@@ -73,7 +83,8 @@
                             <tr class="form-group">
                                 <td>First Name</td>
                                 <td><input type="text" name="first_name" value="{{ user.first_name }}"
-                                           class="profile-input form-control" required></td>
+                                           id="input1" class="profile-input form-control" readonly required></td>
+                                <td><i class="fa fa-edit" id="btn1" style="color: #ffdf00; margin-left: 20px"></i></td>
                             </tr>
                             {#                            <tr>#}
                             {#                                <p>{{ first_name_error }}</p>#}
@@ -81,7 +92,8 @@
                             <tr class="form-group">
                                 <td>Last Name</td>
                                 <td><input type="text" name="last_name" value="{{ user.last_name }}"
-                                           class="profile-input form-control" required></td>
+                                           id="input2" class="profile-input form-control" required readonly></td>
+                                <td><i class="fa fa-edit" id="btn2" style="color: #ffdf00; margin-left: 20px"></i></td>
                             </tr>
                             {#                            <tr>#}
                             {#                                <p>{{ last_name_error }}</p>#}
@@ -89,14 +101,20 @@
                             <tr class="form-group">
                                 <td>Username</td>
                                 <td><input type="text" name="username" value="{{ user.username }}"
-                                           class="profile-input form-control" required></td>
+                                           id="input3" class="profile-input form-control" required readonly></td>
+                                <td><i class="fa fa-edit" id="btn3" style="color: #ffdf00; margin-left: 20px"></i></td>
                             </tr>
-                            <div class="align-self-end">
+                            <tr>
+                                <td></td>
+                                <td>
+                                  <span><br><div>
                                 <button type="submit"
-                                            style="background-color: #ffdf00; color: black; border: 0; border-radius: 5px; padding: 10px">
-                                        <i class="fa fa-check" style="background-color: #ffdf00">Submit</i>
-                                    </button>
-                            </div>
+                                        style="background-color: #ffdf00; color: black; border: 0; border-radius: 5px; padding: 10px">
+                                    <i class="fa fa-check" style="background-color: #ffdf00">Submit</i>
+                                </button>
+                            </div></span>
+                                </td>
+                            </tr>
                         </table>
                     </form>
                 </div>
@@ -118,24 +136,46 @@
                 </div>
                 <div class="card-body">
                     {% for address in addresses %}
-                        <div class="row">
+                        <div class="row address-box">
                             <div class="col-2">
                                 <h5>Address {{ forloop.counter }}</h5>
                             </div>
                             <div class="col-1">
 
                             </div>
-                            <div style="width: 500px; background-color: #00b4c6">
+                            <div style="width: 500px;">
                                 {{ address.address }}
+                            </div>
+                            <div class="justify-content-end">
+                                <form action="/delete_address/" method="post" class="form">
+                                    {% csrf_token %}
+                                    <input type="text" hidden value="{{ address.id }}" name="id">
+                                    <button type="submit" class="button-delete" style="border: 0; background-color: red; color: white; padding: 10px; border: 0; border-radius: 10px; margin-left: 50px">
+                                        Delete
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <br>
                     {% endfor %}
                     <hr>
-                <div class="card-header">
-                    <h3 style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19); color: black">Add address</h3>
-                </div>
+                    {#                <div class="card-header">#}
+                    <div class="row">
+                        <img src="{% static 'images/add_address.png' %}" width="30px" height="30px">
+                        <h5 style="color: black; padding-top: 2px; padding-bottom: 7px">
+                            &nbsp&nbspAdd address</h5>
+                        <div class="col-2"></div>
+                        <form action="/add_address/" method="post" class="form" id="address_form">
+                            {% csrf_token %}
+                            <input type="text" name="address" class="form-control" required/>
+                            <br>
+                            <button type="submit" style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0; padding: 10px; padding-left: 20px; padding-right: 20px">
+                                <i class="fa fa-plus"> Add</i>
+                            </button>
+                        </form>
+                    </div>
 
+                    {#                </div>#}
                 </div>
             </div>
         </div>
@@ -143,5 +183,17 @@
 {% endblock %}
 
 {% block script %}
+<script>
+document.getElementById('btn1').onclick = function () {
+    document.getElementById('input1').removeAttribute('readonly')
+}
 
+document.getElementById('btn2').onclick = function () {
+    document.getElementById('input2').removeAttribute('readonly')
+}
+
+document.getElementById('btn3').onclick = function () {
+    document.getElementById('input3').removeAttribute('readonly')
+}
+</script>
 {% endblock %}
