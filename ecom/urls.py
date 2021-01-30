@@ -10,5 +10,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('checkout/', views.checkout),
     path('logout/', views.logout_view),
-
+    path('add_to_cart/', views.add_to_cart),
+    path('remove_from_cart/', views.remove_from_cart),
 ]

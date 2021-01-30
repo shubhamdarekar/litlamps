@@ -1,9 +1,10 @@
 import razorpay
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from razorpay import client
 from django.contrib.auth import logout
+from django.db import connection
 
 from .models import *
 
@@ -26,11 +27,12 @@ def template(request):
 
 
 def product_page(request):
-    id = 0
     if request.method == 'GET':
         id = request.GET['id']
         product_details = Product.objects.get(id=id)
-    return render(request, 'product.html', {id: id, 'product_details': product_details})
+        cart = cart_items(request)
+        # print(product_detail)
+    return render(request, 'product.html', {'id': id, 'product_details': product_details, 'cart': cart})
 
 
 def checkout(request):
@@ -69,5 +71,48 @@ def cart_items(request):
 
 
 def products(request):
+    cart_visible = 0
+    if request.method == 'GET' and 'cart' in request.GET and request.GET['cart'] == 'true':
+        cart_visible = 1
     products = Product.objects.all()
-    return render(request, 'products.html', {'products': products});
+    cart = cart_items(request)
+    return render(request, 'products.html', {'products': products, 'cart': cart, 'cart_visible': cart_visible});
+
+def add_to_cart(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST['id']:
+                cursor = connection.cursor()
+                product_id = request.POST['id']
+                customer_id = request.user.id
+                cursor.execute('select * from ecom_cart where product_id = %s and customer_id = %s', [product_id, customer_id])
+                row = list(cursor.fetchall())
+                print(row)
+                if row:
+                    Cart.objects.filter(id=row[0][0]).update(quantity=row[0][3] + 1)
+                else:
+                    cart = Cart()
+                    cart.product_id = request.POST['id']
+                    cart.customer_id = request.user.id
+                    cart.save()
+                return redirect('/products/?cart=true')
+    else:
+        return redirect('/accounts/google/login')
+
+
+def remove_from_cart(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST['id']:
+                print('Hello')
+                id = request.POST['id']
+                next = request.POST.get('next', '/')
+                # user = request.user.id
+                obj = Cart.objects.filter(id=id).delete()
+                print(obj)
+
+                return HttpResponseRedirect(next + '?cart=true')
+    else:
+        return redirect('/')
+
+

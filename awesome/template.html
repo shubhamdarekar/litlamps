@@ -171,7 +171,7 @@
 
         /*Right*/
         .modal.right.fade .modal-dialog {
-            right: -550px;
+            right: 0;
             -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
             -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
             -o-transition: opacity 0.3s linear, right 0.3s ease-out;
@@ -318,6 +318,9 @@
             text-align: center;
         }
 
+        h3 {
+            color: #ffdf00;
+        }
     </style>
 </head>
 
@@ -347,11 +350,11 @@
                         <a class="dropdown-item" href="#"><i class="fa fa-usd fa-2x"></i>USD</a>
                     </div>
                 </li>
-                <li title="FAQs" class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-question-circle fa-2x"></i></a>
-                </li>
+{#                <li title="FAQs" class="nav-item">#}
+{#                    <a class="nav-link" href="#"><i class="fa fa-question-circle fa-2x"></i></a>#}
+{#                </li>#}
                 <li title="Contact Us" class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-envelope-o fa-2x"></i></a>
+                    <a class="nav-link" data-toggle="modal" data-target="#myModal3" href="#"><i class="fa fa-envelope-o fa-2x"></i></a>
                 </li>
                 {% if user.is_authenticated %}
                     <li title="Cart" class="nav-item">
@@ -417,14 +420,7 @@
                                     </figcaption>
                                 </figure>
                             </td>
-                            <td>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </td>
+                            <td>{{ cartitem.quantity }}</td>
                             <td>
                                 <div class="price-wrap">
                                     <var class="price">₹{{ cartitem.product.product_price_rupees }}</var>
@@ -433,9 +429,17 @@
                                 </div> <!-- price-wrap .// -->
                             </td>
                             <td class="text-right">
-                                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"
-                                   data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                <a href="" class="btn btn-light"> Remove</a>
+                                {#                                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"></a>#}
+                                {#                                   data-toggle="tooltip"> <i class="fa fa-heart"></i></a>#}
+                                <form action="/remove_from_cart/" method="post">
+                                    {% csrf_token %}
+                                    <input type="type" hidden name="next" value="{{ request.path }}">
+                                    <input type="text" hidden name="id" value="{{ cartitem.id }}">
+                                    <button class="btn btn-light" type="submit">
+                                        Remove
+                                    </button>
+                                </form>
+                                {#                                <a href="" class="btn btn-light"> Remove</a>#}
                             </td>
                         </tr>
                         <tr>
@@ -505,6 +509,18 @@
 </div>
 <!-- Modal login end-->
 
+<!-- Modal contact us -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Content -->
 <div>
     {% block content %}
@@ -514,68 +530,30 @@
 
 
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer" style="background-color: black !important;">
     <div class="container bottom_border">
-        <div class="row">
-            <div class=" col-sm-4 col-md col-sm-4  col-12 col">
-                <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
-                <!--headin5_amrc-->
-                <p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy text ever since the 1500s</p>
-                <p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
-                <p><i class="fa fa-phone"></i> +91-9999878398 </p>
-                <p><i class="fa fa fa-envelope"></i> info@example.com </p>
-
-
+        <div class="row justify-content-lg-around justify-content-md-around justify-content-sm-around">
+            <div>
+                <div class="row justify-content-between">
+                    <i class="fa fa-credit-card" style="color: #ffdf00"> Payments Via:</i>
+                </div>
+                <br/>
+                <div class="row justify-content-start">
+                    <img src="{% static 'images/razorpay.png' %}" width="200px" height="50px"
+                         onclick="location.href='https://razorpay.com/docs/payment-gateway/payment-methods/    '">
+                </div>
             </div>
-
-
-            <div class=" col-sm-4 col-md  col-6 col">
-                <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-                <!--headin5_amrc-->
-                <ul class="footer_ul_amrc">
-                    <li><a href="http://webenlance.com">Image Rectoucing</a></li>
-                    <li><a href="http://webenlance.com">Clipping Path</a></li>
-                    <li><a href="http://webenlance.com">Hollow Man Montage</a></li>
-                    <li><a href="http://webenlance.com">Ebay & Amazon</a></li>
-                    <li><a href="http://webenlance.com">Hair Masking/Clipping</a></li>
-                    <li><a href="http://webenlance.com">Image Cropping</a></li>
-                </ul>
-                <!--footer_ul_amrc ends here-->
-            </div>
-
-
-            <div class=" col-sm-4 col-md  col-6 col">
-                <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-                <!--headin5_amrc-->
-                <ul class="footer_ul_amrc">
-                    <li><a href="http://webenlance.com">Remove Background</a></li>
-                    <li><a href="http://webenlance.com">Shadows & Mirror Reflection</a></li>
-                    <li><a href="http://webenlance.com">Logo Design</a></li>
-                    <li><a href="http://webenlance.com">Vectorization</a></li>
-                    <li><a href="http://webenlance.com">Hair Masking/Clipping</a></li>
-                    <li><a href="http://webenlance.com">Image Cropping</a></li>
-                </ul>
-                <!--footer_ul_amrc ends here-->
-            </div>
-
-
-            <div class=" col-sm-4 col-md  col-12 col">
-                <h5 class="headin5_amrc col_white_amrc pt2">Follow us</h5>
-                <!--headin5_amrc ends here-->
-
-                <ul class="footer_ul2_amrc">
-                    <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a>
-                        <p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.lipsum.com/</a>
-                        </p></li>
-                    <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a>
-                        <p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.lipsum.com/</a>
-                        </p></li>
-                    <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a>
-                        <p>Lorem Ipsum is simply dummy text of the printing...<a href="#">https://www.lipsum.com/</a>
-                        </p></li>
-                </ul>
-                <!--footer_ul2_amrc ends here-->
+            <div>
+                <div class="row justify-content-between">
+                    <i class="fa fa-share-square-o" style="color: #ffdf00"> Follow Us:</i>
+                </div>
+                <br/>
+                <div class="row justify-content-center">
+                    <li><a href="https://www.facebook.com/LIT_Lamps-100686534898738/"><img
+                            src="{% static 'images/facebook.png' %}" width="50px" height="50px"/></a></li>
+                    <li><a href="https://www.instagram.com/lit_lamps__?r=nametag"><img
+                            src="{% static 'images/instagram.png' %}" width="50px" height="50px"/></a></li>
+                </div>
             </div>
         </div>
     </div>
@@ -583,7 +561,7 @@
 
     <div class="container">
         <ul class="foote_bottom_ul_amrc">
-            <li><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Pricing</a></li>
@@ -592,29 +570,20 @@
         </ul>
         <!--foote_bottom_ul_amrc ends here-->
         <p class="text-center">Copyright @2017 | Designed With by <a href="#">LiT</a></p>
-
-        <ul class="social_footer_ul">
-            <li><a href="#"><img src="{% static 'images/facebook.png' %}" width="30px" height="30px"/></a></li>
-            <li><a href="#"><img src="{% static 'images/instagram.png' %}" width="30px" height="30px"/></a></li>
-            {#            <li><a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a></li>#}
-            {#            <li><a href="http://webenlance.com"><i class="fab fa-instagram"></i></a></li>#}
-        </ul>
         <!--social_footer_ul ends here-->
     </div>
-
 </footer>
 
 <!-- End footer -->
 
 
-<script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+{#<script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>#}
 <script src="{% static 'js/wow.min.js' %}"></script>
 
 <script>
     new WOW().init();
 </script>
-<!-- Style -->
 {% block script %}
 {% endblock script %}
 <!-- End Style -->

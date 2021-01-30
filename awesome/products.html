@@ -75,7 +75,16 @@
                             <i class="fa fa-inr" aria-hidden="true" style="margin-top: 5px"></i>
                             <h5><b>{{ product.product_price_rupees }}0</b></h5>
                         </div>
-                        <a class="btn"><i class="fa fa-cart-plus"> Add to Cart</i></a>
+                        <form action="/add_to_cart/" method="post">
+                            {% csrf_token %}
+{#                           <input type="button" value="Add" />#}
+                            <input type="text" name="id" hidden value="{{ product.id }}">
+                            <button  id="btn" type="submit" style="background-color: #ffdf00; border-radius: 10px; color: black; border-width: 0px; padding: 5px">
+                                <i class="fa fa-cart-plus">  Add to Cart</i>
+                            </button>
+{#                            <input type="submit" value="Add to Cart" style="background-color: #ffdf00; border-radius: 5px">#}
+{#                            <a class="btn"><i class="fa fa-cart-plus"> Add to Cart</i></a>#}
+                        </form>
                         {#                                {% for i in "x"|ljust:"3" %}#}
                         {#                                    <span class="fa fa-star checked"></span>#}
                         {#                                {% endfor %}#}
@@ -93,5 +102,11 @@
 {% endblock %}
 
 {% block script %}
-
+<script>
+    {% if cart_visible == 1 %}
+    $(document).ready(function(){
+            $("#myModal2").modal();
+    });
+    {% endif %}
+</script>
 {% endblock %}

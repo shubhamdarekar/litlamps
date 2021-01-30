@@ -92,9 +92,9 @@
                             <dt>Warranty</dt>
                             <dd>1 Year for Adapter</dd>
                         </dl>  <!-- item-property-hor .// -->
-                        <dl class="param param-feature">
+                        <dl class="param padram-feature">
                             <dt>Delivery</dt>
-                            <dd>Free Shipping All over India</dd>
+                            <d>Free Shipping All over India</dd>
                         </dl>  <!-- item-property-hor .// -->
 
                         <hr>
@@ -103,11 +103,12 @@
                                 <dl class="param param-inline">
                                     <dt>Quantity:</dt>
                                     <dd>
-                                        <select class="form-control form-control-sm" style="width:70px;">
-                                            <option> 1</option>
-                                            <option> 2</option>
-                                            <option> 3</option>
-                                        </select>
+{#                                        <select class="form-control form-control-sm" style="width:70px;" name="">#}
+{#                                            <option> 1</option>#}
+{#                                            <option> 2</option>#}
+{#                                            <option> 3</option>#}
+{#                                        </select>#}
+{#                                        <input type="number" style="width: 150px" name="quantity" min="1">#}
                                     </dd>
                                 </dl>  <!-- item-property .// -->
                             </div> <!-- col.// -->
@@ -135,20 +136,44 @@
                             </div> <!-- col.// -->
                         </div> <!-- row.// -->
                         <hr>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Have coupon?</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="" placeholder="Coupon code">
+
+                                            <button class="btn btn-warning">Apply</button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> <!-- card-body.// -->
+                        </div> <!-- card.// -->
                     </article> <!-- card-body.// -->
                 </aside> <!-- col.// -->
             </div> <!-- row.// -->
         </div> <!-- card.// -->
-
-
     </div>
     <!--container.//-->
     <hr>
     <div class="row bg-dark justify-content-center py-md-3 bottom-buttons">
-        <div class="align-content-md-center">
-            <a href="#" class="btn btn-lg btn-warning text-uppercase"> Buy now </a>
-            <a href="#" class="btn btn-lg btn-outline-warning text-uppercase"> <i
-                    class="fa fa-shopping-cart"></i> Add to cart </a>
+        <div class="row align-content-md-center">
+            <button class="btn" style="border-radius: 10px; padding-left: 12px; padding-right: 12px; background-color: #ffdf00" >
+                <i class="fa fa-credit-card"> Buy Now</i>
+            </button>
+{#            <a href="#" class="btn btn-lg btn-warning"><i class="fa fa-credit-card">    Buy Now</i></a>#}
+            <form action="/add_to_cart/" method="post">
+                {% csrf_token %}
+                <input type="text" hidden value="{{ product_details.id }}" name="id">
+                <input type="text" hidden value="">
+                <button class="btn" type="submit" style="margin-left: 7px; padding: 12px; border-radius: 10px; background-color: #ffdf00">
+                    <i class="fa fa-cart-plus">  Add to Cart</i>
+                </button>
+            </form>
+{#            <a href="#" class="btn btn-lg btn-outline-warning text-uppercase"> <i#}
+{#                    class="fa fa-shopping-cart"></i> Add to cart </a>#}
         </div>
     </div>
 

@@ -90,9 +90,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'LitLamps',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',  # Or an IP Address that your DB is hosted on
+        'USER': 'laserInnovation',
+        'PASSWORD': 'Laser@123',
+        'HOST': '148.66.147.6',  # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
@@ -143,7 +143,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
