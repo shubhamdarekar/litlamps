@@ -14,7 +14,7 @@ urlpatterns = [
     path('remove_from_cart/', views.remove_from_cart),
     path('createRzpOrder/', views.create_razorpay_order),
     path('successRedirect/', views.success_redirect),
-    path('orders/', views.orders_page)
+    path('orders/', views.orders_page),
     path('profile/', views.profile),
     path('update_profile/', views.update_profile),
 ]
