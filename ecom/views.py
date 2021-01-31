@@ -123,8 +123,11 @@ def remove_from_cart(request):
         return redirect('/')
 
 def profile(request):
-    address = Address.objects.all()
-    return render(request, 'profile.html', {'addresses': address})
+    if request.user.is_authenticated:
+        address = Address.objects.filter(customer_id=request.user.id)
+        return render(request, 'profile.html', {'addresses': address})
+    else:
+        return redirect('/accounts/google/login')
 
 def update_profile(request):
     if request.user.is_authenticated:
