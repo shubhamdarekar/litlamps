@@ -153,7 +153,7 @@
                                 <form action="/delete_address/" method="post" class="form">
                                     {% csrf_token %}
                                     <input type="text" hidden value="{{ address.id }}" name="id">
-                                    <button type="submit" class="button-delete" style="border: 0; background-color: red; color: white; padding: 10px; border: 0; border-radius: 10px; margin-left: 50px">
+                                    <button class="btn" type="submit" class="button-delete" style="border: 0; background-color: red; color: white; padding: 10px; border: 0; border-radius: 10px; margin-left: 50px">
                                         Delete
                                     </button>
                                 </form>
@@ -171,6 +171,7 @@
                         <form action="/add_address/" method="post" class="form" id="address_form">
                             {% csrf_token %}
                             <input type="text" name="address" class="form-control" required/>
+                            <input type="type" hidden name="next" value="{{ request.path }}">
                             <br>
                             <button type="submit" style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0; padding: 10px; padding-left: 20px; padding-right: 20px">
                                 <i class="fa fa-plus"> Add</i>
