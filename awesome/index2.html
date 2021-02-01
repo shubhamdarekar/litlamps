@@ -113,7 +113,7 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active" id="carousel1">
-                <img class="d-block" src="{% static 'images/test.JPG' %}" alt="First slide" width="100%" height="725px">
+                <img class="d-block" src="{% static 'images/carousel/carousel1.JPG' %}" alt="First slide" width="100%" height="725px">
                 <!--            <div class="carousel-caption d-none d-md-block">-->
                 <!--                <h5>Slider One Item</h5>-->
                 <!--                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt-->
@@ -122,11 +122,11 @@
                 <!--            </div>-->
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="https://i.postimg.cc/pVzg3LWn/2.jpg" alt="Second slide" width="100%"
+                <img class="d-block w-100" src="{% static 'images/carousel/carousel2.JPG' %}" alt="Second slide" width="100%"
                      height="725px">
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="https://i.postimg.cc/0y2F6Gpp/3.jpg" alt="Third slide" width="100%"
+                <img class="d-block w-100" src="{% static 'images/carousel/carousel3.JPG' %}" alt="Third slide" width="100%"
                      height="725px">
             </div>
         </div>
@@ -249,7 +249,7 @@
 
     <!-- Features -->
     <div class="container" id="features">
-    <br><br><br>
+        <br><br><br>
         <div class="row">
             <div class="col-md-12">
                 <div class="main_heading">
@@ -366,30 +366,15 @@
         </div>
     </div>
     <!-- End Reviews -->
-
-
-<!-- FAQs -->
-<div class="container" id="FAQs">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="main_heading">
-                <br>
-                <h1>FAQs</h1>
-                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 150px;"></span></div>
-            </div>
-        </div><!-- End col-md-12 -->
-    </div><!-- End row -->
-    <div class="" id="accordion">
-        {% for faq in faqs %}
-        <div class="card ">
-            <div class="card-header">
-                <h4 class="card-header">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{forloop.counter}}">{{ faq.question }}</a>
-                </h4>
-            </div>
-            <div id="collapseOne{{forloop.counter}}" class="panel-collapse collapse in">
-                <div class="card-block">
-                    <p style="font-size: 20px; padding-left: 15px; padding-top: 5px">{{ faq.answer }}</p>
+    <!-- FAQs -->
+    <div class="container" id="FAQs">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_heading">
+                    <br>
+                    <h1>FAQs</h1>
+                    <div class="text-center"><span class="underline"
+                                                   style="background-color: #ffdf00; width: 150px;"></span></div>
                 </div>
             </div><!-- End col-md-12 -->
         </div><!-- End row -->
@@ -399,10 +384,10 @@
                     <div class="card-header">
                         <h4 class="card-header">
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseOne">{{ faq.question }}</a>
+                               href="#collapseOne{{ forloop.counter }}">{{ faq.question }}</a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
+                    <div id="collapseOne{{ forloop.counter }}" class="panel-collapse collapse in">
                         <div class="card-block">
                             <p style="font-size: 20px; padding-left: 15px; padding-top: 5px">{{ faq.answer }}</p>
                         </div>
