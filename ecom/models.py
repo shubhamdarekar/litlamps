@@ -48,6 +48,7 @@ class Order_item(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     quantity = models.IntegerField()
+    color = models.CharField(max_length=255)
 
 
 class Customer_review(models.Model):
@@ -76,6 +77,7 @@ class Cart(models.Model):
     customer = models.ForeignKey(authUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    color = models.CharField(max_length=255)
 
     def _total(self):
         return self.quantity*self.product.product_price_rupees

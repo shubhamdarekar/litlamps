@@ -102,16 +102,13 @@ def add_to_cart(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             if request.POST['id']:
-                cursor = connection.cursor()
+                # cursor = connection.cursor()
                 color = request.POST['color']
                 product_id = request.POST['id']
-                print("Hii"+str(product_id))
                 customer_id = request.user.id
-                cursor.execute('select * from ecom_cart where product_id = %s and customer_id = %s and color="red"', [product_id, customer_id])
-                row = list(cursor.fetchall())
-                print(row)
+                row = Cart.objects.filter(product_id=product_id).filter(customer_id=customer_id).filter(color=color)
                 if row:
-                    Cart.objects.filter(id=row[0][0]).update(quantity=row[0][3] + 1)
+                    Cart.objects.filter(id=row.first().id).update(quantity=row.first().quantity + 1)
                 else:
                     cart = Cart()
                     cart.product_id = request.POST['id']
@@ -132,8 +129,11 @@ def remove_from_cart(request):
                 print(id)
                 next = request.POST.get('next', '/')
                 # user = request.user.id
-                obj = Cart.objects.filter(id=id).delete()
-
+                obj = Cart.objects.filter(id=id)
+                p_id = obj[0].product_id
+                obj.delete()
+                if next == "/product/":
+                    return HttpResponseRedirect(next + '?cart=true&id='+str(p_id))
                 return HttpResponseRedirect(next + '?cart=true')
     else:
         return redirect('/')

@@ -144,6 +144,7 @@
                             <form class="outer_form" action="/add_to_cart/" method="post" id="add_to_cart2">
                                 {% csrf_token %}
                                 <input type="text" name="id" hidden value="{{ product.id }}">
+                                <input type="text" name="color" hidden value="red">
                                 <button  class="cart" type="submit">
                                     <i class="fa fa-cart-plus sm-font"> ADD TO CART </i>
                                 </button>
