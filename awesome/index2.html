@@ -368,16 +368,28 @@
     <!-- End Reviews -->
 
 
-    <!-- FAQs -->
-    <div class="container" id="FAQs">
-    <br><br>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="main_heading">
-                    <br>
-                    <h1>FAQs</h1>
-                    <div class="text-center"><span class="underline"
-                                                   style="background-color: #ffdf00; width: 150px;"></span></div>
+<!-- FAQs -->
+<div class="container" id="FAQs">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main_heading">
+                <br>
+                <h1>FAQs</h1>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 150px;"></span></div>
+            </div>
+        </div><!-- End col-md-12 -->
+    </div><!-- End row -->
+    <div class="" id="accordion">
+        {% for faq in faqs %}
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne{{forloop.counter}}">{{ faq.question }}</a>
+                </h4>
+            </div>
+            <div id="collapseOne{{forloop.counter}}" class="panel-collapse collapse in">
+                <div class="card-block">
+                    <p style="font-size: 20px; padding-left: 15px; padding-top: 5px">{{ faq.answer }}</p>
                 </div>
             </div><!-- End col-md-12 -->
         </div><!-- End row -->
