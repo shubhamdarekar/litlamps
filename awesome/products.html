@@ -58,7 +58,7 @@
         }
 
         .outer_form {
-            width:48%;
+            width: 48%;
             margin-left: 2%;
         }
 
@@ -115,6 +115,26 @@
         h5 {
             font-size: 25px;
         }
+
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline-width: 2px;
+            outline-style: solid;
+            outline-color: #f00;
+            -moz-outline-radius: 25px;
+        }
     </style>
 {% endblock %}
 
@@ -144,15 +164,16 @@
                             <form class="outer_form" action="/add_to_cart/" method="post" id="add_to_cart2">
                                 {% csrf_token %}
                                 <input type="text" name="id" hidden value="{{ product.id }}">
-                                <input type="text" name="color" hidden value="red">
-                                <button  class="cart" type="submit">
+                                <input id="colorCart{{ product.id }}" type="text" name="color" hidden value="red">
+                                <button class="cart" type="submit">
                                     <i class="fa fa-cart-plus sm-font"> ADD TO CART </i>
                                 </button>
                             </form>
                             <form class="outer_form" action="/buy_now/" method="post" id="buy_now">
                                 {% csrf_token %}
                                 <input type="text" name="id" hidden value="{{ product.id }}">
-                                <button class="order" type="submit">
+                                <input id="colorBuy{{ product.id }}" type="text" name="color" hidden value="red">
+                                <button class="order" type="submit" style="border:0">
                                     <i class="fa fa-credit-card sm-font"> ORDER NOW </i>
                                 </button>
                             </form>
@@ -162,11 +183,36 @@
                             <h5 class="mb-0 mt-2">{{ product.product_name }}</h5> <small
                                 class="text-muted mb-1">{{ product.product_name }}</small>
                         </div>
-                        <div class="row px-3" onclick="location.href='/product/?id={{ product.id }}'">
-                            <h5>Rs.{{ product.product_price_rupees }}</h5>
-                            <p class="text-muted ml-2">
+                        <div class="row px-3">
+                            <h5 onclick="location.href='/product/?id={{ product.id }}'">
+                                Rs.{{ product.product_price_rupees }}</h5>
+                            <p class="text-muted ml-2" onclick="location.href='/product/?id={{ product.id }}'">
                                 <del>Rs.{{ product.product_price_rupees }}</del>
                             </p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="row" style="margin-top: 5px">
+                                <form>
+                                    <label class="form-group">
+                                        <input type="radio" id="red" name="color" value="red" checked
+                                        onblur="document.getElementById('colorCart{{ product.id }}').value = this.value;document.getElementById('colorBuy{{ product.id }}').value = this.value;"
+                                        >
+                                        <img src="{% static 'images/red.jpeg' %}" width="25px" height="25px"
+                                             style="border-radius: 12px">
+                                    </label>
+                                    <label class="form-group">
+                                        <input type="radio" id="wooden" name="color" value="wooden"
+                                        onblur="document.getElementById('colorCart{{ product.id }}').value = this.value;document.getElementById('colorBuy{{ product.id }}').value = this.value;">
+                                        <img src="{% static 'images/wooden.jpeg' %}" width="25px" height="25px"
+                                             style="border-radius: 12px; margin-left: 4px">
+                                    </label>
+                                    <label class="form-group">
+                                        <input type="radio" id="black" name="color" value="black"
+                                        onblur="document.getElementById('colorCart{{ product.id }}').value = this.value;document.getElementById('colorBuy{{ product.id }}').value = this.value;">
+                                        <img src="{% static 'images/black.jpeg' %}" width="25px" height="25px"
+                                             style="border-radius: 12px; margin-left: 4px">
+                                    </label>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

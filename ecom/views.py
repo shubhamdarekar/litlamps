@@ -53,12 +53,13 @@ def checkout_product(request):
         if request.method == 'POST':
             if request.POST['id']:
                 product_id = request.POST['id']
+                color = request.POST['color']
                 single_product = Product.objects.get(id=product_id)
                 total_price = Product.objects.get(id=product_id).product_price_rupees
                 address = Address.objects.filter(customer_id=request.user.id)
                 return render(request, 'checkout.html',
                               {'single_product': single_product, 'totalPrice': total_price,
-                               'addresses': address})
+                               'addresses': address, 'color_product': color})
     else:
         return redirect('/accounts/google/login')
 
@@ -81,7 +82,8 @@ def homepage(request):
     recently_viewed = recent_viewed()
     cart = cart_items(request)
     return render(request, 'index2.html',
-                  {'bestselling': bestselling, 'faq': faq, 'payment': payment, 'cart': cart, 'reviews': reviews})
+                  {'bestselling': bestselling, 'faqs': faq, 'payment': payment, 'cart': cart, 'reviews': reviews})
+
 
 def cart_items(request):
     uid = request.user.id
@@ -206,6 +208,7 @@ def create_razorpay_order(request):
     if request.method == 'POST' and request.POST['type'] == 'buy_now':
         order_address_id = request.POST['address_id']
         product_id = request.POST['product_id']
+        color = request.POST['color']
         order_address = Address.objects.get(id=order_address_id).address
         # Find total price
         order_amount = Product.objects.get(id=product_id).product_price_rupees
@@ -230,6 +233,7 @@ def create_razorpay_order(request):
         new_order_item.order_id = new_order.id
         new_order_item.quantity = 1
         new_order_item.product_id = product_id
+        new_order_item.color = color
         new_order_item.save()
         payment['rupee'] = order_amount
         return render(request, 'payment_completion.html', {'payment': payment})
@@ -255,7 +259,10 @@ def success_redirect(request):
 
 
 def orders_page(request):
-    return render(request, "orders_page.html")
+    orders = []
+    if request.user.is_authenticated:
+        orders = Order_item.objects.filter(order__customer_id=request.user.id)
+    return render(request, "orders_page.html", {"orders": orders})
 
 
 def add_address(request):

@@ -8,7 +8,12 @@
 {% endblock %}
 
 {% block content %}
-
+    <br>
+    <br>
+    <br><br><br><br><br><br><br><br><br><br>
+    {% for order_item in orders %}
+        {{ order_item.order.customer }}{{ order_item.order.amount }}{{ order_item.product.product_name }}{{ order_item.order.payment_id }}<br>
+    {% endfor %}
 {% endblock %}
 
 {% block script %}

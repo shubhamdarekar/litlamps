@@ -41,7 +41,8 @@
             <input name="type" value="cart" hidden>
         {% else %}
             <input name="type" value="buy_now" hidden>
-            <input name="product_id" value="{{ single_product.id }}">
+            <input name="product_id" value="{{ single_product.id }}" hidden>
+            <input name="color" value="{{ color_product }}" hidden>
         {% endif %}
     </form>
     <div class="row">
@@ -51,6 +52,7 @@
                     <thead class="text-muted">
                     <tr class="small text-uppercase">
                         <th scope="col">Product</th>
+                        <th scope="col">Color</th>
                         <th scope="col" width="120">Quantity</th>
                         <th scope="col" width="120">Price</th>
                         <th scope="col" class="text-right" width="200"></th>
@@ -76,13 +78,19 @@
                                         </figcaption>
                                     </figure>
                                 </td>
+                                {% if cartitem.color == 'red' %}
+                                    <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
+                                             style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
+                                {% elif cartitem.color == 'wooden' %}
+                                    <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
+                                             style="border-radius: 15px"></br><small class="text-muted">Wooden</small>
+                                    </td>
+                                {% elif cartitem.color == 'black' %}
+                                    <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
+                                             style="border-radius: 15px"></br><small class="text-muted">Black</small>
+                                    </td>
+                                {% endif %}
                                 <td>
-                                    {#                                    <select class="form-control">#}
-                                    {#                                        <option>1</option>#}
-                                    {#                                        <option>2</option>#}
-                                    {#                                        <option>3</option>#}
-                                    {#                                        <option>4</option>#}
-                                    {#                                    </select>#}
                                     {{ cartitem.quantity }}
                                 </td>
                                 <td>
@@ -106,7 +114,6 @@
                         <tr>
                             <td>
                                 <figure class="itemside align-items-center">
-
                                     <div onclick="location.href='/product/?id={{ single_product.id }}'" class="aside">
                                         <img src="{{ single_product.image_path }}" class="img-sm">
                                     </div>
@@ -116,8 +123,20 @@
                                     </figcaption>
                                 </figure>
                             </td>
+                            {% if color_product == 'red' %}
+                                <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
+                            {% elif color_product == 'wooden' %}
+                                <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"></br><small class="text-muted">Wooden</small>
+                                </td>
+                            {% elif color_product == 'black' %}
+                                <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"></br><small class="text-muted">Black</small>
+                                </td>
+                            {% endif %}
                             <td>
-                                {{ cartitem.quantity }}
+                                1
                             </td>
                             <td>
                                 <div class="price-wrap">
@@ -182,7 +201,6 @@
                                 {% csrf_token %}
                                 <input type="type" hidden name="next" value="{{ request.path }}">
                                 <textarea form="address_form" name="address" class="form-control" required></textarea>
-                                {#                                <input type="text" name="address" class="form-control" required/>#}
                                 <br>
                                 <button type="submit"
                                         style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0; padding: 10px; padding-left: 20px; padding-right: 20px">

@@ -37,7 +37,7 @@
             padding-right: 0px !important;
         }
 
-        .carousel-item {
+        #carousel1{
             height: 725px;
             min-height: 300px;
             background: no-repeat center center scroll;
@@ -287,7 +287,7 @@
             margin-bottom: 10px;
             margin-left: auto;
         }
-<td>{{cartitem.color}}</td>
+
         .foote_bottom_ul_amrc li {
             display: inline;
         }
@@ -339,28 +339,29 @@
         </button>
 
         <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-<!--            <form class="form-inline my-2 my-lg-0">-->
-<!--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>-->
-<!--            </form>-->
+            <!--            <form class="form-inline my-2 my-lg-0">-->
+            <!--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+            <!--                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>-->
+            <!--            </form>-->
 
             <ul class="nav nav-pills ml-auto">
-<!--                <li title="Currency" class="nav-item active dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
-<!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-inr fa-2x"></i></a>-->
-<!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                        <a class="dropdown-item" href="#"><i class="fa fa-inr fa-2x"></i>INR</a>-->
-<!--                        <a class="dropdown-item" href="#"><i class="fa fa-usd fa-2x"></i>USD</a>-->
-<!--                    </div>-->
-<!--                </li>-->
+                <!--                <li title="Currency" class="nav-item active dropdown">-->
+                <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
+                <!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-inr fa-2x"></i></a>-->
+                <!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                <!--                        <a class="dropdown-item" href="#"><i class="fa fa-inr fa-2x"></i>INR</a>-->
+                <!--                        <a class="dropdown-item" href="#"><i class="fa fa-usd fa-2x"></i>USD</a>-->
+                <!--                    </div>-->
+                <!--                </li>-->
                 <li title="Products" class="nav-item">
                     <a class="nav-link" href="/products"><i class="fa fa-gift fa-2x"></i></a>
                 </li>
-{#                <li title="FAQs" class="nav-item">#}
-{#                    <a class="nav-link" href="#"><i class="fa fa-question-circle fa-2x"></i></a>#}
-{#                </li>#}
+                {#                <li title="FAQs" class="nav-item">#}
+                {#                    <a class="nav-link" href="#"><i class="fa fa-question-circle fa-2x"></i></a>#}
+                {#                </li>#}
                 <li title="Contact Us" class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#myModal3" href="#"><i class="fa fa-envelope-o fa-2x"></i></a>
+                    <a class="nav-link" data-toggle="modal" data-target="#myModal3" href="#"><i
+                            class="fa fa-envelope-o fa-2x"></i></a>
                 </li>
                 {% if user.is_authenticated %}
                     <li title="Cart" class="nav-item">
@@ -368,13 +369,14 @@
                                 class="fa fa-shopping-basket fa-2x"></i></a>
                     </li>
                     <li title="Currency" class="nav-item active dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x"></i></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/profile/"><i class="fa fa-user"></i> Your profile</a>
-                        <a class="dropdown-item" href="/orders/"><i class="fa fa-shopping-cart"></i> Your orders</a>
-                    </div>
-                </li>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                class="fa fa-user fa-2x"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/profile/"><i class="fa fa-user"></i> Your profile</a>
+                            <a class="dropdown-item" href="/orders/"><i class="fa fa-shopping-cart"></i> Your orders</a>
+                        </div>
+                    </li>
                     <li title="Logout" class="nav-item">
                         <a class="nav-link" href="/logout/"><i
                                 class="fa fa-sign-out fa-2x"></i></a>
@@ -413,7 +415,6 @@
                     <tr class="small text-uppercase">
                         <th scope="col">Product</th>
                         <th scope="col">Colour</th>
-                        <th scope="col" width="120">Quantity</th>
                         <th scope="col" width="120">Price</th>
                         <th scope="col" class="text-right" width="200"></th>
                     </tr>
@@ -425,20 +426,20 @@
                                 <figure class="itemside align-items-center">
                                     <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm">
                                     </div>
-                                    <figcaption class="info">
-                                        <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
-                                        {#                                        <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>#}
-                                    </figcaption>
+                                    <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
                                 </figure>
+                                <var>Quantity : {{ cartitem.quantity }}</var>
                             </td>
                             {% if cartitem.color == 'red' %}
-                                <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px" style="border-radius: 15px"></td>
+                                <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
                             {% elif cartitem.color == 'wooden' %}
-                            <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px" style="border-radius: 15px"></td>
+                                <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"></br><small class="text-muted">Wooden</small></td>
                             {% elif cartitem.color == 'black' %}
-                            <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px" style="border-radius: 15px"></td>
-                            {% endif%}
-                            <td>{{ cartitem.quantity }}</td>
+                                <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"></br><small class="text-muted">Black</small></td>
+                            {% endif %}
                             <td>
                                 <div class="price-wrap">
                                     <var class="price">₹{{ cartitem.total }}</var>
