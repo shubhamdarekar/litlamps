@@ -1,101 +1,67 @@
-{% extends "template.html" %}
 {% load static %}
+<html>
+<head>
+    <title>Confirm your payments</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
 
-{% block title %}Payment{% endblock %}
+<div class="container">
+    <br><br>
+    <div class="row">
+        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3 ali">
+            <div class="row justify-content-center bg-dark">
+                <div class="col-1">
+                    <form action="/successRedirect/" method="POST" id="payment">
+                        {% csrf_token %}
+                        <script
+                                src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="rzp_test_XgSvcOhAnzdFER"
+                                data-amount="{{ payment.amount }}"
+                                data-currency="{{ payment.currency }}"
+                                data-order_id="{{ payment.id }}"
+                                data-name="Laser Innovation Technology"
+                                data-description="Pay for your order"
+                                data-image="{% static '/images/logo.png' %}"
+                                data-prefill.name="{{ user.first_name }}"
+                                data-prefill.email="{{ user.email }}"
+                                data-theme.color="#ffdf00"
 
-
-{% block style %}
-
-{% endblock %}
-
-{% block content %}
-    <br><br><br>
-    {{ payment }}
-    <div class="container">
-        <form action="/successRedirect/" method="POST">
-            {% csrf_token %}
-            <script
-                    src="https://checkout.razorpay.com/v1/checkout.js"
-                    data-key="rzp_test_XgSvcOhAnzdFER"
-                    data-amount="{{ payment.amount }}"
-                    data-currency="{{ payment.currency }}"
-                    data-order_id="{{ payment.id }}"
-                    data-buttontext=" Pay with Razorpay"
-                    data-name="Laser Innovation Technology"
-                    data-description="Pay for your order"
-                    data-image="{% static '/images/facebook.png' %}"
-                    data-prefill.name="{{ user.first_name }}"
-                    data-prefill.email="{{ user.email }}"
-                    data-theme.color="#ffdf00"
-            ></script>
-            <input type="hidden" custom="Hidden Element" name="hidden">
-        </form>
-    </div>
-    <div class="container" id="Services">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="main_heading">
-                    <h1>Services</h1>
-                    <div class="text-center"><span class="underline"></span></div>
+                        ></script>
+                        <input type="hidden" custom="Hidden Element" name="hidden">
+                    </form>
                 </div>
-            </div><!-- End col-md-12 -->
-        </div><!-- End row -->
-
-        <div class="col-md-4 services-box-gray col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-support"></i>
-                <h4>24/7 Support</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
             </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-rocket"></i>
-                <h4>Quick Install</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <address>
+                        <strong>{{ user.first_name }}&nbsp;{{ user.last_name }}</strong>
+                        <p>Address:<br>{{ payment.notes.shipping_address }}</p>
+                    </address>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                    <p>
+                        <em>Order #: {{ payment.id }}</em>
+                    </p>
+                </div>
             </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 services-box-gray col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-cogs"></i>
-                <h4>Easy to Customize</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
+            <div class="row">
+                <div class="text-center">
+                    <h1>Order Confirmation</h1>
+                </div>
+                </span>
+                <div class="text-center"><h4><strong>Total: </strong></h4></div>
+                <div class="text-center text-danger"><h4><strong>₹{{ payment.rupee }}</strong></h4></div>
+
+                <button type="submit" form="payment" class="btn btn-success btn-lg btn-block">
+                    Pay Now   <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+                </td>
             </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-magic"></i>
-                <h4>Another Feature</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 services-box-gray col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-support"></i>
-                <h4>24/7 Support</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-rocket"></i>
-                <h4>Quick Install</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-
-
-    </div><!-- End container -->
-
-    <!-- End Services -->
-{% endblock %}
-
-{% block script %}
-
-{% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

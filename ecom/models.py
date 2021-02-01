@@ -1,6 +1,5 @@
 # Create your models here.
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User as authUser
 
 # Create your models here.
@@ -11,7 +10,6 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     gender = models.BooleanField()
     email_id = models.CharField(max_length=255)
-    mobile_no = PhoneNumberField(null=False, blank=False, unique=True)
 
 
 class Password(models.Model):
@@ -78,6 +76,11 @@ class Cart(models.Model):
     customer = models.ForeignKey(authUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+
+    def _total(self):
+        return self.quantity*self.product.product_price_rupees
+
+    total = property(_total)
 
 
 class Address(models.Model):

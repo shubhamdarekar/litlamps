@@ -4,6 +4,85 @@
 
 
 {% block style %}
+    <!--Style for bottom-->
+    <style>
+        body {
+            color: #000;
+            overflow-x: hidden;
+            height: 100%;
+            background-color: #fff;
+            background-repeat: no-repeat
+        }
+
+        .block {
+            position: relative;
+            width: 22%;
+            background-color: lightgrey;
+            padding-top: 10px;
+            margin-bottom: 165px
+        }
+
+        .image {
+            width: 180px;
+            height: 300px
+        }
+
+        .info {
+            position: absolute;
+            width: 94%;
+            top: 280px;
+            left: 3%;
+            background-color: #fff
+        }
+
+        .cart {
+
+            background-color: #ffdf00;
+            color: #000000;
+            padding: 6px;
+            width: 100%;
+            border: 2px solid #fff8e3;
+            cursor: pointer
+        }
+
+        .cart:hover {
+            background-color: #decc22
+        }
+
+        .order {
+            color: #000000;
+            padding: 6px 5px;
+            width: 100%;
+            border: 2px solid #000000;
+            cursor: pointer
+        }
+
+        .outer_form {
+            width:48%;
+            margin-left: 2%;
+        }
+
+        .order:hover {
+            color: #000000;
+            background-color: #decc22
+        }
+
+        .sm-font {
+            font-size: 12px
+        }
+
+        @media screen and (max-width: 992px) {
+            .block {
+                width: 45%
+            }
+        }
+
+        @media screen and (max-width: 550px) {
+            .block {
+                width: 100%
+            }
+        }
+    </style>
     <style>
         .products:hover {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -11,9 +90,8 @@
 
         .card {
             font-family: Copperplate;
-            {#background-color: rgba(183,178,190,0.32);#}
-            border-color: #ffdf00;
-            border-radius: 25px ;
+        {#background-color: rgba(183,178,190,0.32);#} border-color: #ffdf00;
+            border-radius: 25px;
         }
 
         .btn {
@@ -55,58 +133,58 @@
         </div><!-- End col-md-12 -->
     </div>
     <hr>
-    <div class="row justify-content-md-center justify-content-lg-center justify-content-sm-center p-5">
-        {% for product in products %}
-            <div class="card col-lg-2 col-md-5 col-sm-5 products" style="margin: 15px; height: 425px"
-                 id="{{ product.product_id }}">
-                <div class="row justify-content-center" >
-                    <img src="{{ product.image_path }}" height="275px" alt="image" style="margin-top: 2%;"
-                         onclick="location.href='/product/?id={{ product.id }}'">
-                </div>
 
-                <div class="card-body justify-content-lg-start">
-                    <div class="row">
-                        <h4 onclick="location.href='/product/?id={{ product.id }}'">{{ product.product_name }}</h4>
-                    </div>
-                    <br>
-                    <div class="row justify-content-lg-between justify-content-md-between justify-content-sm-between">
-                        <div class="row">
-                            <div class="col-lg-1 col-md-1 col-sm-1"></div>
-                            <i class="fa fa-inr" aria-hidden="true" style="margin-top: 5px"></i>
-                            <h5><b>{{ product.product_price_rupees }}0</b></h5>
+    <div class="container-fluid px-5 py-5 mx-auto">
+        <div class="row justify-content-between px-3">
+            {% for product in products %}
+                <div class="block text-center"><img onclick="location.href='/product/?id={{ product.id }}'"
+                                                    class="image" src="{{ product.image_path }}">
+                    <div class="info py-2 px-2">
+                        <div class="row px-3">
+                            <form class="outer_form" action="/add_to_cart/" method="post" id="add_to_cart2">
+                                {% csrf_token %}
+                                <input type="text" name="id" hidden value="{{ product.id }}">
+                                <button  class="cart" type="submit">
+                                    <i class="fa fa-cart-plus sm-font"> ADD TO CART </i>
+                                </button>
+                            </form>
+                            <form class="outer_form" action="/buy_now/" method="post" id="buy_now">
+                                {% csrf_token %}
+                                <input type="text" name="id" hidden value="{{ product.id }}">
+                                <button class="order" type="submit">
+                                    <i class="fa fa-credit-card sm-font"> ORDER NOW </i>
+                                </button>
+                            </form>
+
                         </div>
-                        <form action="/add_to_cart/" method="post">
-                            {% csrf_token %}
-{#                           <input type="button" value="Add" />#}
-                            <input type="text" name="id" hidden value="{{ product.id }}">
-                            <button  id="btn" type="submit" style="background-color: #ffdf00; border-radius: 10px; color: black; border-width: 0px; padding: 5px">
-                                <i class="fa fa-cart-plus">  Add to Cart</i>
-                            </button>
-{#                            <input type="submit" value="Add to Cart" style="background-color: #ffdf00; border-radius: 5px">#}
-{#                            <a class="btn"><i class="fa fa-cart-plus"> Add to Cart</i></a>#}
-                        </form>
-                        {#                                {% for i in "x"|ljust:"3" %}#}
-                        {#                                    <span class="fa fa-star checked"></span>#}
-                        {#                                {% endfor %}#}
+                        <div class="text-left" onclick="location.href='/product/?id={{ product.id }}'">
+                            <h5 class="mb-0 mt-2">{{ product.product_name }}</h5> <small
+                                class="text-muted mb-1">{{ product.product_name }}</small>
+                        </div>
+                        <div class="row px-3" onclick="location.href='/product/?id={{ product.id }}'">
+                            <h5>Rs.{{ product.product_price_rupees }}</h5>
+                            <p class="text-muted ml-2">
+                                <del>Rs.{{ product.product_price_rupees }}</del>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div>
-        <br>
-        <br>
-        <br>
+            {% endfor %}
+        </div>
+        <div>
+            <br>
+            <br>
+            <br>
+        </div>
     </div>
 {% endblock %}
 
 {% block script %}
-<script>
-    {% if cart_visible == 1 %}
-    $(document).ready(function(){
-            $("#myModal2").modal();
-    });
-    {% endif %}
-</script>
+    <script>
+        {% if cart_visible == 1 %}
+            $(document).ready(function () {
+                $("#myModal2").modal();
+            });
+        {% endif %}
+    </script>
 {% endblock %}

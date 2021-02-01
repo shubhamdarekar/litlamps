@@ -5,7 +5,29 @@
 
 
 {% block style %}
+    <style>
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
 
+        }
+
+        /* IMAGE STYLES */
+        [type=radio] + div {
+            width: 80px;
+            height: 45px;
+            cursor: pointer;
+            background-color: grey;
+            padding: 10px;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + div {
+        {#outline: 5px solid #000;#} background-color: #42ba96;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -13,6 +35,15 @@
     <br>
     <br>
     <hr>
+    <form action="/createRzpOrder/" method="post" class="form" id="address_selector">
+        {% csrf_token %}
+        {% if cart != None %}
+            <input name="type" value="cart" hidden>
+        {% else %}
+            <input name="type" value="buy_now" hidden>
+            <input name="product_id" value="{{ single_product.id }}">
+        {% endif %}
+    </form>
     <div class="row">
         <aside class="col-lg-9">
             <div class="card">
@@ -26,50 +57,147 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for cartitem in cart %}
+
+                    {% if cart != None %}
+                        {% if cart|length == 0 %}
+                            <a href="/products/"><h3 class="center-block center">Your cart is Empty!!! Start
+                                Shopping</h3></a>
+                        {% endif %}
+                        {% for cartitem in cart %}
+                            <tr>
+                                <td>
+                                    <figure class="itemside align-items-center">
+                                        <div onclick="location.href='/product/?id={{ cartitem.product.id }}'"
+                                             class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm">
+                                        </div>
+                                        <figcaption class="info">
+                                            <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
+                                            {#                                        <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>#}
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+                                    {#                                    <select class="form-control">#}
+                                    {#                                        <option>1</option>#}
+                                    {#                                        <option>2</option>#}
+                                    {#                                        <option>3</option>#}
+                                    {#                                        <option>4</option>#}
+                                    {#                                    </select>#}
+                                    {{ cartitem.quantity }}
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">₹{{ cartitem.total }}</var>
+                                        <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
+                                            each </small>
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right">
+                                    <form action="/remove_from_cart/" method="post" id="remove">
+                                        {% csrf_token %}
+                                        <input type="type" hidden name="next" value="{{ request.path }}">
+                                        <input type="text" hidden name="id" value="{{ cartitem.id }}">
+                                    </form>
+                                    <button form="remove" class="btn btn-danger"> Remove</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
                         <tr>
                             <td>
                                 <figure class="itemside align-items-center">
-                                    <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm">
+
+                                    <div onclick="location.href='/product/?id={{ single_product.id }}'" class="aside">
+                                        <img src="{{ single_product.image_path }}" class="img-sm">
                                     </div>
                                     <figcaption class="info">
-                                        <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
+                                        <a href="#" class="title text-dark">{{ single_product.product_name }}</a>
                                         {#                                        <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>#}
                                     </figcaption>
                                 </figure>
                             </td>
                             <td>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                {{ cartitem.quantity }}
                             </td>
                             <td>
                                 <div class="price-wrap">
-                                    <var class="price">₹{{ cartitem.product.product_price_rupees }}</var>
-                                    <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
+                                    <var class="price">₹{{ single_product.product_price_rupees }}</var>
+                                    <small class="text-muted"> ₹{{ single_product.product_price_rupees }}
                                         each </small>
                                 </div> <!-- price-wrap .// -->
                             </td>
                             <td class="text-right">
-                                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"
-                                   data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                <a href="" class="btn btn-light"> Remove</a>
+                                <a href="/products/" class="btn btn-danger"> Remove</a>
                             </td>
                         </tr>
-                        <tr>
-                    {% endfor %}
+                    {% endif %}
                     </tbody>
                 </table>
+
+                <div class="profile">
+                    <hr>
+                    <div class="row">
+                        <div class="card col-lg-8">
+                            <div class="card-header"
+                                 style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
+                                <div class="row">
+                                    <img src="{% static 'images/address.png' %}" width="70px" height="70px">
+                                    <h2 class="align-self-center">&nbsp&nbspSelect an address</h2>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                {% for address in addresses %}
+                                    <div class="row address-box">
+                                        <div class="col-2">
+                                            <h5>Address {{ forloop.counter }}</h5>
+                                        </div>
+                                        <div class="col-1">
+
+                                        </div>
+                                        <div style="width: 500px;">
+                                            {{ address.address }}
+                                        </div>
+                                        <div class="justify-content-end">
+                                            <label class="form-group">
+                                                <input form="address_selector" type="radio" name="address_id"
+                                                       name="color" value="{{ address.id }}" checked>
+                                                <div class="container" width="70px" height="40px"
+                                                     style="border-radius: 5px"><span class="fa fa-check-circle">&nbsp;Select</span>
+                                                </div>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                {% endfor %}
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <img src="{% static 'images/add_address.png' %}" width="30px" height="30px">
+                            <h5 style="color: black; padding-top: 2px; padding-bottom: 7px">
+                                &nbsp;&nbsp;Or Add a new address</h5>
+                            <div class="col-2"></div>
+                            <form action="/add_address/" method="post" class="form" id="address_form">
+                                {% csrf_token %}
+                                <input type="type" hidden name="next" value="{{ request.path }}">
+                                <textarea form="address_form" name="address" class="form-control" required></textarea>
+                                {#                                <input type="text" name="address" class="form-control" required/>#}
+                                <br>
+                                <button type="submit"
+                                        style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0; padding: 10px; padding-left: 20px; padding-right: 20px">
+                                    <i class="fa fa-plus"> Add</i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card-body border-top">
                     <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
                 </div> <!-- card-body.// -->
 
             </div> <!-- card.// -->
-
         </aside> <!-- col.// -->
         <aside class="col-lg-3">
 
@@ -99,8 +227,9 @@
                     <p class="text-center mb-3">
                         <img src="{% static 'images/razorpay.png' %}" height="26">
                     </p>
-                    <a href="/createRzpOrder/?type=cart" class="btn btn-primary btn-block"> Make Purchase </a>
-                    <a href="#" class="btn btn-light btn-block">Continue Shopping</a>
+                    <button class="btn btn-primary btn-block" form="address_selector" type="submit">Make Purchase
+                    </button>
+                    <a href="/products/" class="btn btn-light btn-block">Continue Shopping</a>
                 </div> <!-- card-body.// -->
             </div> <!-- card.// -->
 
