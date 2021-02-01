@@ -148,7 +148,7 @@
         <div class="col-md-12">
             <div class="main_heading">
                 <h1>Our Products</h1>
-                <div class="text-center"><span class="underline"></span></div>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width:300px"></span></div>
             </div>
         </div><!-- End col-md-12 -->
     </div>
@@ -173,7 +173,7 @@
                                 {% csrf_token %}
                                 <input type="text" name="id" hidden value="{{ product.id }}">
                                 <input id="colorBuy{{ product.id }}" type="text" name="color" hidden value="red">
-                                <button class="order" type="submit" style="border:0">
+                                <button class="order" type="submit">
                                     <i class="fa fa-credit-card sm-font"> ORDER NOW </i>
                                 </button>
                             </form>
