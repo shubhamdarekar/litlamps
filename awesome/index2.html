@@ -6,69 +6,7 @@
 
 
 {% block style %}
-    <!--Login  CSS -->
-{#    <style>#}
-{#        .card {#}
-{#            height: 370px;#}
-{#            margin-top: auto;#}
-{#            margin-bottom: auto;#}
-{#            width: 400px;#}
-{#            background-color: rgba(0, 0, 0, 0.5) !important;#}
-{#        }#}
-{##}
-{#        .social_icon span {#}
-{#            font-size: 60px;#}
-{#            margin-left: 10px;#}
-{#            color: #1e7e34;#}
-{#        }#}
-{##}
-{#        .social_icon span:hover {#}
-{#            color: white;#}
-{#            cursor: pointer;#}
-{#        }#}
-{##}
-{#        .social_icon {#}
-{#            position: absolute;#}
-{#            right: 20px;#}
-{#            top: -45px;#}
-{#        }#}
-{##}
-{#        .input-group-prepend span {#}
-{#            width: 50px;#}
-{#            background-color: #1e7e34;#}
-{#            color: black;#}
-{#            border: 0 !important;#}
-{#        }#}
-{##}
-{#        input:focus {#}
-{#            box-shadow: 0 0 0 0 !important;#}
-{##}
-{#        }#}
-{##}
-{#        .remember {#}
-{#            color: white;#}
-{#        }#}
-{##}
-{#        .remember input {#}
-{#            width: 20px;#}
-{#            height: 20px;#}
-{#            margin-left: 15px;#}
-{#            margin-right: 5px;#}
-{#        }#}
-{##}
-{#        .login_btn {#}
-{#            color: black;#}
-{#            background-color: #1e7e34;#}
-{#            width: 100px;#}
-{#        }#}
-{##}
-{#        .login_btn:hover {#}
-{#            color: black;#}
-{#            background-color: white;#}
-{#        }#}
-{#    </style>#}
 
-        <!-- FAQs -->
 <style>
     .faqHeader {
         font-size: 27px;
@@ -99,646 +37,539 @@
         transform: rotate(90deg);
         color: #454444;
     }
+
+    .carousel-card:hover {
+        box-shadow: 0 4px 8px 0 #ffdf00, 0 5px 10px 0 #ffdf00;
+    }
+
+    button {
+        border-radius: 10px;
+        border: 0;
+        background-color: #ffdf00;
+        padding: 10px;
+        margin-top: 15px;
+    }
+
+    button:hover {
+        box-shadow: 0 4px 8px 0 darkgrey, 0 5px 10px 0 darkgrey;
+    }
 </style>
 
 {% endblock %}
 
 {% block content %}
 
-    <!-- Navbar 2 -->
-    <nav class="navbar navbar-expand-sm navbar-dark sticky-top second-nav">
-        <a class="navbar-brand" href="#"></a>
-        <ul class="nav container justify-content-center" id="mynavbar2">
-            <li class="nav-item">
-                <a class="nav-link-2" href="#features">Best Seller</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link-2" href="#Services">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link-2" href="#Price">Reviews</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link-2" href="#FAQs">FAQs</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- Navbar 2 end-->
+<!-- Navbar 2 -->
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top second-nav">
+    <a class="navbar-brand" href="#"></a>
+    <ul class="nav container justify-content-center" id="mynavbar2">
+        <li class="nav-item">
+            <a class="nav-link-2" href="#features">Best Seller</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link-2" href="#Services">Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link-2" href="#Price">Reviews</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link-2" href="#FAQs">FAQs</a>
+        </li>
+    </ul>
+</nav>
+<!-- Navbar 2 end-->
 
 
-    <!-- Carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
+<!-- Carousel -->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block" src="{% static 'images/test.JPG' %}" alt="First slide" width="100%" height="725px">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Slider One Item</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt
+                    excepturi
+                    quas vero.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="https://i.postimg.cc/pVzg3LWn/2.jpg" alt="Second slide" width="100%"
+                 height="725px">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Slider One Item</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt
+                    excepturiquas vero.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="https://i.postimg.cc/0y2F6Gpp/3.jpg" alt="Third slide" width="100%"
+                 height="725px">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Slider One Item</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt
+                    excepturi
+                    quas vero.</p>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!-- Carousel end-->
+
+<!-- Products Button -->
+<!--<div class="row">-->
+<a href="/products" class="btn col-12"
+   style="margin-top: 2px; font-size: 30px; background-color: #ffdf00; color: black">
+    <img src="{% static 'images/lamp.png' %}" width="100px" height="100px">
+    <br>
+    <span class="glyphicon glyphicon-lamp"></span>
+    Products
+</a>
+<!--  End Products Button -->
+
+<!-- Best Selling -->
+<div style="background-color: #f5f5f5">
+    <div class="col-md-12">
+        <div class="main_heading">
+            <h1>Best Selling Products</h1>
+            <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 425px"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <!--First slide-->
             <div class="carousel-item active">
-                <img class="d-block w-100" src="{% static 'images/test.JPG' %}" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt
-                        excepturi
-                        quas vero.</p>
+                {% for best in bestselling %}
+                <div class="col-md-3" style="float:left">
+                    <div class="card carousel-card">
+                        <img class="align-self-center"
+                             src="{{ best.image_path }}"
+                             style="margin-top: 15px"
+                             alt="Card image cap"
+                        >
+                        <div class="card-body">
+                            <h4 class="card-title">{{ best.product_name }}</h4>
+                            <div class="row justify-content-around">
+                                <form method="post" action="/add_to_cart/">
+                                    {% csrf_token %}
+                                    <input name="id" hidden value="{{best.id}}">
+                                    <input name="color" hidden value="red">
+                                    <button type="submit">
+                                        <i class="fa fa-cart-plus"> Add to Cart</i>
+                                    </button>
+                                </form>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input name="id" hidden value="{{ best.id }}">
+                                    <button type="submit">
+                                        <i class="fa fa-credit-card"> Order Now</i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {% if forloop.counter|divisibleby:4 %}
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="https://i.postimg.cc/pVzg3LWn/2.jpg" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt
-                        excepturiquas vero.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="https://i.postimg.cc/0y2F6Gpp/3.jpg" alt="Third slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Slider One Item</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt
-                        excepturi
-                        quas vero.</p>
-                </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        <br>
+        <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="color: black"></span>
+                    <span class="sr-only">Next</span>
+                </a>
     </div>
-    <!-- Carousel end-->
+</div>
+<!-- End Best Selling -->
 
-    <!-- Products Button -->
+<!-- Features -->
+<div class="container" id="features">
     <div class="row">
-        <a href="/products" class="btn col-12"
-           style="margin-top: 2px; font-size: 30px; background-color: #ffdf00; color: black">
-            <span class="glyphicon glyphicon-lamp"></span>
-            Products
-        </a>
-    </div>
-    <!--  End Products Button -->
-
-    <!-- Features -->
-    <div class="container" id="features">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="main_heading">
-                    <h1>Features</h1>
-                    <div class="text-center"><span class="underline"></span></div>
-                </div>
-            </div><!-- End col-md-12 -->
-        </div><!-- End row -->
-
-        {#    <div class="row">#}
-        <div class="col-md-12 col-sm-12">
-            <div class="features-div">
-                {#                <i class="fa fa-mobile"></i>#}
-                <div class="row justify-content-md-around   ">
-                    <img src="{% static 'images/qual.png' %}" style="width: 25vh"/>
-                    <div class="flex-row-reverse col-md-6">
-                        <h4>Quality</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore</p>
-                    </div>
+        <div class="col-md-12">
+            <div class="main_heading">
+                <h1>Features</h1>
+                <div class="text-center"><span class="underline"
+                                               style="background-color: #ffdf00; width: 200px"></span>
                 </div>
             </div>
-        </div><!-- End col-md-3-->
-        <br>
-        <br>
-        <div class="col-md-12 col-sm-12">
+        </div><!-- End col-md-12 -->
+    </div><!-- End row -->
+    <div class="row justify-content-around">
+        <div class="col-md-12 col-sm-12 col-lg-3">
             <div class="features-div">
-                {#                <i class="fa fa-code"></i>#}
-                <div class="row justify-content-md-around">
-                    <div class="flex-row-reverse col-md-6">
-                        <h4>Finish</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore</p>
-                    </div>
-                    <img src="{% static 'images/finish.png' %}" style="width: 22vh"/>
-                </div>
+                <img src="{% static 'images/quality.png' %}" style="width: 250px"/>
+                <h4>Quality</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore
+                    et dolore</p>
+            </div>
+        </div>
+        <!-- End col-md-3-->
+        <br>
+        <br>
+        <div class="col-md-12 col-sm-12 col-lg-3">
+            <div class="features-div">
+                <img src="{% static 'images/finishing.png' %}" style="width: 250px"/>
+                <h4>Finish</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore
+                    et dolore</p>
 
             </div>
         </div><!-- End col-md-3-->
         <br>
         <br>
-        <div class="col-md-12 col-sm-12">
+        <div class="col-md-12 col-sm-12 col-lg-3">
             <div class="features-div">
-                <div class="row justify-content-md-around">
-                    <img src="{% static 'images/light.png' %}" style="width: 29vh;"/>
-                    <div class="flex-row-reverse col-md-6">
-                        <h4>Light Bright</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore
-                            et dolore</p>
-                    </div>
-                </div>
+                <img src="{% static 'images/light-bright.png' %}" style="width: 250px;"/>
+                <br>
+                <br>
+                <h4>Light Bright</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore
+                    et dolore</p>
             </div>
-        </div>  <!-- End col-md-3-->
-    </div><!-- End Container -->
-
-
-    <form action="#" method="POST">
-        {% csrf_token %}
-        <script
-                src="https://checkout.razorpay.com/v1/checkout.js"
-                data-key="rzp_test_XgSvcOhAnzdFER"
-                data-amount="1000"
-                data-currency="INR"
-                data-order_id="{{ payment.id }}"
-                data-buttontext="Pay with Razorpay"
-                data-name="Lit Lamp"
-                data-description="Pay for me"
-                data-prefill.name="Mihir Butala"
-                data-prefill.email="mihirbutala@gmail.com"
-                data-prefill.phone="7545562135"
-                data-theme.color="#E3E3E3"
-        ></script>
-        <input type="hidden" custom="Hidden Element" name="hidden">
-    </form>
-
-
-
-
-
-    <!-- Services -->
-
-    <div class="container" id="Services">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="main_heading">
-                    <h1>Services</h1>
-                    <div class="text-center"><span class="underline"></span></div>
-                </div>
-            </div><!-- End col-md-12 -->
-        </div><!-- End row -->
-
-        <div class="col-md-4 services-box-gray col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-support"></i>
-                <h4>24/7 Support</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-rocket"></i>
-                <h4>Quick Install</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 services-box-gray col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-cogs"></i>
-                <h4>Easy to Customize</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-magic"></i>
-                <h4>Another Feature</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 services-box-gray col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-support"></i>
-                <h4>24/7 Support</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-        <div class="col-md-4 col-sm-6">
-            <div class="services-box">
-                <i class="fa fa-rocket"></i>
-                <h4>Quick Install</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s</p>
-            </div>
-        </div><!-- End col-md-4-->
-
-
-    </div><!-- End container -->
-
-    <!-- End Services -->
-
-    <!-- Call to Action -->
-    <div class="call-action-bg" id="Call-to-Action">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main_heading">
-                        <h1>Call to Action</h1>
-                        <div class="text-center"><span class="underline"></span></div>
-                    </div>
-                </div><!-- End col-md-12 -->
-            </div><!-- End row -->
-
-            <div class="col-md-12">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                    type</p>
-            </div><!-- End col-md-12-->
-
-        </div><!-- End container -->
+        </div>
     </div>
+</div>
+<!-- End Features -->
 
-    <!-- End Call to Action -->
-    <!-- Price Table -->
-
-    <div class="container" id="Price">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="main_heading">
-                    <h1>Price Table</h1>
-                    <div class="text-center"><span class="underline"></span></div>
-                </div>
-            </div><!-- End col-md-12 -->
-        </div><!-- End row -->
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class="pricing-box">
-                    <div class="pricing-box-price"><span>$ </span><strong>12</strong><span> / month</span></div>
-                    <h3>Basic</h3>
-                    <h4>Freelancer</h4>
-                    <div class="pricing-box-features">
-                        <ul>
-                            <li>1000 video lessons</li>
-                            <li>Normal speed</li>
-                            <li>500 solved exercises</li>
-                            <li>300MB to save your code</li>
-                            <li>750 hours of support</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-sign-up">
-                        <a class="btn btn-link-1 scroll-link" href="#top-content">Sign up</a>
-                    </div>
-                </div>
-            </div><!-- End col-dm-4 -->
-            <div class="col-md-4 pricing-box-best">
-                <div class="pricing-box">
-                    <div class="pricing-box-price">
-                        <span>$ </span><strong>35</strong><span> / month</span>
-                    </div>
-                    <h3>Ultimate</h3>
-                    <h4>Best value</h4>
-                    <div class="pricing-box-features">
-                        <ul>
-                            <li>3000 video lessons</li>
-                            <li>2x speed</li>
-                            <li>2000 solved exercises</li>
-                            <li>500MB to save your code</li>
-                            <li>900 hours of support</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-sign-up">
-                        <a class="btn btn-link-1 scroll-link" href="#top-content">Sign up</a>
-                    </div>
-                </div>
-            </div><!-- End col-dm-4 -->
-            <div class="col-md-4">
-                <div class="pricing-box">
-                    <div class="pricing-box-price"><span>$ </span><strong>75</strong><span> / month</span></div>
-                    <h3>Platinum</h3>
-                    <h4>Big company</h4>
-                    <div class="pricing-box-features">
-                        <ul>
-                            <li>5000 video lessons</li>
-                            <li>4x speed</li>
-                            <li>4000 solved exercises</li>
-                            <li>900MB to save your code</li>
-                            <li>Unlimited hours of support</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-sign-up">
-                        <a class="btn btn-link-1 scroll-link" href="#top-content">Sign up</a>
-                    </div>
-                </div>
-            </div><!-- End col-dm-4 -->
-        </div><!-- End row -->
-
-    </div><!-- End container -->
-
-    <!-- End Price Table -->
-    <!-- FAQs -->
-
-
-    <div class="container" id="FAQs">
-    <div class="row">
-            <div class="col-md-12">
-                <div class="main_heading">
-                    <h1>FAQs</h1>
-                    <div class="text-center"><span class="underline"></span></div>
-                </div>
-            </div><!-- End col-md-12 -->
-        </div><!-- End row -->
-        <div class="" id="accordion">
-            <div class="faqHeader">Sellers</div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is
-                            account registration required?</a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="card-block">
-                        Account registration at <strong>PrepBootstrap</strong> is only required if you will be selling
-                        or buying themes.
-                        This ensures a valid communication channel for all parties involved in any transactions.
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a>
-                    </h4>
-                </div>
-                <div id="collapseTen" class="panel-collapse collapse">
-                    <div class="card-block">
-                        A lot of the content of the site has been submitted by the community. Whether it is a commercial
-                        element/template/theme
-                        or a free one, you are encouraged to contribute. All credits are published along with the
-                        resources.
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseEleven">What is the currency used for all transactions?</a>
-                    </h4>
-                </div>
-                <div id="collapseEleven" class="panel-collapse collapse">
-                    <div class="card-block">
-                        All prices for themes, templates and other items, including each seller's or buyer's account
-                        balance are in <strong>USD</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faqHeader">Sellers</div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseTwo">Who cen sell items?</a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="card-block">
-                        Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseThree">I want to sell my items - what are the steps?</a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="card-block">
-                        The steps involved in this process are really simple. All you need to do is:
-                        <ul>
-                            <li>Register an account</li>
-                            <li>Activate your account</li>
-                            <li>Go to the <strong>Themes</strong> section and upload your theme</li>
-                            <li>The next step is the approval step, which usually takes about 72 hours.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseFive">How much do I get from each sale?</a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                    <div class="card-block">
-                        Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless
-                        of any restrictions, such as volume, date of entry, etc.
-                        <br/>
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseSix">Why sell my items here?</a>
-                    </h4>
-                </div>
-                <div id="collapseSix" class="panel-collapse collapse">
-                    <div class="card-block">
-                        There are a number of reasons why you should join us:
-                        <ul>
-                            <li>A great 70% flat rate for your items.</li>
-                            <li>Fast response/approval times. Many sites take weeks to process a theme or template. And
-                                if it gets rejected, there is another iteration. We have aliminated this, and made the
-                                process very fast. It only takes up to 72 hours for a template/theme to get reviewed.
-                            </li>
-                            <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>,
-                                as well as on any other marketplate, and thus increase your earning potential.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseEight">What are the payment options?</a>
-                    </h4>
-                </div>
-                <div id="collapseEight" class="panel-collapse collapse">
-                    <div class="card-block">
-                        The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a
-                        secure environment.
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseNine">When do I get paid?</a>
-                    </h4>
-                </div>
-                <div id="collapseNine" class="panel-collapse collapse">
-                    <div class="card-block">
-                        Our standard payment plan provides for monthly payments. At the end of each month, all
-                        accumulated funds are transfered to your account.
-                        The minimum amount of your balance should be at least 70 USD.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faqHeader">Buyers</div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseFour">I want to buy a theme - what are the steps?</a>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="card-block">
-                        Buying a theme on <strong>PrepBootstrap</strong> is really simple. Each theme has a live
-                        preview.
-                        Once you have selected a theme or template, which is to your liking, you can quickly and
-                        securely pay via Paypal.
-                        <br/>
-                        Once the transaction is complete, you gain full access to the purchased product.
-                    </div>
-                </div>
-            </div>
-            <div class="card ">
-                <div class="card-header">
-                    <h4 class="card-header">
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseSeven">Is this the latest version of an item</a>
-                    </h4>
-                </div>
-                <div id="collapseSeven" class="panel-collapse collapse">
-                    <div class="card-block">
-                        Each item in <strong>PrepBootstrap</strong> is maintained to its latest version. This ensures
-                        its smooth operation.
-                    </div>
-                </div>
+<!-- Reviews -->
+<div style="background-color: #f5f5f5">
+    <div class="col-md-12">
+        <div class="main_heading">
+            <br>
+            <br>
+            <h1>Customer Reviews</h1>
+            <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 425px"></span>
             </div>
         </div>
     </div>
 
-    <!-- End FAQs -->
-
-
-    <!-- About -->
-    <div class="container" id="About">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="main_heading">
-                    <h1>About us</h1>
-                    <div class="text-center"><span class="underline"></span></div>
-                </div>
-            </div><!-- End col-md-12 -->
-        </div><!-- End row -->
-
-
-        <div class="row">
-            <div class="col-md-4 about-us-box wow fadeInUp animated">
-                <div class="about-us-photo">
-                    <img src="{% static 'images/1.jpg' %}" alt="">
-                    <div class="about-us-role">Marketing</div>
-                </div>
-                <h3>John Doe</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
-            </div>
-
-            <div class="col-md-4 about-us-box wow fadeInUp animated">
-                <div class="about-us-photo">
-                    <img src="{% static 'images/2.jpg' %}" alt="">
-                    <div class="about-us-role">Marketing</div>
-                </div>
-                <h3>John Doe</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
-            </div>
-
-            <div class="col-md-4 about-us-box wow fadeInUp animated">
-                <div class="about-us-photo">
-                    <img src="{% static 'images/3.jpg' %}" alt="">
-                    <div class="about-us-role">Marketing</div>
-                </div>
-                <h3>John Doe</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
-            </div>
-        </div><!-- End row -->
-
-    </div><!-- End container -->
-    <!-- End About -->
-
-
-    <!-- Testimonial -->
-    <div class="call-action-color" id="Testimonial">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main_heading">
-                        <h1>Testimonial</h1>
-                        <div class="text-center"><span class="underline"></span></div>
+    <div id="multi-item-example2" class="carousel slide carousel-multi-item" data-ride="carousel">
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <!--First slide-->
+            <div class="carousel-item active">
+                {% for review in reviews %}
+                <div class="col-md-4 col-lg-4 col-sm-4" style="float:left;">
+                    <div class="card carousel-card">
+                        <div class="card-header">
+                            <div class="row justify-content-center" style="width: 100%;">
+                                <div class="col-lg-4 col-md-6 col-sm-12 align-self-center">
+                                    <img class="align-self-center"
+                                         src="{{ review.product.image_path }}"
+                                         alt="Card image cap"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ review.product.product_name }}</h4>
+                            <div class="col-lg-12">
+                                <h4 style="margin-left: 10px; margin-right: 10px; margin-top: 20px">"{{ review.review
+                                    }}"</h4>
+                            </div>
+                        </div>
+                        <div class="card-footer justify-content-end">
+                            <div class="row justify-content-end" style="width: 100%">
+                                <p style="font-size: 20px"> - {{ review.customer.first_name}}&nbsp;{{
+                                    review.customer.last_name }}</p>
+                            </div>
+                            <div class="col-lg-1"></div>
+                        </div>
                     </div>
-                </div><!-- End col-md-12 -->
-            </div><!-- End row -->
-
-            <div class="col-md-12">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                    type</p>
-            </div><!-- End col-md-12-->
-
-        </div><!-- End container -->
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="carousel-item">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <!--Controls-->
+        <div class="row justify-content-center">
+            <div class="controls">
+                <a class="btn-floating" href="#multi-item-example2" data-slide="prev"
+                   style="color: #ffdf00; font-size: 30px"><i class="fa fa-chevron-left"></i></a>
+                <a class="btn-floating" href="#multi-item-example2" data-slide="next"
+                   style="color: #ffdf00; font-size: 30px"><i class="fa fa-chevron-right"></i></a>
+            </div>
+            <br>
+            <br>
+        </div>
+        <!--/.Controls-->
+        <!--Indicators-->
+        <!--    <ol class="carousel-indicators" style="background-color: black; margin-top: 50px">-->
+        <!--        <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>-->
+        <!--        <li data-target="#multi-item-example" data-slide-to="1"></li>-->
+        <!--    </ol>-->
+        <!--/.Indicators-->
     </div>
+</div>
+<!-- End Reviews -->
 
-    <!-- End Testimonial -->
+
+<!-- FAQs -->
+<div class="container" id="FAQs">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main_heading">
+                <h1>FAQs</h1>
+                <div class="text-center"><span class="underline"></span></div>
+            </div>
+        </div><!-- End col-md-12 -->
+    </div><!-- End row -->
+    <div class="" id="accordion">
+        <div class="faqHeader">Sellers</div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is
+                        account registration required?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="card-block">
+                    Account registration at <strong>PrepBootstrap</strong> is only required if you will be selling
+                    or buying themes.
+                    This ensures a valid communication channel for all parties involved in any transactions.
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a>
+                </h4>
+            </div>
+            <div id="collapseTen" class="panel-collapse collapse">
+                <div class="card-block">
+                    A lot of the content of the site has been submitted by the community. Whether it is a commercial
+                    element/template/theme
+                    or a free one, you are encouraged to contribute. All credits are published along with the
+                    resources.
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseEleven">What is the currency used for all transactions?</a>
+                </h4>
+            </div>
+            <div id="collapseEleven" class="panel-collapse collapse">
+                <div class="card-block">
+                    All prices for themes, templates and other items, including each seller's or buyer's account
+                    balance are in <strong>USD</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="faqHeader">Sellers</div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTwo">Who cen sell items?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="card-block">
+                    Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseThree">I want to sell my items - what are the steps?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="card-block">
+                    The steps involved in this process are really simple. All you need to do is:
+                    <ul>
+                        <li>Register an account</li>
+                        <li>Activate your account</li>
+                        <li>Go to the <strong>Themes</strong> section and upload your theme</li>
+                        <li>The next step is the approval step, which usually takes about 72 hours.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseFive">How much do I get from each sale?</a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse">
+                <div class="card-block">
+                    Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless
+                    of any restrictions, such as volume, date of entry, etc.
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseSix">Why sell my items here?</a>
+                </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse">
+                <div class="card-block">
+                    There are a number of reasons why you should join us:
+                    <ul>
+                        <li>A great 70% flat rate for your items.</li>
+                        <li>Fast response/approval times. Many sites take weeks to process a theme or template. And
+                            if it gets rejected, there is another iteration. We have aliminated this, and made the
+                            process very fast. It only takes up to 72 hours for a template/theme to get reviewed.
+                        </li>
+                        <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>,
+                            as well as on any other marketplate, and thus increase your earning potential.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseEight">What are the payment options?</a>
+                </h4>
+            </div>
+            <div id="collapseEight" class="panel-collapse collapse">
+                <div class="card-block">
+                    The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a
+                    secure environment.
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseNine">When do I get paid?</a>
+                </h4>
+            </div>
+            <div id="collapseNine" class="panel-collapse collapse">
+                <div class="card-block">
+                    Our standard payment plan provides for monthly payments. At the end of each month, all
+                    accumulated funds are transfered to your account.
+                    The minimum amount of your balance should be at least 70 USD.
+                </div>
+            </div>
+        </div>
+
+        <div class="faqHeader">Buyers</div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseFour">I want to buy a theme - what are the steps?</a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="card-block">
+                    Buying a theme on <strong>PrepBootstrap</strong> is really simple. Each theme has a live
+                    preview.
+                    Once you have selected a theme or template, which is to your liking, you can quickly and
+                    securely pay via Paypal.
+                    <br/>
+                    Once the transaction is complete, you gain full access to the purchased product.
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-header">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseSeven">Is this the latest version of an item</a>
+                </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse">
+                <div class="card-block">
+                    Each item in <strong>PrepBootstrap</strong> is maintained to its latest version. This ensures
+                    its smooth operation.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<!-- End FAQs -->
 {% endblock %}
 
 
-
 {% block script %}
-    <!-- Script for scrollspy -->
-    <script>
-        $(document).ready(function () {
-            // Add scrollspy to <body>
-            $('body').scrollspy({target: ".navbar", offset: 50});
+<!-- Script for scrollspy -->
+<script>
+    $(document).ready(function () {
+        // Add scrollspy to <body>
+        $('body').scrollspy({target: ".navbar", offset: 50});
 
-            // Add smooth scrolling on all links inside the navbar
-            $("#mynavbar2 a").on('click', function (event) {
-                // Make sure this.hash has a value before overriding default behavior
-                if (this.hash !== "") {
-                    // Prevent default anchor click behavior
-                    event.preventDefault();
+        // Add smooth scrolling on all links inside the navbar
+        $("#mynavbar2 a").on('click', function (event) {
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+                // Prevent default anchor click behavior
+                event.preventDefault();
 
-                    // Store hash
-                    var hash = this.hash;
+                // Store hash
+                var hash = this.hash;
 
-                    // Using jQuery's animate() method to add smooth page scroll
-                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top
-                    }, 800, function () {
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function () {
 
-                        // Add hash (#) to URL when done scrolling (default click behavior)
-                        window.location.hash = hash;
-                    });
-                }  // End if
-            });
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+            }  // End if
         });
-    </script>
-    <!-- scrollspy end -->
+    });
+</script>
+<!-- scrollspy end -->
 
-    <!-- script for ripple effect on card -->
-    <script>
-        document.querySelectorAll('.example-class').forEach((cardRipple) => {
-            new mdb.Ripple(cardRipple, {color: 'light'})
-        });
-    </script>
-    <!-- end script -->
+<!-- script for ripple effect on card -->
+<script>
+    document.querySelectorAll('.example-class').forEach((cardRipple) => {
+        new mdb.Ripple(cardRipple, {color: 'light'})
+    });
+</script>
+<!-- end script -->
 {% endblock %}

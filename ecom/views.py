@@ -58,17 +58,13 @@ def homepage(request):
                 'payment_capture': '1'}
         # payment = temp_client.order.create(data=data)
 
-    bestselling = Product.objects.all().order_by('bestselling')
+    bestselling = Product.objects.filter(bestselling=1)
     faq = FAQ.objects.all()
+    reviews = Customer_review.objects.all()
     recently_viewed = recent_viewed()
     cart = cart_items(request)
     return render(request, 'index2.html',
-                  {'bestselling': bestselling, 'faq': faq, 'payment': payment, 'cart': cart})
-
-
-def login(request):
-    pass
-
+                  {'bestselling': bestselling, 'faq': faq, 'payment': payment, 'cart': cart, 'reviews': reviews})
 
 def cart_items(request):
     uid = request.user.id
@@ -90,9 +86,10 @@ def add_to_cart(request):
         if request.method == 'POST':
             if request.POST['id']:
                 cursor = connection.cursor()
+                color = request.POST['color']
                 product_id = request.POST['id']
                 customer_id = request.user.id
-                cursor.execute('select * from ecom_cart where product_id = %s and customer_id = %s', [product_id, customer_id])
+                cursor.execute('select * from ecom_cart where product_id = %s and customer_id = %s and color="red"', [product_id, customer_id])
                 row = list(cursor.fetchall())
                 print(row)
                 if row:
@@ -101,6 +98,7 @@ def add_to_cart(request):
                     cart = Cart()
                     cart.product_id = request.POST['id']
                     cart.customer_id = request.user.id
+                    cart.color = color
                     cart.save()
                 return redirect('/products/?cart=true')
     else:

@@ -5,6 +5,9 @@
 
 {% block style %}
     <style>
+        * {
+            font-family: Copperplate;
+        }
         .profile {
             margin: 25px;
         }
@@ -50,7 +53,7 @@
         <div class="row justify-content-start">
             <div style="padding-top: 18px; padding-right: 30px; padding-left: 30px;
             background-color: #ffdf00; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19); margin-left: 100px">
-                <p style="font-size: 50px">{{ user.first_name|slice:":1" }}</p>
+                <p style="font-size: 50px; text-align: center">{{ user.username|slice:":1" }}</p>
             </div>
             <div class="flex-row-reverse align-self-center">
                 <h3 class="text"> &nbsp&nbsp{{ user.first_name }}&nbsp{{ user.last_name }}</h3>
@@ -84,7 +87,7 @@
                                 <td>First Name</td>
                                 <td><input type="text" name="first_name" value="{{ user.first_name }}"
                                            id="input1" class="profile-input form-control" readonly required></td>
-                                <td><i class="fa fa-edit" id="btn1" style="color: #ffdf00; margin-left: 20px"></i></td>
+                                <td><i class="fa fa-edit" id="btn1" style="color: black; margin-left: 20px"></i></td>
                             </tr>
                             {#                            <tr>#}
                             {#                                <p>{{ first_name_error }}</p>#}
@@ -93,7 +96,7 @@
                                 <td>Last Name</td>
                                 <td><input type="text" name="last_name" value="{{ user.last_name }}"
                                            id="input2" class="profile-input form-control" required readonly></td>
-                                <td><i class="fa fa-edit" id="btn2" style="color: #ffdf00; margin-left: 20px"></i></td>
+                                <td><i class="fa fa-edit" id="btn2" style="color: black; margin-left: 20px"></i></td>
                             </tr>
                             {#                            <tr>#}
                             {#                                <p>{{ last_name_error }}</p>#}
@@ -102,7 +105,7 @@
                                 <td>Username</td>
                                 <td><input type="text" name="username" value="{{ user.username }}"
                                            id="input3" class="profile-input form-control" required readonly></td>
-                                <td><i class="fa fa-edit" id="btn3" style="color: #ffdf00; margin-left: 20px"></i></td>
+                                <td><i class="fa fa-edit" id="btn3" style="color: black; margin-left: 20px"></i></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -110,7 +113,7 @@
                                   <span><br><div>
                                 <button type="submit"
                                         style="background-color: #ffdf00; color: black; border: 0; border-radius: 5px; padding: 10px">
-                                    <i class="fa fa-check" style="background-color: #ffdf00">Submit</i>
+                                    <i class="fa fa-check" style="background-color: #ffdf00">&nbspSubmit</i>
                                 </button>
                             </div></span>
                                 </td>
