@@ -201,6 +201,7 @@ def create_razorpay_order(request):
             new_order_item.order_id = new_order.id
             new_order_item.quantity = item.quantity
             new_order_item.product_id = item.product_id
+            new_order_item.color = item.color
             new_order_item.save()
         payment['rupee'] = order_amount
         return render(request, 'payment_completion.html', {'payment': payment})
@@ -260,9 +261,11 @@ def success_redirect(request):
 
 def orders_page(request):
     orders = []
+    reviews = []
     if request.user.is_authenticated:
         orders = Order_item.objects.filter(order__customer_id=request.user.id)
-    return render(request, "orders_page.html", {"orders": orders})
+        reviews = Customer_review.objects.filter(customer_id=request.user.id)
+    return render(request, "orders_page.html", {"orders": orders, "reviews": reviews})
 
 
 def add_address(request):
@@ -283,3 +286,19 @@ def delete_address(request):
             id = request.POST['id']
             Address.objects.filter(id=id).delete()
     return redirect('/profile')
+
+
+def write_review(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            product_id = request.POST['id']
+            color = request.POST['color']
+            review = request.POST['reviewField']
+            new_review = Customer_review()
+            new_review.review = review
+            new_review.color = color
+            new_review.product_id = product_id
+            new_review.customer_id = request.user.id
+            new_review.save()
+    return redirect('/orders')
+

@@ -20,4 +20,5 @@ urlpatterns = [
     path('add_address/', views.add_address),
     path('delete_address/', views.delete_address),
     path('buy_now/', views.checkout_product),
+    path('submitReview/', views.write_review),
 ]

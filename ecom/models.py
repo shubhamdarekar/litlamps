@@ -50,10 +50,16 @@ class Order_item(models.Model):
     quantity = models.IntegerField()
     color = models.CharField(max_length=255)
 
+    def _total(self):
+        return self.quantity*self.product.product_price_rupees
+
+    total = property(_total)
+
 
 class Customer_review(models.Model):
     customer = models.ForeignKey(authUser, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=255)
     review = models.TextField()
 
 
