@@ -7,128 +7,126 @@
 
 {% block style %}
 
-    <style>
-        .faqHeader {
-            font-size: 27px;
-            margin: 20px;
-        }
+<style>
+    .faqHeader {
+        font-size: 27px;
+        margin: 20px;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        .panel-heading [data-toggle="collapse"]:after {
-            font-family: 'Glyphicons Halflings';
-            content: "e072"; /* "play" icon */
-            float: right;
-            color: #F58723;
-            font-size: 18px;
-            line-height: 22px;
-            /* rotate "play" icon from > (right arrow) to down arrow */
-            -webkit-transform: rotate(-90deg);
-            -moz-transform: rotate(-90deg);
-            -ms-transform: rotate(-90deg);
-            -o-transform: rotate(-90deg);
-            transform: rotate(-90deg);
-        }
+    .panel-heading [data-toggle="collapse"]:after {
+        font-family: 'Glyphicons Halflings';
+        content: "e072"; /* "play" icon */
+        float: right;
+        color: #F58723;
+        font-size: 18px;
+        line-height: 22px;
+        /* rotate "play" icon from > (right arrow) to down arrow */
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
 
-        .panel-heading [data-toggle="collapse"].collapsed:after {
-            /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
-            -webkit-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            -o-transform: rotate(90deg);
-            transform: rotate(90deg);
-            color: #454444;
-        }
+    .panel-heading [data-toggle="collapse"].collapsed:after {
+        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        color: #454444;
+    }
 
-        .carousel-card:hover {
-            box-shadow: 0 4px 8px 0 #ffdf00, 0 5px 10px 0 #ffdf00;
-        }
+    .carousel-card:hover {
+        box-shadow: 0 4px 8px 0 #ffdf00, 0 5px 10px 0 #ffdf00;
+    }
 
-        button {
-            border-radius: 10px;
-            border: 0;
-            background-color: #ffdf00;
-            padding: 10px;
-            margin-top: 15px;
-        }
+    img:hover {
+        cursor: pointer;
+    }
 
-        button:hover {
-            box-shadow: 0 4px 8px 0 darkgrey, 0 5px 10px 0 darkgrey;
-        }
+    button {
+        border-radius: 10px;
+        border: 0;
+        background-color: #ffdf00;
+        padding: 10px;
+        margin-top: 15px;
+    }
 
-        [type=radio] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+    button:hover {
+        box-shadow: 0 4px 8px 0 darkgrey, 0 5px 10px 0 darkgrey;
+    }
 
-        /* IMAGE STYLES */
-        [type=radio] + img {
-            cursor: pointer;
-        }
+    [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
-        /* CHECKED STYLES */
-        [type=radio]:checked + img {
-            outline-width: 2px;
-            outline-style: solid;
-            outline-color: #f00;
-            -moz-outline-radius: 25px;
-        }
-    </style>
+    /* IMAGE STYLES */
+    [type=radio] + img {
+        cursor: pointer;
+    }
+
+    /* CHECKED STYLES */
+    [type=radio]:checked + img {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: #f00;
+        -moz-outline-radius: 25px;
+    }
+</style>
 
 {% endblock %}
 
 {% block content %}
 
-    <!-- Navbar 2 -->
-    <nav class="navbar navbar-expand-sm navbar-dark sticky-top second-nav">
-        <a class="navbar-brand" href="#"></a>
-        <ul class="nav container justify-content-center" id="mynavbar2">
-            <li class="nav-item">
-                <a class="nav-link-2" href="#bestSelling">Best Seller</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link-2" href="#features">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link-2" href="#reviews">Reviews</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link-2" href="#FAQs">FAQs</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- Navbar 2 end-->
+<!-- Navbar 2 -->
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top second-nav">
+    <a class="navbar-brand" href="#"></a>
+    <ul class="nav container justify-content-center" id="mynavbar2">
+        <li class="nav-item">
+            <a class="nav-link-2" href="#bestSelling">Best Seller</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link-2" href="#features">Features</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link-2" href="#reviews">Reviews</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link-2" href="#FAQs">FAQs</a>
+        </li>
+    </ul>
+</nav>
+<!-- Navbar 2 end-->
 
 
-    <!-- Carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active" id="carousel1">
-                <img class="d-block" src="{% static 'images/carousel/carousel1.JPG' %}" alt="First slide" width="100%" height="725px">
-                <!--            <div class="carousel-caption d-none d-md-block">-->
-                <!--                <h5>Slider One Item</h5>-->
-                <!--                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt-->
-                <!--                    excepturi-->
-                <!--                    quas vero.</p>-->
-                <!--            </div>-->
+<!-- Carousel -->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active" id="carousel1">
+            {% for item in carousel %}
+            <img class="d-block" src="{{ item.image_path }}" alt="{{forloop.counter}} slide" width="100%"
+                 height="725px" onclick="location.href='/product/?id={{ item.id }}'" >
+            <div class="carousel-caption d-none d-md-block">%}
             </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="{% static 'images/carousel/carousel2.JPG' %}" alt="Second slide" width="100%"
-                     height="725px">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="{% static 'images/carousel/carousel3.JPG' %}" alt="Third slide" width="100%"
-                     height="725px">
-            </div>
+            {% if forloop.counter < carousel|length %}
+        </div>
+        <div class="carousel-item" id="carousel1">
+            {% endif %}
+            {% endfor %}
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -166,83 +164,95 @@
         </div>
 
         <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+            <!--Controls-->
+            <div class="controls-top row justify-content-center">
+                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left fa-2x"
+                                                                                        style="color: #ffdf00"></i></a>
+                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+                        class="fa fa-chevron-right fa-2x"
+                        style="color: #ffdf00"></i></a>
+            </div>
+            <!--/.Controls-->
+            <br>
             <!--Slides-->
             <div class="carousel-inner" role="listbox">
                 <!--First slide-->
-                <div class="carousel-item active">
+                <div class="carousel-item active row justify-content-center">
                     {% for best in bestselling %}
-                        <div class="col-md-3" style="float:left">
-                            <div class="card carousel-card">
-                                <img class="align-self-center"
-                                     src="{{ best.image_path }}"
-                                     style="margin-top: 15px"
-                                     alt="Card image cap"
-                                     onclick="location.href='/product/?id={{ best.id }}'"
-                                >
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ best.product_name }}</h4>
-                                    <div class="row justify-content-around">
-                                        <form method="post" action="/add_to_cart/">
-                                            {% csrf_token %}
-                                            <input name="id" hidden value="{{ best.id }}">
-                                            <input id="colorCart{{ best.id }}" type="text" name="color" hidden
-                                                   value="red">
-                                            <button type="submit" style="margin-left: 2%; width: 100%">
-                                                <i class="fa fa-cart-plus"> Add to Cart</i>
-                                            </button>
-                                        </form>
-                                        <form method="post" action="/buy_now/">
-                                            {% csrf_token %}
-                                            <input name="id" hidden value="{{ best.id }}">
-                                            <input id="colorCart{{ best.id }}" type="text" name="color" hidden
-                                                   value="red">
-                                            <button type="submit" style="width: 100%; margin-right: 2%">
-                                                <i class="fa fa-credit-card"> Order Now</i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="row justify-content-center" style="margin-top: 5px">
-                                        <form>
-                                            <label class="form-group">
-                                                <input type="radio" id="red" name="color" value="red" checked
-                                                       onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;"
-                                                >
-                                                <img src="{% static 'images/red.jpeg' %}" width="25px" height="25px"
-                                                     style="border-radius: 12px">
-                                            </label>
-                                            <label class="form-group">
-                                                <input type="radio" id="wooden" name="color" value="wooden"
-                                                       onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;">
-                                                <img src="{% static 'images/wooden.jpeg' %}" width="25px" height="25px"
-                                                     style="border-radius: 12px; margin-left: 4px">
-                                            </label>
-                                            <label class="form-group">
-                                                <input type="radio" id="black" name="color" value="black"
-                                                       onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;">
-                                                <img src="{% static 'images/black.jpeg' %}" width="25px" height="25px"
-                                                     style="border-radius: 12px; margin-left: 4px">
-                                            </label>
-                                        </form>
-                                    </div>
+                    <div class="col-md-4 col-lg-4" style="float:left">
+                        <div class="card carousel-card">
+                            <img class="align-self-center"
+                                 src="{{ best.image_path }}"
+                                 style="margin-top: 15px"
+                                 width="250px"
+                                 height="300px"
+                                 alt="Card image cap"
+                                 onclick="location.href='/product/?id={{ best.id }}'"
+                            >
+                            <div class="card-body">
+                                <h4 class="card-title">{{ best.product_name }}</h4>
+                                <div class="row justify-content-around">
+                                    <form method="post" action="/add_to_cart/">
+                                        {% csrf_token %}
+                                        <input name="id" hidden value="{{ best.id }}">
+                                        <input id="colorCart{{ best.id }}" type="text" name="color" hidden
+                                               value="red">
+                                        <button type="submit" style="margin-left: 2%; width: 100%">
+                                            <i class="fa fa-cart-plus"> Add to Cart</i>
+                                        </button>
+                                    </form>
+                                    <form method="post" action="/buy_now/">
+                                        {% csrf_token %}
+                                        <input name="id" hidden value="{{ best.id }}">
+                                        <input id="colorCart{{ best.id }}" type="text" name="color" hidden
+                                               value="red">
+                                        <button type="submit" style="width: 100%; margin-right: 2%">
+                                            <i class="fa fa-credit-card"> Order Now</i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="row justify-content-center" style="margin-top: 5px">
+                                    <form>
+                                        <label class="form-group">
+                                            <input type="radio" id="red" name="color" value="red" checked
+                                                   onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;"
+                                            >
+                                            <img src="{% static 'images/red.jpeg' %}" width="25px" height="25px"
+                                                 style="border-radius: 12px">
+                                        </label>
+                                        <label class="form-group">
+                                            <input type="radio" id="wooden" name="color" value="wooden"
+                                                   onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;">
+                                            <img src="{% static 'images/wooden.jpeg' %}" width="25px" height="25px"
+                                                 style="border-radius: 12px; margin-left: 4px">
+                                        </label>
+                                        <label class="form-group">
+                                            <input type="radio" id="black" name="color" value="black"
+                                                   onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;">
+                                            <img src="{% static 'images/black.jpeg' %}" width="25px" height="25px"
+                                                 style="border-radius: 12px; margin-left: 4px">
+                                        </label>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        {% if forloop.counter|divisibleby:4 %}
-                            </div>
-                            <div class="carousel-item">
-                        {% endif %}
-                    {% endfor %}
                     </div>
+                    {% if bestselling|length > forloop.counter and forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="carousel-item">
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             <br>
-            <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true" style="color: black"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <!--        <a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">-->
+            <!--            <span class="carousel-control-prev-icon" style="background-color: black;" aria-hidden="true"></span>-->
+            <!--            <span class="sr-only">Previous</span>-->
+            <!--        </a>-->
+            <!--        <a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">-->
+            <!--            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: black;"></span>-->
+            <!--            <span class="sr-only">Next</span>-->
+            <!--        </a>-->
         </div>
     </div>
     <!-- End Best Selling -->
@@ -314,55 +324,64 @@
         </div>
 
         <div id="multi-item-example2" class="carousel slide carousel-multi-item" data-ride="carousel">
+            <div class="controls-top row justify-content-center">
+                <a class="btn-floating" href="#multi-item-example2" data-slide="prev"><i
+                        class="fa fa-chevron-left fa-2x"
+                        style="color: #ffdf00"></i></a>
+                <a class="btn-floating" href="#multi-item-example2" data-slide="next"><i
+                        class="fa fa-chevron-right fa-2x"
+                        style="color: #ffdf00"></i></a>
+            </div>
+            <br>
             <!--Slides-->
             <div class="carousel-inner" role="listbox">
                 <!--First slide-->
                 <div class="carousel-item active">
                     {% for review in reviews %}
-                        <div class="col-md-4 col-lg-4 col-sm-4" style="float:left;">
-                            <div class="card carousel-card">
-                                <div class="card-header">
-                                    <div class="row justify-content-center" style="width: 100%;">
-                                        <div class="col-lg-4 col-md-6 col-sm-12 align-self-center">
-                                            <img class="align-self-center"
-                                                 src="{{ review.product.image_path }}"
-                                                 alt="Card image cap"
-                                            >
-                                        </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4" style="float:left;">
+                        <div class="card carousel-card">
+                            <div class="card-header">
+                                <div class="row justify-content-center" style="width: 100%;">
+                                    <div class="col-lg-4 col-md-6 col-sm-12 align-self-center">
+                                        <img class="align-self-center"
+                                             src="{{ review.product.image_path }}"
+                                             alt="Card image cap"
+                                        >
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ review.product.product_name }}</h4>
-                                    <div class="col-lg-12">
-                                        <h4 style="margin-left: 10px; margin-right: 10px; margin-top: 20px">
-                                            "{{ review.review }}"</h4>
-                                    </div>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ review.product.product_name }}</h4>
+                                <div class="col-lg-12">
+                                    <h4 style="margin-left: 10px; margin-right: 10px; margin-top: 20px">
+                                        "{{ review.review }}"</h4>
                                 </div>
-                                <div class="card-footer justify-content-end">
-                                    <div class="row justify-content-end" style="width: 100%">
-                                        <p style="font-size: 20px">
-                                            - {{ review.customer.first_name }}&nbsp;{{ review.customer.last_name }}</p>
-                                    </div>
-                                    <div class="col-lg-1"></div>
+                            </div>
+                            <div class="card-footer justify-content-end">
+                                <div class="row justify-content-end" style="width: 100%">
+                                    <p style="font-size: 20px">
+                                        - {{ review.customer.first_name }}&nbsp;{{ review.customer.last_name }}</p>
                                 </div>
+                                <div class="col-lg-1"></div>
                             </div>
                         </div>
-                        {% if forloop.counter|divisibleby:3 %}
-                            </div>
-                            <div class="carousel-item">
-                        {% endif %}
-                    {% endfor %}
                     </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="carousel-item">
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             <br>
-            <a class="carousel-control-prev" href="#multi-item-example2" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#multi-item-example2" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true" style="color: black"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <!--        <a class="carousel-control-prev" href="#multi-item-example2" role="button" data-slide="prev">-->
+            <!--            <span class="carousel-control-prev-icon" style="background-color: black;" aria-hidden="true"></span>-->
+            <!--            <span class="sr-only">Previous</span>-->
+            <!--        </a>-->
+            <!--        <a class="carousel-control-next" href="#multi-item-example2" role="button" data-slide="next">-->
+            <!--            <span class="carousel-control-next-icon" style="background-color: black;" aria-hidden="true"></span>-->
+            <!--            <span class="sr-only">Next</span>-->
+            <!--        </a>-->
         </div>
     </div>
     <!-- End Reviews -->
@@ -380,19 +399,19 @@
         </div><!-- End row -->
         <div class="" id="accordion">
             {% for faq in faqs %}
-                <div class="card ">
-                    <div class="card-header">
-                        <h4 class="card-header">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseOne{{ forloop.counter }}">{{ faq.question }}</a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne{{ forloop.counter }}" class="panel-collapse collapse in">
-                        <div class="card-block">
-                            <p style="font-size: 20px; padding-left: 15px; padding-top: 5px">{{ faq.answer }}</p>
-                        </div>
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-header">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne{{ forloop.counter }}">{{ faq.question }}</a>
+                    </h4>
+                </div>
+                <div id="collapseOne{{ forloop.counter }}" class="panel-collapse collapse in">
+                    <div class="card-block">
+                        <p style="font-size: 20px; padding-left: 15px; padding-top: 5px">{{ faq.answer }}</p>
                     </div>
                 </div>
+            </div>
             {% endfor %}
 
         </div>
@@ -400,8 +419,8 @@
     <br>
     <br>
     <!-- End FAQs -->
-{% endblock %}
+    {% endblock %}
 
 
-{% block script %}
-{% endblock %}
+    {% block script %}
+    {% endblock %}

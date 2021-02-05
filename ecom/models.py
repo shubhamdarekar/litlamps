@@ -24,6 +24,7 @@ class Product(models.Model):
     product_price_rupees = models.FloatField()
     product_price_dollars = models.FloatField()
     bestselling = models.IntegerField(null=True)
+    carousel = models.BooleanField(default=0)
     image_path = models.TextField()
     image_path_2 = models.TextField(null=True, default=None)
     image_path_3 = models.TextField(null=True, default=None)

@@ -78,11 +78,12 @@ def homepage(request):
 
     bestselling = Product.objects.filter(bestselling=1)
     faq = FAQ.objects.all()
+    carousel = Product.objects.filter(carousel=1)
     reviews = Customer_review.objects.all()
     recently_viewed = recent_viewed()
     cart = cart_items(request)
     return render(request, 'index2.html',
-                  {'bestselling': bestselling, 'faqs': faq, 'payment': payment, 'cart': cart, 'reviews': reviews})
+                  {'bestselling': bestselling, 'faqs': faq, 'payment': payment, 'cart': cart, 'reviews': reviews, 'carousel': carousel})
 
 
 def cart_items(request):

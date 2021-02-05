@@ -7,7 +7,6 @@
 <head>
     <title>{% block title %}LiT Lamps{% endblock %}</title>
     <link rel="icon" href="{% static 'images/logo-crop.png' %}" type="image/icon type">
- <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -29,7 +28,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     <!-- Animation Css -->
-    {#    <link rel="stylesheet" href="{% static 'css/animate.css' %}">#}
+    {#
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    #}
 
     <!-- Header and carousel CSS -->
     <style>
@@ -37,7 +38,7 @@
             padding-right: 0px !important;
         }
 
-        #carousel1{
+        #carousel1 {
             height: 725px;
             min-height: 300px;
             background: no-repeat center center scroll;
@@ -45,7 +46,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-            object-fit:cover;
+            object-fit: cover;
         }
 
         .carousel-caption {
@@ -189,7 +190,12 @@
         /* ----- MODAL STYLE ----- */
         .modal-content {
             border-radius: 15px;
-        {#border: 25px #1e7e34;#}
+
+        {
+            #border: 25px #1e7e34
+        ;
+            #
+        }
         }
 
         .modal-header {
@@ -312,8 +318,23 @@
 
         .social_footer_ul li a {
             color: #CCC;
-        {#border: 1px solid #CCC;#} padding: 8px;
-        {#border-radius: 50%;#}
+
+        {
+            #border: 1px solid #CCC
+        ;
+            #
+        }
+        padding:
+
+        8
+        px
+
+        ;
+        {
+            #border-radius: 50%
+        ;
+            #
+        }
         }
 
         .social_footer_ul li i {
@@ -325,6 +346,7 @@
         h3 {
             color: #ffdf00;
         }
+
     </style>
 </head>
 
@@ -333,7 +355,6 @@
 <!-- Navbar 1 -->
 <nav class="navbar navbar-expand-sm fixed-top navbar-dark" role="navigation" style="background:#000000">
     <div class="container">
-        <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" height="40px" width="150px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -345,7 +366,7 @@
             <!--                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>-->
             <!--            </form>-->
 
-            <ul class="nav nav-pills ml-auto">
+            <ul class="nav nav-pills mr-auto">
                 <!--                <li title="Currency" class="nav-item active dropdown">-->
                 <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
                 <!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-inr fa-2x"></i></a>-->
@@ -357,43 +378,42 @@
                 <li title="Products" class="nav-item">
                     <a class="nav-link" href="/products"><i class="fa fa-gift fa-2x"></i></a>
                 </li>
-                {#                <li title="FAQs" class="nav-item">#}
-                {#                    <a class="nav-link" href="#"><i class="fa fa-question-circle fa-2x"></i></a>#}
-                {#                </li>#}
                 <li title="Contact Us" class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#myModal3" href="#"><i
                             class="fa fa-envelope-o fa-2x"></i></a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li title="Cart" class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#myModal2" href="#"><i
-                                class="fa fa-shopping-basket fa-2x"></i></a>
-                    </li>
-                    <li title="Currency" class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                class="fa fa-user fa-2x"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/profile/"><i class="fa fa-user"></i> Your profile</a>
-                            <a class="dropdown-item" href="/orders/"><i class="fa fa-shopping-cart"></i> Your orders</a>
-                        </div>
-                    </li>
-                    <li title="Logout" class="nav-item">
-                        <a class="nav-link" href="/logout/"><i
-                                class="fa fa-sign-out fa-2x"></i></a>
-                    </li>
-                {% else %}
-                    {#                    <li title="Login" class="nav-item">#}
-                    {#                        <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#"><i#}
-                    {#                                class="fa fa-sign-in fa-2x"></i></a>#}
-                    {#                    </li>#}
-                    {#                    #}
-                    <li title="Login" class="nav-item">
-                        <a class="nav-link" href="{% provider_login_url 'google' %}"><i
-                                class="fa fa-sign-in fa-2x"></i></a>
-                    </li>
-                {% endif %}
 
+                <li title="Account" class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            class="fa fa-user fa-2x"></i></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile/"><i class="fa fa-user"></i> Your profile</a>
+                        <a class="dropdown-item" href="/orders/"><i class="fa fa-shopping-cart"></i> Your orders</a>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" height="40px" width="150px"></a>
+        <div class="collapse navbar-collapse container">
+            <ul class="nav nav-pills ml-auto">
+                {% if user.is_authenticated %}
+                <li title="Cart" class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#myModal2" href="#"><i
+                            class="fa fa-shopping-basket fa-2x"></i></a>
+                </li>
+                <li title="Logout" class="nav-item">
+                    <a class="nav-link" href="/logout/"><i
+                            class="fa fa-sign-out fa-2x"></i></a>
+                </li>
+                {% else %}
+                <li title="Login" class="nav-item">
+                    <a class="nav-link" href="{% provider_login_url 'google' %}"><i
+                            class="fa fa-sign-in fa-2x"></i></a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -422,48 +442,48 @@
                     </thead>
                     <tbody>
                     {% for cartitem in cart %}
-                        <tr>
-                            <td>
-                                <figure class="itemside align-items-center">
-                                    <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm">
-                                    </div>
-                                    <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
-                                </figure>
-                                <var>Quantity : {{ cartitem.quantity }}</var>
-                            </td>
-                            {% if cartitem.color == 'red' %}
-                                <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
-                            {% elif cartitem.color == 'wooden' %}
-                                <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px"></br><small class="text-muted">Wooden</small></td>
-                            {% elif cartitem.color == 'black' %}
-                                <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px"></br><small class="text-muted">Black</small></td>
-                            {% endif %}
-                            <td>
-                                <div class="price-wrap">
-                                    <var class="price">₹{{ cartitem.total }}</var>
-                                    <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
-                                        each </small>
-                                </div> <!-- price-wrap .// -->
-                            </td>
-                            <td class="text-right">
-                                {#                                <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"></a>#}
-                                {#                                   data-toggle="tooltip"> <i class="fa fa-heart"></i></a>#}
-                                <form action="/remove_from_cart/" method="post">
-                                    {% csrf_token %}
-                                    <input type="type" hidden name="next" value="{{ request.path }}">
-                                    <input type="text" hidden name="id" value="{{ cartitem.id }}">
-                                    <button class="btn btn-danger" type="submit">
-                                        Remove
-                                    </button>
-                                </form>
-                                {#                                <a href="" class="btn btn-light"> Remove</a>#}
-                            </td>
-                        </tr>
-                        <tr>
-                    {% endfor %}
+                    <tr>
+                        <td>
+                            <figure class="itemside align-items-center">
+                                <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm">
+                                </div>
+                                <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
+                            </figure>
+                            <var>Quantity : {{ cartitem.quantity }}</var>
+                        </td>
+                        {% if cartitem.color == 'red' %}
+                        <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
+                                 style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
+                        {% elif cartitem.color == 'wooden' %}
+                        <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
+                                 style="border-radius: 15px"></br><small class="text-muted">Wooden</small></td>
+                        {% elif cartitem.color == 'black' %}
+                        <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
+                                 style="border-radius: 15px"></br><small class="text-muted">Black</small></td>
+                        {% endif %}
+                        <td>
+                            <div class="price-wrap">
+                                <var class="price">₹{{ cartitem.total }}</var>
+                                <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
+                                    each </small>
+                            </div> <!-- price-wrap .// -->
+                        </td>
+                        <td class="text-right">
+                            {# <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"></a>#}
+                            {# data-toggle="tooltip"> <i class="fa fa-heart"></i></a>#}
+                            <form action="/remove_from_cart/" method="post">
+                                {% csrf_token %}
+                                <input type="type" hidden name="next" value="{{ request.path }}">
+                                <input type="text" hidden name="id" value="{{ cartitem.id }}">
+                                <button class="btn btn-danger" type="submit">
+                                    Remove
+                                </button>
+                            </form>
+                            {# <a href="" class="btn btn-light"> Remove</a>#}
+                        </td>
+                    </tr>
+                    <tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -597,8 +617,12 @@
 <!-- End footer -->
 
 
-{#<script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>#}
-{#<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>#}
+{#
+<script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>
+#}
+{#
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+#}
 <script src="{% static 'js/wow.min.js' %}"></script>
 
 <script>
