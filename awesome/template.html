@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>{% block title %}LiT Lamps{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'images/logo-crop.png' %}" type="image/icon type">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -28,9 +29,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     <!-- Animation Css -->
-    {#
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
-    #}
+    {#    <link rel="stylesheet" href="{% static 'css/animate.css' %}">#}
 
     <!-- Header and carousel CSS -->
     <style>
@@ -66,7 +65,8 @@
             font-size: 18px;
             line-height: 1.9;
         }
-        body{
+
+        body {
             color: whitesmoke;
             background-color: black;
         }
@@ -136,10 +136,7 @@
             color: #fff;
         }
 
-        .second-nav {
-            top: 60px;
-            background: #2a2a2a;
-        }
+
     </style>
 
     <!--Style block -->
@@ -160,7 +157,9 @@
         .modal.right .modal-dialog {
             position: fixed;
             margin: auto;
-            width: 550px;
+            min-width: 550px;
+            max-width: 550px;
+            width: 50%;
             height: 100%;
             -webkit-transform: translate3d(0%, 0, 0);
             -ms-transform: translate3d(0%, 0, 0);
@@ -175,7 +174,10 @@
         }
 
         .modal.right .modal-body {
-            padding: 15px 15px 15px 15px;
+            padding-top: 15px;
+            padding-right: 15px;
+            padding-left: 15px;
+            padding-bottom: 15px;
         }
 
         /*Right*/
@@ -325,21 +327,6 @@
             color: #CCC;
         }
 
-        {
-            #border: 1px solid #CCC
-        ;
-
-        }
-        padding:8px
-
-        ;
-        {
-            #border-radius: 50%
-        ;
-
-        }
-        }
-
         .social_footer_ul li i {
             width: 20px;
             height: 20px;
@@ -350,59 +337,98 @@
             color: #ffdf00;
         }
 
+        .nav-img {
+            max-height: 90px;
+        }
+
+        @media only screen and (max-width: 500px) {
+            .nav-img {
+                max-height: 40px;
+            }
+        }
+
     </style>
+
+<style>
+    .wrapper {
+    display: block;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* top layer */
+    z-index: 9999;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+    /* transparent black */
+    background: rgba(0, 0, 0, 0.7);
+    /* middle layer, i.e. appears below the sidebar */
+    z-index: 998;
+    opacity: 0;
+    /* animate the transition */
+    transition: all 0.5s ease-in-out;
+}
+/* display .overlay when it has the .active class */
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+#dismiss {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    /* top right corner of the sidebar */
+    top: 10px;
+    right: 10px;
+}
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+        });
+
+        $('#dismiss, .overlay').on('click', function () {
+            // hide sidebar
+            $('#sidebar').removeClass('active');
+            // hide overlay
+            $('.overlay').removeClass('active');
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            // open sidebar
+            $('#sidebar').addClass('active');
+            // fade in the overlay
+            $('.overlay').addClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+</script>
 </head>
 
 <body>
 
 <!-- Navbar 1 -->
-<nav class="navbar navbar-expand-sm fixed-top navbar-dark" role="navigation" style="background:#000000">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-            <!--            <form class="form-inline my-2 my-lg-0">-->
-            <!--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-            <!--                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>-->
-            <!--            </form>-->
-
-            <ul class="nav nav-pills mr-auto">
-                <!--                <li title="Currency" class="nav-item active dropdown">-->
-                <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
-                <!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-inr fa-2x"></i></a>-->
-                <!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-                <!--                        <a class="dropdown-item" href="#"><i class="fa fa-inr fa-2x"></i>INR</a>-->
-                <!--                        <a class="dropdown-item" href="#"><i class="fa fa-usd fa-2x"></i>USD</a>-->
-                <!--                    </div>-->
-                <!--                </li>-->
-                <li title="Products" class="nav-item">
-                    <a class="nav-link" href="/products"><i class="fa fa-gift fa-2x"></i></a>
-                </li>
-                <li title="Contact Us" class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#myModal3" href="#"><i
-                            class="fa fa-envelope-o fa-2x"></i></a>
-                </li>
-                {% if user.is_authenticated %}
-
-                <li title="Account" class="nav-item active dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                            class="fa fa-user fa-2x"></i></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/profile/"><i class="fa fa-user"></i> Your profile</a>
-                        <a class="dropdown-item" href="/orders/"><i class="fa fa-shopping-cart"></i> Your orders</a>
-                    </div>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-        <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" height="40px" width="150px"></a>
-        <div class="collapse navbar-collapse container">
-            <ul class="nav nav-pills ml-auto">
-                {% if user.is_authenticated %}
+<nav class="navbar">
+    <div class="container-fluid">
+        <i class="fa fa-bars fa-2x" data-toggle="modal" data-target="#myModal4"></i>
+        <a class="navbar-brand mx-auto" href="/"><img class="nav-img" src="{% static 'images/logo-full.png' %}"
+                                                      height="auto" width="auto"></a>
+        <ul class="nav">
+            {% if user.is_authenticated %}
                 <li title="Cart" class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#myModal2" href="#"><i
                             class="fa fa-shopping-basket fa-2x"></i></a>
@@ -411,17 +437,88 @@
                     <a class="nav-link" href="/logout/"><i
                             class="fa fa-sign-out fa-2x"></i></a>
                 </li>
-                {% else %}
+            {% else %}
                 <li title="Login" class="nav-item">
                     <a class="nav-link" href="{% provider_login_url 'google' %}"><i
                             class="fa fa-sign-in fa-2x"></i></a>
                 </li>
-                {% endif %}
-            </ul>
-        </div>
+            {% endif %}
+        </ul>
     </div>
 </nav>
+{#<nav class="navbar navbar-expand-sm fixed-top navbar-dark" role="navigation" style="background:#000000; top:100px">#}
+{#    <div class="container">#}
+{#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"#}
+{#                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+{##}
+{#        <div class="collapse navbar-collapse container" id="navbarSupportedContent">#}
+{#            <ul class="nav nav-pills mr-auto">#}
+{#                <li title="Products" class="nav-item">#}
+{#                    <a class="nav-link" href="/products"><i class="fa fa-gift fa-2x"></i></a>#}
+{#                </li>#}
+{#                <li title="Contact Us" class="nav-item">#}
+{#                    <a class="nav-link" data-toggle="modal" data-target="#myModal3" href="#"><i#}
+{#                            class="fa fa-envelope-o fa-2x"></i></a>#}
+{#                </li>#}
+{#                {% if user.is_authenticated %}#}
+{##}
+{#                <li title="Account" class="nav-item active dropdown">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"#}
+{#                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i#}
+{#                            class="fa fa-user fa-2x"></i></a>#}
+{#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                        <a class="dropdown-item" href="/profile/"><i class="fa fa-user"></i> Your profile</a>#}
+{#                        <a class="dropdown-item" href="/orders/"><i class="fa fa-shopping-cart"></i> Your orders</a>#}
+{#                    </div>#}
+{#                </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#        <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" height="40px" width="150px"></a>#}
+{#        <div class="collapse navbar-collapse container">#}
+{#            <ul class="nav nav-pills ml-auto">#}
+{#                {% if user.is_authenticated %}#}
+{#                <li title="Cart" class="nav-item">#}
+{#                    <a class="nav-link" data-toggle="modal" data-target="#myModal2" href="#"><i#}
+{#                            class="fa fa-shopping-basket fa-2x"></i></a>#}
+{#                </li>#}
+{#                <li title="Logout" class="nav-item">#}
+{#                    <a class="nav-link" href="/logout/"><i#}
+{#                            class="fa fa-sign-out fa-2x"></i></a>#}
+{#                </li>#}
+{#                {% else %}#}
+{#                <li title="Login" class="nav-item">#}
+{#                    <a class="nav-link" href="{% provider_login_url 'google' %}"><i#}
+{#                            class="fa fa-sign-in fa-2x"></i></a>#}
+{#                </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
 <!-- Navbar 1 end -->
+<!-- Modal side-->
+<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Left Sidebar</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</p>
+				</div>
+
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div>
+<!-- modal end-->
+
 <!-- Modal cart-->
 <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog" role="document">
@@ -445,48 +542,49 @@
                     </thead>
                     <tbody>
                     {% for cartitem in cart %}
-                    <tr>
-                        <td>
-                            <figure class="itemside align-items-center">
-                                <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm" style="max-width:150px;max-height: 100px;">
-                                </div>
-                                <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
-                            </figure>
-                            <var>Quantity : {{ cartitem.quantity }}</var>
-                        </td>
-                        {% if cartitem.color == 'red' %}
-                        <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
-                                 style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
-                        {% elif cartitem.color == 'wooden' %}
-                        <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
-                                 style="border-radius: 15px"></br><small class="text-muted">Wooden</small></td>
-                        {% elif cartitem.color == 'black' %}
-                        <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
-                                 style="border-radius: 15px"></br><small class="text-muted">Black</small></td>
-                        {% endif %}
-                        <td>
-                            <div class="price-wrap">
-                                <var class="price">₹{{ cartitem.total }}</var>
-                                <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
-                                    each </small>
-                            </div> <!-- price-wrap .// -->
-                        </td>
-                        <td class="text-right">
-                            {# <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"></a>#}
-                            {# data-toggle="tooltip"> <i class="fa fa-heart"></i></a>#}
-                            <form action="/remove_from_cart/" method="post">
-                                {% csrf_token %}
-                                <input type="type" hidden name="next" value="{{ request.path }}">
-                                <input type="text" hidden name="id" value="{{ cartitem.id }}">
-                                <button class="btn btn-danger" type="submit">
-                                    Remove
-                                </button>
-                            </form>
-                            {# <a href="" class="btn btn-light"> Remove</a>#}
-                        </td>
-                    </tr>
-                    <tr>
-                        {% endfor %}
+                        <tr>
+                            <td>
+                                <figure class="itemside align-items-center">
+                                    <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm"
+                                                            style="max-width:150px;max-height: 100px;">
+                                    </div>
+                                    <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
+                                </figure>
+                                <var>Quantity : {{ cartitem.quantity }}</var>
+                            </td>
+                            {% if cartitem.color == 'red' %}
+                                <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
+                            {% elif cartitem.color == 'wooden' %}
+                                <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"></br><small class="text-muted">Wooden</small></td>
+                            {% elif cartitem.color == 'black' %}
+                                <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
+                                         style="border-radius: 15px"></br><small class="text-muted">Black</small></td>
+                            {% endif %}
+                            <td>
+                                <div class="price-wrap">
+                                    <var class="price">₹{{ cartitem.total }}</var>
+                                    <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
+                                        each </small>
+                                </div> <!-- price-wrap .// -->
+                            </td>
+                            <td class="text-right">
+                                {# <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"></a>#}
+                                {# data-toggle="tooltip"> <i class="fa fa-heart"></i></a>#}
+                                <form action="/remove_from_cart/" method="post">
+                                    {% csrf_token %}
+                                    <input type="type" hidden name="next" value="{{ request.path }}">
+                                    <input type="text" hidden name="id" value="{{ cartitem.id }}">
+                                    <button class="btn btn-danger" type="submit">
+                                        Remove
+                                    </button>
+                                </form>
+                                {# <a href="" class="btn btn-light"> Remove</a>#}
+                            </td>
+                        </tr>
+                        <tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -557,7 +655,7 @@
     <div class="modal-dialog modal-full" role="document">
         <div class="modal-content" style="min-height: 30vh">
             <div class="modal-body" style="color: #ffdf00; margin:auto">
-            <h1>Contact Us</h1>
+                <h1>Contact Us</h1>
                 <h4 style="color: white">Address:</h4>
                 <p>520,Riidl Somaiya Vidyavihar Mumbai 400077</p>
                 <h4 style="color: white">Email:</h4>
@@ -568,10 +666,10 @@
 </div>
 
 <!-- Content -->
-<div>
-    {% block content %}
-    {% endblock content %}
-</div>
+
+{% block content %}
+{% endblock content %}
+
 <!-- End Content -->
 
 

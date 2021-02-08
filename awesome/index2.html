@@ -85,6 +85,9 @@
         outline-color: #f00;
         -moz-outline-radius: 25px;
     }
+    .second-nav {
+            background: #2a2a2a;
+        }
 </style>
 
 {% endblock %}
@@ -92,7 +95,7 @@
 {% block content %}
 
 <!-- Navbar 2 -->
-<nav class="navbar navbar-expand-sm navbar-dark sticky-top second-nav">
+<nav class="navbar navbar-expand-sm navbar-dark second-nav">
     <a class="navbar-brand" href="#"></a>
     <ul class="nav container justify-content-center" id="mynavbar2">
         <li class="nav-item">
@@ -162,21 +165,21 @@
                 <br>
                 <br>
                 <h1>Best Selling Products</h1>
-                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 425px"></span>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 30%"></span>
                 </div>
             </div>
         </div>
 
         <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-            <!--Controls-->
-            <div class="controls-top row justify-content-center">
-                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left fa-2x"
-                                                                                        style="color: #ffdf00"></i></a>
-                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
-                        class="fa fa-chevron-right fa-2x"
-                        style="color: #ffdf00"></i></a>
-            </div>
-            <!--/.Controls-->
+{#            <!--Controls-->#}
+{#            <div class="controls-top row justify-content-center">#}
+{#                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left fa-2x"#}
+{#                                                                                        style="color: #ffdf00"></i></a>#}
+{#                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i#}
+{#                        class="fa fa-chevron-right fa-2x"#}
+{#                        style="color: #ffdf00"></i></a>#}
+{#            </div>#}
+{#            <!--/.Controls-->#}
             <br>
             <!--Slides-->
             <div class="carousel-inner" role="listbox">
@@ -322,20 +325,20 @@
                 <br>
                 <br>
                 <h1>Customer Reviews</h1>
-                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 425px"></span>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 30%"></span>
                 </div>
             </div>
         </div>
 
         <div id="multi-item-example2" class="carousel slide carousel-multi-item" data-ride="carousel">
-            <div class="controls-top row justify-content-center">
-                <a class="btn-floating" href="#multi-item-example2" data-slide="prev"><i
-                        class="fa fa-chevron-left fa-2x"
-                        style="color: #ffdf00"></i></a>
-                <a class="btn-floating" href="#multi-item-example2" data-slide="next"><i
-                        class="fa fa-chevron-right fa-2x"
-                        style="color: #ffdf00"></i></a>
-            </div>
+{#            <div class="controls-top row justify-content-center">#}
+{#                <a class="btn-floating" href="#multi-item-example2" data-slide="prev"><i#}
+{#                        class="fa fa-chevron-left fa-2x"#}
+{#                        style="color: #ffdf00"></i></a>#}
+{#                <a class="btn-floating" href="#multi-item-example2" data-slide="next"><i#}
+{#                        class="fa fa-chevron-right fa-2x"#}
+{#                        style="color: #ffdf00"></i></a>#}
+{#            </div>#}
             <br>
             <!--Slides-->
             <div class="carousel-inner" role="listbox">
@@ -428,4 +431,4 @@
 
 
     {% block script %}
-    {% endblock %}
+    {% endblock script %}

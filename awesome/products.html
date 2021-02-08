@@ -142,19 +142,19 @@
         <br>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
             <div class="main_heading">
                 <h1>Our Products</h1>
-                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width:300px"></span></div>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width:50%"></span></div>
             </div>
         </div><!-- End col-md-12 -->
     </div>
     <hr>
 
-    <div class="container-fluid px-5 py-5 mx-auto">
-        <div class="row justify-content-center px-2">
+    <div class="container-fluid row px-2 col-12">
+        <div class="row justify-content-center px-0 col-12">
             {% for product in products %}
-                <div class="block text-center col-lg-3 col-sm-12 col-md-5 m-2 p-2">
+                <div class="block text-center col-lg-3 col-sm-10 col-md-4 m-1 p-2">
                     <img onclick="location.href='/product/?id={{ product.id }}'"
                                                     class="image my-1" src="{{ product.image_path }}">
                     <div class="info py-2 px-2 col-12">

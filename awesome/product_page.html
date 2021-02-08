@@ -7,7 +7,7 @@
     <style>
         .gallery-wrap .img-big-wrap img {
             height: auto;
-            width: 450px;
+            width: 100%;
             display: inline-block;
             cursor: zoom-in;
         }
@@ -74,9 +74,11 @@
             <div class="row justify-content-between" style="background-color: black">
                 <aside class="col-lg-5 border-right">
                     <article class="gallery-wrap">
+                        <div class="col-lg-12">
                         <div class="img-big-wrap">
                             <div><a href="#"><img src="{{ product_details.image_path }}"></a></div>
                         </div> <!-- slider-product.// -->
+                        </div>
                         <div class="img-small-wrap">
                             <div class="item-gallery"><img src="{% static 'images/Macbook.png' %}"></div>
                             <div class="item-gallery"><img src="{% static 'images/Macbook.png' %}"></div>
@@ -114,7 +116,7 @@
                         </dl>  <!-- item-property-hor .// -->
                         <dl class="param padram-feature">
                             <dt>Delivery</dt>
-                            <d>Free Shipping All over India</dd>
+                            <dd>Free Shipping All over India</dd>
                         </dl>  <!-- item-property-hor .// -->
 
                         <hr>
