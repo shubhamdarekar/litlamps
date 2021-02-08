@@ -8,6 +8,7 @@
         * {
             font-family: Copperplate;
         }
+
         .profile {
             margin: 25px;
         }
@@ -22,15 +23,45 @@
             border-right: 0;
         }
 
-        {#.address-box:hover {#}
-        {#    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);#}
-        {#    padding: 5px;#}
-        {#}#}
-
         button:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
+
+    </style>
+
+    <style>
+
+        .order-form .container {
+            color: #4c4c4c;
+            padding: 20px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+        }
+
+        .order-form-label {
+            margin: 8px 0 0 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .order-form-input {
+            width: 100%;
+            padding: 8px 8px;
+            border-width: 1px !important;
+            border-style: solid !important;
+            border-radius: 3px !important;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            line-height: 1.2em;
+            background-color: transparent;
+            border-color: #cccccc;
+        }
+
+        .btn-submit:hover {
+            background-color: #090909 !important;
+        }
     </style>
 {% endblock %}
 
@@ -147,13 +178,19 @@
 
                             </div>
                             <div style="width: 500px;">
-                                {{ address.address }}
+                                <strong>{{ address.first }}&nbsp;{{ address.last }}</strong><br>
+                                <small class="text-muted">{{ address.street }}</small><br>
+                                <small class="text-muted">{{ address.street2 }}</small><br>
+                                <small class="text-muted">{{ address.city }}&nbsp;{{ address.region }}</small><br>
+                                <small class="text-muted">{{ address.pin }}</small>
+                                <b>Mobile : {{ address.mobile }}</b>
                             </div>
                             <div class="justify-content-end">
                                 <form action="/delete_address/" method="post" class="form">
                                     {% csrf_token %}
                                     <input type="text" hidden value="{{ address.id }}" name="id">
-                                    <button class="btn" type="submit" class="button-delete" style="border: 0; background-color: red; color: white; padding: 10px; border: 0; border-radius: 10px; margin-left: 50px">
+                                    <button class="btn" type="submit" class="button-delete"
+                                            style="border: 0; background-color: red; color: white; padding: 10px; border: 0; border-radius: 10px; margin-left: 50px">
                                         Delete
                                     </button>
                                 </form>
@@ -163,23 +200,78 @@
                     {% endfor %}
                     <hr>
                     {#                <div class="card-header">#}
-                    <div class="row">
+                    <div class="container pt-4 col-lg-12">
                         <img src="{% static 'images/add_address.png' %}" width="30px" height="30px">
                         <h5 style="color: black; padding-top: 2px; padding-bottom: 7px">
-                            &nbsp&nbspAdd address</h5>
-                        <div class="col-2"></div>
-                        <form action="/add_address/" method="post" class="form" id="address_form">
-                            {% csrf_token %}
-                            <input type="text" name="address" class="form-control" required/>
-                            <input type="type" hidden name="next" value="{{ request.path }}">
-                            <br>
-                            <button type="submit" style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0; padding: 10px; padding-left: 20px; padding-right: 20px">
-                                <i class="fa fa-plus"> Add</i>
-                            </button>
-                        </form>
-                    </div>
+                            &nbsp;&nbsp;Or Add a new address</h5>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row mx-0">
+                                    <div class="col-12">
+                                        <label class="order-form-label">Name</label>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input class="order-form-input" placeholder="First" name="first" required
+                                               form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input class="order-form-input" placeholder="Last" name="last" required
+                                               form="address_form">
+                                    </div>
+                                </div>
 
-                    {#                </div>#}
+                                <div class="row mt-1 mx-0">
+                                    <div class="col-12">
+                                        <label class="order-form-label">Address</label>
+                                    </div>
+                                    <div class="col-12">
+                                        <input class="order-form-input" placeholder="Street Address" name="street"
+                                               required form="address_form">
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <input class="order-form-input" placeholder="Street Address Line 2"
+                                               name="street2" required form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-2 pr-sm-2">
+                                        <input class="order-form-input" placeholder="City" name="city" required
+                                               form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-2 pl-sm-0">
+                                        <input class="order-form-input" placeholder="Region" name="region" required
+                                               form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-12 mt-2 pr-sm-12">
+                                        <input class="order-form-input" placeholder="Postal / Zip Code" name="pin"
+                                               required form="address_form">
+                                    </div>
+                                </div>
+                                <div class="row mt-1 mx-0">
+                                    <div class="col-12">
+                                        <label class="order-form-label">Mobile Number</label>
+                                    </div>
+                                    <div class="col-12">
+                                        <input class="order-form-input" placeholder="+91" name="mobile" required
+                                               form="address_form">
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1 mx-0">
+                                    <div class="col-12">
+                                        <form action="/add_address/" method="post" class="form" id="address_form">
+                                            {% csrf_token %}
+                                            <input type="type" hidden name="next" value="{{ request.path }}">
+                                            <br>
+                                            <button type="submit"
+                                                    class="btn d-block mx-auto btn-submit"
+                                                    style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0;">
+                                                <i class="fa fa-plus"> Add</i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,17 +279,17 @@
 {% endblock %}
 
 {% block script %}
-<script>
-document.getElementById('btn1').onclick = function () {
-    document.getElementById('input1').removeAttribute('readonly')
-}
+    <script>
+        document.getElementById('btn1').onclick = function () {
+            document.getElementById('input1').removeAttribute('readonly')
+        }
 
-document.getElementById('btn2').onclick = function () {
-    document.getElementById('input2').removeAttribute('readonly')
-}
+        document.getElementById('btn2').onclick = function () {
+            document.getElementById('input2').removeAttribute('readonly')
+        }
 
-document.getElementById('btn3').onclick = function () {
-    document.getElementById('input3').removeAttribute('readonly')
-}
-</script>
+        document.getElementById('btn3').onclick = function () {
+            document.getElementById('input3').removeAttribute('readonly')
+        }
+    </script>
 {% endblock %}

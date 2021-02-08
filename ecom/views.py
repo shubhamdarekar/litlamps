@@ -272,10 +272,16 @@ def orders_page(request):
 def add_address(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            temp = request.POST['address']
+            street = request.POST['street']
+            street2 = request.POST['street2']
+            region = request.POST['region']
+            city = request.POST['city']
+            mobile = request.POST['mobile']
+            pincode = request.POST['pin']
+            last = request.POST['last']
+            first = request.POST['first']
             next = request.POST.get('next', '/')
-            address = Address()
-            address.address = temp
+            address = Address(street=street, street2=street2, region=region, city=city, mobile=mobile, pincode=pincode, first=first, last=last)
             address.customer_id = request.user.id
             address.save()
     return redirect(next)
@@ -303,3 +309,13 @@ def write_review(request):
             new_review.save()
     return redirect('/orders')
 
+
+def privacy_policy(request):
+    return render(request, "privacy_policy.html")
+
+
+def term_condition(request):
+    return render(request, "term_conditions.html")
+
+def refund_policy(request):
+    return render(request, 'refund_policy.html')

@@ -21,4 +21,8 @@ urlpatterns = [
     path('delete_address/', views.delete_address),
     path('buy_now/', views.checkout_product),
     path('submitReview/', views.write_review),
+    path('privacy/', views.privacy_policy),
+    path('termsconditions/', views.term_condition),
+    path('refundPolicy/', views.refund_policy),
+
 ]

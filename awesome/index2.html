@@ -16,6 +16,10 @@
     html {
         scroll-behavior: smooth;
     }
+    body{
+        color: whitesmoke;
+        background-color: black;
+    }
 
     .panel-heading [data-toggle="collapse"]:after {
         font-family: 'Glyphicons Halflings';
@@ -151,7 +155,7 @@
     <!--  End Products Button -->
 
     <!-- Best Selling -->
-    <div style="background-color: #f5f5f5" id="bestSelling">
+    <div id="bestSelling">
         <br><br>
         <div class="col-md-12">
             <div class="main_heading">
@@ -311,7 +315,7 @@
     <!-- End Features -->
 
     <!-- Reviews -->
-    <div style="background-color: #f5f5f5" id="reviews">
+    <div id="reviews">
         <br><br>
         <div class="col-md-12">
             <div class="main_heading">
@@ -336,16 +340,17 @@
             <!--Slides-->
             <div class="carousel-inner" role="listbox">
                 <!--First slide-->
-                <div class="carousel-item active">
+                <div class="carousel-item active justify-content-center">
                     {% for review in reviews %}
-                    <div class="col-md-4 col-lg-4 col-sm-4" style="float:left;">
+                    <div class="col-md-5 col-lg-4 col-sm-8" style="float:left;color: black">
                         <div class="card carousel-card">
                             <div class="card-header">
                                 <div class="row justify-content-center" style="width: 100%;">
-                                    <div class="col-lg-4 col-md-6 col-sm-12 align-self-center">
-                                        <img class="align-self-center"
+                                    <div class="col-lg-8 col-md-10 col-sm-12 align-self-center">
+                                        <img
                                              src="{{ review.product.image_path }}"
                                              alt="Card image cap"
+                                             style="max-height: 200px; max-width: 400px;width:100%"
                                         >
                                     </div>
                                 </div>

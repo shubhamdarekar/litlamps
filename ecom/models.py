@@ -31,6 +31,8 @@ class Product(models.Model):
     image_path_4 = models.TextField(null=True, default=None)
     dimensions = models.TextField(null=True, default=None)
     power = models.TextField(default=None)
+    mrp = models.FloatField()
+    small_desc = models.CharField(max_length=255)
 
 
 class Order(models.Model):
@@ -95,3 +97,12 @@ class Cart(models.Model):
 class Address(models.Model):
     customer = models.ForeignKey(authUser, on_delete=models.CASCADE)
     address = models.TextField()
+    street = models.TextField()
+    street2 = models.TextField()
+    city = models.TextField()
+    region = models.TextField()
+    pincode = models.IntegerField()
+    mobile = models.TextField()
+    first = models.CharField(max_length=255)
+    last = models.CharField(max_length=255)
+

@@ -28,6 +28,42 @@
         {#outline: 5px solid #000;#} background-color: #42ba96;
         }
     </style>
+    <style>
+        body {
+            color: #383308;
+        }
+
+        .order-form .container {
+            color: #4c4c4c;
+            padding: 20px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+        }
+
+        .order-form-label {
+            margin: 8px 0 0 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .order-form-input {
+            width: 100%;
+            padding: 8px 8px;
+            border-width: 1px !important;
+            border-style: solid !important;
+            border-radius: 3px !important;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            line-height: 1.2em;
+            background-color: transparent;
+            border-color: #cccccc;
+        }
+
+        .btn-submit:hover {
+            background-color: #090909 !important;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -70,7 +106,8 @@
                                 <td>
                                     <figure class="itemside align-items-center">
                                         <div onclick="location.href='/product/?id={{ cartitem.product.id }}'"
-                                             class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm">
+                                             class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm"
+                                                                style="max-width:150px;max-height: 100px;">
                                         </div>
                                         <figcaption class="info">
                                             <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
@@ -115,7 +152,8 @@
                             <td>
                                 <figure class="itemside align-items-center">
                                     <div onclick="location.href='/product/?id={{ single_product.id }}'" class="aside">
-                                        <img src="{{ single_product.image_path }}" class="img-sm">
+                                        <img src="{{ single_product.image_path }}" class="img-sm"
+                                             style="max-width:150px;max-height: 100px;">
                                     </div>
                                     <figcaption class="info">
                                         <a href="#" class="title text-dark">{{ single_product.product_name }}</a>
@@ -174,7 +212,12 @@
 
                                         </div>
                                         <div style="width: 500px;">
-                                            {{ address.address }}
+                                            <strong>{{ address.first }}&nbsp;{{ address.last }}</strong><br>
+                                            <small class="text-muted">{{ address.street }}</small><br>
+                                            <small class="text-muted">{{ address.street2 }}</small><br>
+                                            <small class="text-muted">{{ address.city }}&nbsp;{{ address.region }}</small><br>
+                                            <small class="text-muted">{{ address.pin }}</small>
+                                            <b>Mobile : {{ address.mobile }}</b>
                                         </div>
                                         <div class="justify-content-end">
                                             <label class="form-group">
@@ -192,21 +235,78 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="container pt-4 col-lg-3">
                             <img src="{% static 'images/add_address.png' %}" width="30px" height="30px">
                             <h5 style="color: black; padding-top: 2px; padding-bottom: 7px">
                                 &nbsp;&nbsp;Or Add a new address</h5>
-                            <div class="col-2"></div>
-                            <form action="/add_address/" method="post" class="form" id="address_form">
-                                {% csrf_token %}
-                                <input type="type" hidden name="next" value="{{ request.path }}">
-                                <textarea form="address_form" name="address" class="form-control" required></textarea>
-                                <br>
-                                <button type="submit"
-                                        style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0; padding: 10px; padding-left: 20px; padding-right: 20px">
-                                    <i class="fa fa-plus"> Add</i>
-                                </button>
-                            </form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row mx-0">
+                                        <div class="col-12">
+                                            <label class="order-form-label">Name</label>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <input class="order-form-input" placeholder="First" name="first" required
+                                                   form="address_form">
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <input class="order-form-input" placeholder="Last" name="last" required
+                                                   form="address_form">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-1 mx-0">
+                                        <div class="col-12">
+                                            <label class="order-form-label">Address</label>
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="order-form-input" placeholder="Street Address" name="street"
+                                                   required form="address_form">
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <input class="order-form-input" placeholder="Street Address Line 2"
+                                                   name="street2" required form="address_form">
+                                        </div>
+                                        <div class="col-12 col-sm-6 mt-2 pr-sm-2">
+                                            <input class="order-form-input" placeholder="City" name="city" required
+                                                   form="address_form">
+                                        </div>
+                                        <div class="col-12 col-sm-6 mt-2 pl-sm-0">
+                                            <input class="order-form-input" placeholder="Region" name="region" required
+                                                   form="address_form">
+                                        </div>
+                                        <div class="col-12 col-sm-12 mt-2 pr-sm-12">
+                                            <input class="order-form-input" placeholder="Postal / Zip Code" name="pin"
+                                                   required form="address_form">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1 mx-0">
+                                        <div class="col-12">
+                                            <label class="order-form-label">Mobile Number</label>
+                                        </div>
+                                        <div class="col-12">
+                                            <input class="order-form-input" placeholder="+91" name="mobile" required
+                                                   form="address_form">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-1 mx-0">
+                                        <div class="col-12">
+                                            <form action="/add_address/" method="post" class="form" id="address_form">
+                                                {% csrf_token %}
+                                                <input type="type" hidden name="next" value="{{ request.path }}">
+                                                <br>
+                                                <button type="submit"
+                                                        class="btn d-block mx-auto btn-submit"
+                                                        style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0;">
+                                                    <i class="fa fa-plus"> Add</i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
