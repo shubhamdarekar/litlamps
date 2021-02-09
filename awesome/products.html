@@ -144,8 +144,8 @@
     <div class="row">
         <div class="col-12">
             <div class="main_heading">
-                <h1>Our Products</h1>
-                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width:50%"></span></div>
+                <h1 style="color: #ffdf00">Our Products</h1>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width:15%"></span></div>
             </div>
         </div><!-- End col-md-12 -->
     </div>
@@ -154,10 +154,10 @@
     <div class="container-fluid row px-2 col-12">
         <div class="row justify-content-center px-0 col-12">
             {% for product in products %}
-                <div class="block text-center col-lg-3 col-sm-10 col-md-4 m-1 p-2">
+                <div class="block text-center col-lg-3 col-sm-10 col-md-4 m-1 p-2" style="background-color: black; border-color: #ffdf00; border-width: 1px">
                     <img onclick="location.href='/product/?id={{ product.id }}'"
                                                     class="image my-1" src="{{ product.image_path }}">
-                    <div class="info py-2 px-2 col-12">
+                    <div class="info py-2 mx-auto col-12" style="background-color: black">
                         <div class="row px-3">
                             <form class="outer_form" action="/add_to_cart/" method="post" id="add_to_cart2">
                                 {% csrf_token %}
@@ -178,14 +178,14 @@
 
                         </div>
                         <div class="text-left" onclick="location.href='/product/?id={{ product.id }}'">
-                            <h5 class="mb-0 mt-2">{{ product.product_name }}</h5> <small
-                                class="text-muted mb-1">{{ product.small_desc }}</small>
+                            <h5 class="mb-0 mt-2" style="color: #ffdf00">{{ product.product_name }}</h5> <small
+                                class="text-muted mb-1"><p style="color: #ffdf00">{{ product.small_desc }}</p></small>
                         </div>
                         <div class="row px-3">
-                            <h5 onclick="location.href='/product/?id={{ product.id }}'">
+                            <h5 onclick="location.href='/product/?id={{ product.id }}'" style="color: #ffdf00">
                                 Rs.{{ product.product_price_rupees }}</h5>
                             <p class="text-muted ml-2" onclick="location.href='/product/?id={{ product.id }}'">
-                                <del>Rs.{{ product.mrp }}</del>
+                                <del style="color: #ffdf00">Rs.{{ product.mrp }}</del>
                             </p>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class="row mx-auto" style="margin-top: 5px">

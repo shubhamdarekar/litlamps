@@ -424,7 +424,7 @@
 <!-- Navbar 1 -->
 <nav class="navbar">
     <div class="container-fluid">
-        <i class="fa fa-bars fa-2x" data-toggle="modal" data-target="#myModal4"></i>
+        <i class="fa fa-bars fa-2x" data-toggle="modal" data-target="#myModal4" style="color: #ffdf00"></i>
         <a class="navbar-brand mx-auto" href="/"><img class="nav-img" src="{% static 'images/logo-full.png' %}"
                                                       height="auto" width="auto"></a>
         <ul class="nav">
@@ -522,21 +522,21 @@
 <!-- Modal cart-->
 <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="row modal-header">
-                <button type="button" class="close ml-0" data-dismiss="modal" aria-label="Close"><span
+        <div class="modal-content" style="background-color: black">
+            <div class="row modal-header" style="background-color: black">
+                <button type="button" class="close ml-0" data-dismiss="modal" aria-label="Close" style="color: #ffdf00"><span
                         aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title mx-auto" id="myModalLabel2">CART</h4>
+                <h4 class="modal-title mx-auto" id="myModalLabel2" style="color: #ffdf00">CART</h4>
             </div>
 
             <div class="modal-body">
                 <table class="table table-borderless table-shopping-cart">
                     <thead class="text-muted">
                     <tr class="small text-uppercase">
-                        <th scope="col">Product</th>
-                        <th scope="col">Colour</th>
-                        <th scope="col" width="120">Price</th>
+                        <th scope="col" style="color: #ffdf00">Product</th>
+                        <th scope="col"style="color: #ffdf00">Colour</th>
+                        <th scope="col" width="120"style="color: #ffdf00">Price</th>
                         <th scope="col" class="text-right" width="200"></th>
                     </tr>
                     </thead>
@@ -548,9 +548,9 @@
                                     <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm"
                                                             style="max-width:150px;max-height: 100px;">
                                     </div>
-                                    <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
+                                    <a href="#" class="title text-dark"><p style="color: #ffdf00">{{ cartitem.product.product_name }}</p></a>
                                 </figure>
-                                <var>Quantity : {{ cartitem.quantity }}</var>
+                                <var style="color: #ffdf00">Quantity : {{ cartitem.quantity }}</var>
                             </td>
                             {% if cartitem.color == 'red' %}
                                 <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
@@ -564,9 +564,9 @@
                             {% endif %}
                             <td>
                                 <div class="price-wrap">
-                                    <var class="price">₹{{ cartitem.total }}</var>
-                                    <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
-                                        each </small>
+                                    <var class="price" style="color: #ffdf00">₹{{ cartitem.total }}</var>
+                                    <small class="text-muted"><p style="color: #ffdf00"> ₹{{ cartitem.product.product_price_rupees }}
+                                        each </p></small>
                                 </div> <!-- price-wrap .// -->
                             </td>
                             <td class="text-right">
@@ -655,11 +655,11 @@
     <div class="modal-dialog modal-full" role="document">
         <div class="modal-content" style="min-height: 30vh">
             <div class="modal-body" style="color: #ffdf00; margin:auto">
-                <h1>Contact Us</h1>
-                <h4 style="color: white">Address:</h4>
-                <p>520,Riidl Somaiya Vidyavihar Mumbai 400077</p>
-                <h4 style="color: white">Email:</h4>
-                <a href="mailto:laserinnovativetechnologies@gmail.com">laserinnovativetechnologies@gmail.com</a>
+                <h1 style="color: #ffdf00">Contact Us</h1>
+                <h4 style="color: #ffdf00">Address:</h4>
+                <p style="color: #ffdf00">520,Riidl Somaiya Vidyavihar Mumbai 400077</p>
+                <h4 style="color: #ffdf00">Email:</h4>
+                <a href="mailto:laserinnovativetechnologies@gmail.com"><p style="color: #ffdf00">laserinnovativetechnologies@gmail.com</p></a>
             </div>
         </div>
     </div>
@@ -706,13 +706,13 @@
     <div class="container">
         <ul class="foote_bottom_ul_amrc">
             <li><a href="/">Home</a></li>
-            <li><a href="/privacy/">Privacy Policy</a></li>
-            <li><a href="/termsconditions/">T&C</a></li>
-            <li><a href="/refundPolicy/">Cancellation/Refund Policy</a></li>
-            <li><a data-toggle="modal" data-target="#myModal3" href="#">Contact us</a></li>
+            <li><a href="/privacy/"><p style="color: #ffdf00">Privacy Policy</p></a></li>
+            <li><a href="/termsconditions/"><p style="color: #ffdf00">T&C</p></a></li>
+            <li><a href="/refundPolicy/"><p style="color: #ffdf00">Cancellation/Refund Policy</p></a></li>
+            <li><a data-toggle="modal" data-target="#myModal3" href="#"><p style="color: #ffdf00">Contact us</p></a></li>
         </ul>
         <!--foote_bottom_ul_amrc ends here-->
-        <p class="text-center">Copyright @2021 | Designed With by <a href="#">LiT</a></p>
+        <p class="text-center" style="color: #ffdf00">Copyright @2021 | Designed With by <a href="#">LiT</a></p>
         <!--social_footer_ul ends here-->
     </div>
 </footer>

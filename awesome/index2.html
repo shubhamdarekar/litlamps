@@ -46,6 +46,10 @@
         color: #454444;
     }
 
+    .carousel-card{
+        background-color: black;
+    }
+
     .carousel-card:hover {
         box-shadow: 0 4px 8px 0 #ffdf00, 0 5px 10px 0 #ffdf00;
     }
@@ -88,6 +92,13 @@
     .second-nav {
             background: #2a2a2a;
         }
+    a:link{
+        color: #ffdf00;
+    }
+    
+    a:visited{
+        color: #ffdf00;
+    }
 </style>
 
 {% endblock %}
@@ -164,7 +175,7 @@
             <div class="main_heading">
                 <br>
                 <br>
-                <h1>Best Selling Products</h1>
+                <h1 style="color: #ffdf00">Best Selling Products</h1>
                 <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 30%"></span>
                 </div>
             </div>
@@ -184,20 +195,20 @@
             <!--Slides-->
             <div class="carousel-inner" role="listbox">
                 <!--First slide-->
-                <div class="carousel-item active row justify-content-center">
+                <div class="carousel-item active row justify-content-center mx-auto">
                     {% for best in bestselling %}
-                    <div class="col-md-4 col-lg-4" style="float:left">
+                    <div class="col-md-4 col-lg-4" style="float:left;">
                         <div class="card carousel-card">
                             <img class="align-self-center"
                                  src="{{ best.image_path }}"
                                  style="margin-top: 15px"
-                                 width="250px"
+                                 width="400px"
                                  height="300px"
                                  alt="Card image cap"
                                  onclick="location.href='/product/?id={{ best.id }}'"
                             >
                             <div class="card-body">
-                                <h4 class="card-title">{{ best.product_name }}</h4>
+                                <h4 class="card-title" style="color: #ffdf00">{{ best.product_name }}</h4>
                                 <div class="row justify-content-around">
                                     <form method="post" action="/add_to_cart/">
                                         {% csrf_token %}
@@ -270,21 +281,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="main_heading">
-                    <h1>Features</h1>
+                    <h1 style="color: #ffdf00">Features</h1>
                     <div class="text-center"><span class="underline"
                                                    style="background-color: #ffdf00; width: 200px"></span>
                     </div>
                 </div>
             </div><!-- End col-md-12 -->
         </div><!-- End row -->
-        <div class="row justify-content-around">
+        <div class="row justify-content-around col-12   ">
             <div class="col-md-12 col-sm-12 col-lg-3">
                 <div class="features-div">
                     <img src="{% static 'images/quality.png' %}" style="width: 250px"/>
-                    <h4>Quality</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore
-                        et dolore</p>
+                    <h4 style="color: #ffdf00">Quality</h4>
+                    <p style="color: #ffdf00">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore</p>
                 </div>
             </div>
             <!-- End col-md-3-->
@@ -293,8 +303,8 @@
             <div class="col-md-12 col-sm-12 col-lg-3">
                 <div class="features-div">
                     <img src="{% static 'images/finishing.png' %}" style="width: 250px"/>
-                    <h4>Finish</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    <h4 style="color: #ffdf00">Finish</h4>
+                    <p style="color: #ffdf00">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                         labore
                         et dolore</p>
 
@@ -307,8 +317,8 @@
                     <img src="{% static 'images/light-bright.png' %}" style="width: 250px;"/>
                     <br>
                     <br>
-                    <h4>Light Bright</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    <h4 style="color: #ffdf00">Light Bright</h4>
+                    <p style="color: #ffdf00">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                         labore
                         et dolore</p>
                 </div>
@@ -324,8 +334,8 @@
             <div class="main_heading">
                 <br>
                 <br>
-                <h1>Customer Reviews</h1>
-                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 30%"></span>
+                <h1 style="color: #ffdf00">Customer Reviews</h1>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 20%"></span>
                 </div>
             </div>
         </div>
@@ -359,22 +369,22 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">{{ review.product.product_name }}</h4>
+                                <h4 class="card-title" style="color: #ffdf00">{{ review.product.product_name }}</h4>
                                 <div class="col-lg-12">
-                                    <h4 style="margin-left: 10px; margin-right: 10px; margin-top: 20px">
+                                    <h4 style="margin-left: 10px; margin-right: 10px; margin-top: 20px; color: #ffdf00">
                                         "{{ review.review }}"</h4>
                                 </div>
                             </div>
                             <div class="card-footer justify-content-end">
                                 <div class="row justify-content-end" style="width: 100%">
-                                    <p style="font-size: 20px">
+                                    <p style="font-size: 20px; color: #ffdf00">
                                         - {{ review.customer.first_name }}&nbsp;{{ review.customer.last_name }}</p>
                                 </div>
                                 <div class="col-lg-1"></div>
                             </div>
                         </div>
                     </div>
-                    {% if forloop.counter|divisibleby:3 %}
+                    {% if forloop.counter|divisibleby:3 and forloop.counter < reviews|length %}
                 </div>
                 <div class="carousel-item">
                     {% endif %}
@@ -399,7 +409,7 @@
             <div class="col-md-12">
                 <div class="main_heading">
                     <br>
-                    <h1>FAQs</h1>
+                    <h1 style="color: #ffdf00">FAQs</h1>
                     <div class="text-center"><span class="underline"
                                                    style="background-color: #ffdf00; width: 150px;"></span></div>
                 </div>
@@ -407,7 +417,7 @@
         </div><!-- End row -->
         <div class="" id="accordion">
             {% for faq in faqs %}
-            <div class="card ">
+            <div class="card" style="background-color: black">
                 <div class="card-header">
                     <h4 class="card-header">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"

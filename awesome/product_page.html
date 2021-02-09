@@ -59,6 +59,10 @@
         [type=radio]:checked + img {
             outline: 2px solid #f00;
         }
+        
+        .pointers:hover{
+            cursor: pointer;
+        }
     </style>
 {% endblock %}
 
@@ -76,54 +80,55 @@
                     <article class="gallery-wrap">
                         <div class="col-lg-12">
                         <div class="img-big-wrap">
-                            <div><a href="#"><img src="{{ product_details.image_path }}"></a></div>
+                            <div><a href="#"><img id="myImage" src="{{ product_details.image_path }}"></a></div>
                         </div> <!-- slider-product.// -->
                         </div>
-                        <div class="img-small-wrap">
-                            <div class="item-gallery"><img src="{% static 'images/Macbook.png' %}"></div>
-                            <div class="item-gallery"><img src="{% static 'images/Macbook.png' %}"></div>
-                            <div class="item-gallery"><img src="{% static 'images/Macbook.png' %}"></div>
-                            <div class="item-gallery"><img src="{% static 'images/Macbook.png' %}"></div>
+                        <br>
+                        <div class="img-small-wrap justify-content-around">
+                            <div class="item-gallery"><img class="pointers" src="{{ product_details.image_path }}" onclick="document.getElementById('myImage').src='{{ product_details.image_path }}'"></div>
+                            <div class="item-gallery"><img class="pointers" src="{{ product_details.image_path_2 }}" onclick="document.getElementById('myImage').src='{{ product_details.image_path_2 }}'"></div>
+                            <div class="item-gallery"><img class="pointers" src="{{ product_details.image_path_3 }}" onclick="document.getElementById('myImage').src='{{ product_details.image_path_3 }}'"></div>
+                            <div class="item-gallery"><img class="pointers" src="{{ product_details.image_path_4 }}" onclick="document.getElementById('myImage').src='{{ product_details.image_path_4 }}'"></div>
                         </div> <!-- slider-nav.// -->
                     </article> <!-- gallery-wrap .end// -->
                 </aside>
                 <aside class="col-lg-6">
                     <article class="card-body p-5">
-                        <h3 class="title mb-3">{{ product_details.product_name }}</h3>
+                        <h3 class="title mb-3" style="color: #ffdf00">{{ product_details.product_name }}</h3>
 
-                        <p class="price-detail-wrap">
+                        <p class="price-detail-wrap" style="color: #ffdf00">
 	<span class="price h3 text-warning">
 		<span class="currency">RS ₹</span><span class="num">{{ product_details.product_price_rupees }}</span>
 	</span>
                             <span>/per piece</span>
                         </p> <!-- price-detail-wrap .// -->
                         <dl class="item-property">
-                            <dt>Description</dt>
-                            <dd><p>{{ product_details.product_desc }} </p></dd>
+                            <dt style="color: #ffdf00">Description</dt>
+                            <dd><p style="color: #ffdf00">{{ product_details.product_desc }} </p></dd>
                         </dl>
 
                         <dl class="param param-feature">
-                            <dt>Dimensions</dt>
-                            <dd>Length: 6 Inches (Base Diameter)<br>Height: 9 Inches</dd>
+                            <dt style="color: #ffdf00">Dimensions</dt>
+                            <dd style="color: #ffdf00">Length: 6 Inches (Base Diameter)<br>Height: 9 Inches</dd>
                         </dl>  <!-- item-property-hor .// -->
                         <dl class="param param-feature">
-                            <dt>Power</dt>
-                            <dd>12 Volts</dd>
+                            <dt style="color: #ffdf00">Power</dt>
+                            <dd style="color: #ffdf00">12 Volts</dd>
                         </dl>  <!-- item-property-hor .// -->
                         <dl class="param param-feature">
-                            <dt>Warranty</dt>
-                            <dd>1 Year for Adapter</dd>
+                            <dt style="color: #ffdf00">Warranty</dt>
+                            <dd style="color: #ffdf00">1 Year for Adapter</dd>
                         </dl>  <!-- item-property-hor .// -->
                         <dl class="param padram-feature">
-                            <dt>Delivery</dt>
-                            <dd>Free Shipping All over India</dd>
+                            <dt style="color: #ffdf00">Delivery</dt>
+                            <dd style="color: #ffdf00">Free Shipping All over India</dd>
                         </dl>  <!-- item-property-hor .// -->
 
                         <hr>
                         <div class="row">
                             <div class="col-sm-7">
                                 <dl class="param param-inline">
-                                    <dt>Available Color</dt>
+                                    <dt style="color: #ffdf00">Available Color</dt>
                                     <form class="form" id="myForm" method="post" action="/add_to_cart/">
                                         {% csrf_token %}
                                         <input type="text" hidden value="{{ product_details.id }}" name="id">
@@ -156,16 +161,14 @@
                             </div> <!-- col.// -->
                         </div> <!-- row.// -->
                         <hr>
-                        <div class="card mb-3">
+                        <div class="card mb-3" style="background-color: black">
                             <div class="card-body" style="color: #383308">
                                 <form>
                                     <div class="form-group">
-                                        <label>Have coupon?</label>
+                                        <label style="color: #ffdf00">Have coupon?</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="" placeholder="Coupon code">
-
-                                            <button class="btn btn-warning">Apply</button>
-
+                                            <button class="btn btn-warning" style="margin-left: 10px">Apply</button>
                                         </div>
                                     </div>
                                 </form>
