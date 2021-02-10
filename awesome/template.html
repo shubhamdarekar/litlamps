@@ -157,9 +157,6 @@
         .modal.right .modal-dialog {
             position: fixed;
             margin: auto;
-            min-width: 550px;
-            max-width: 550px;
-            width: 50%;
             height: 100%;
             -webkit-transform: translate3d(0%, 0, 0);
             -ms-transform: translate3d(0%, 0, 0);
@@ -196,11 +193,6 @@
         /* ----- MODAL STYLE ----- */
         .modal-content {
             border-radius: 15px;
-        }
-
-        {
-            #border: 25px #1e7e34
-        ;
 
         }
 
@@ -349,74 +341,82 @@
 
     </style>
 
-<style>
-    .wrapper {
-    display: block;
-}
+    <style>
+        .wrapper {
+            display: block;
+        }
 
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    /* top layer */
-    z-index: 9999;
-}
+        #sidebar {
+            min-width: 250px;
+            max-width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            /* top layer */
+            z-index: 9999;
+        }
 
-.overlay {
-    display: none;
-    position: fixed;
-    /* full screen */
-    width: 100vw;
-    height: 100vh;
-    /* transparent black */
-    background: rgba(0, 0, 0, 0.7);
-    /* middle layer, i.e. appears below the sidebar */
-    z-index: 998;
-    opacity: 0;
-    /* animate the transition */
-    transition: all 0.5s ease-in-out;
-}
-/* display .overlay when it has the .active class */
-.overlay.active {
-    display: block;
-    opacity: 1;
-}
+        .overlay {
+            display: none;
+            position: fixed;
+            /* full screen */
+            width: 100vw;
+            height: 100vh;
+            /* transparent black */
+            background: rgba(0, 0, 0, 0.7);
+            /* middle layer, i.e. appears below the sidebar */
+            z-index: 998;
+            opacity: 0;
+            /* animate the transition */
+            transition: all 0.5s ease-in-out;
+        }
 
-#dismiss {
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    /* top right corner of the sidebar */
-    top: 10px;
-    right: 10px;
-}
-</style>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#sidebar").mCustomScrollbar({
-            theme: "minimal"
-        });
+        /* display .overlay when it has the .active class */
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
 
-        $('#dismiss, .overlay').on('click', function () {
-            // hide sidebar
-            $('#sidebar').removeClass('active');
-            // hide overlay
-            $('.overlay').removeClass('active');
-        });
+        #dismiss {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            /* top right corner of the sidebar */
+            top: 10px;
+            right: 10px;
+        }
 
-        $('#sidebarCollapse').on('click', function () {
-            // open sidebar
-            $('#sidebar').addClass('active');
-            // fade in the overlay
-            $('.overlay').addClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-    });
-</script>
+        #side-drawer {
+            height: 100vh;
+            width: 336px; /*Ideal width for sidebar accdg to https://forums.envato.com/t/standard-sidebar-width/75633*/
+            top: 0;
+            left: -336px;
+            z-index: 1032; /*z-index of standard bootstrap navbar is 1030 + 1 offset due to side-drawer-void*/
+            transition: left 0.25s ease;
+        }
+
+        #side-drawer-void {
+            height: 100%;
+            width: 100%;
+            top: 0;
+            z-index: 1031; /*z-index of standard bootstrap navbar is 1030*/
+            background: rgba(0, 0, 0, .6);
+        }
+    </style>
+    <script type="text/javascript">
+        function openSideDrawer() {
+            document.getElementById("side-drawer").style.left = "0";
+            document.getElementById("side-drawer-void").classList.add("d-block");
+            document.getElementById("side-drawer-void").classList.remove("d-none");
+        }
+
+        function closeSideDrawer() {
+            document.getElementById("side-drawer").style.left = "-336px";
+            document.getElementById("side-drawer-void").classList.add("d-none");
+            document.getElementById("side-drawer-void").classList.remove("d-block");
+        }
+    </script>
 </head>
 
 <body>
@@ -424,7 +424,7 @@
 <!-- Navbar 1 -->
 <nav class="navbar">
     <div class="container-fluid">
-        <i class="fa fa-bars fa-2x" data-toggle="modal" data-target="#myModal4" style="color: #ffdf00"></i>
+        <i class="fa fa-bars fa-2x" type="button" onclick="openSideDrawer()" style="color: #ffdf00"></i>
         <a class="navbar-brand mx-auto" href="/"><img class="nav-img" src="{% static 'images/logo-full.png' %}"
                                                       height="auto" width="auto"></a>
         <ul class="nav">
@@ -499,25 +499,53 @@
 {#    </div>#}
 {#</nav>#}
 <!-- Navbar 1 end -->
+
 <!-- Modal side-->
-<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+<div id="side-drawer" class="position-fixed">
+    <div class="h-100" style="background-color: black">
+        <button type="button" class="close ml-0" onclick="closeSideDrawer()" style="color: #ffdf00"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+        <!-- Side Drawer Links -->
+        <ul id="links" class="list-group ml-2" style="background-color: black" onclick="closeSideDrawer()">
+{#            <a id="link-structure" href="#" class="list-group-item list-group-item-action border-0 rounded-0 active">#}
+{#                Works#}
+{#            </a>#}
+{#            <a id="link-css" href="#" class="list-group-item list-group-item-action border-0 rounded-0">#}
+{#                About#}
+{#            </a>#}
+{#            <a id="link-javascript" href="#" class="list-group-item list-group-item-action border-0 rounded-0">#}
+{#                Contact#}
+{#            </a>#}
+{#            <a id="link-customization" href="#customization"#}
+{#               class="list-group-item list-group-item-action border-0 rounded-0">#}
+{#                Blog#}
+{#            </a>#}
 
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Left Sidebar</h4>
-				</div>
+        <br>
+        <br>
+                <li title="Products" class="nav-item">
+                    <a href="/products"><i class="fa fa-gift fa-3x"></i>&nbsp;All Products</a>
+                </li>
+                <li title="Contact Us" class="nav-item">
+                    <a data-toggle="modal" data-target="#myModal3" href="#"><i
+                            class="fa fa-envelope-o fa-3x"></i>&nbsp;Contact Us</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li title="Contact Us" class="nav-item">
+                    <a href="/profile/"><i class="fa fa-user fa-3x"></i>&nbsp;Your profile</a>
+                </li>
+                    <li title="Contact Us" class="nav-item">
+                    <a href="/orders/"><i class="fa fa-shopping-cart fa-3x"></i>&nbsp;Your orders</a>
+                </li>
+                {% endif %}
+            </ul>
 
-				<div class="modal-body">
-					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-					</p>
-				</div>
-
-			</div><!-- modal-content -->
-		</div><!-- modal-dialog -->
-	</div>
-<!-- modal end-->
+        </ul>
+    </div>
+</div>
+<div id="side-drawer-void" class="position-fixed d-none" onclick="closeSideDrawer()"></div>
+<!-- end -->
 
 <!-- Modal cart-->
 <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
@@ -535,9 +563,8 @@
                     <thead class="text-muted">
                     <tr class="small text-uppercase">
                         <th scope="col" style="color: #ffdf00">Product</th>
-                        <th scope="col"style="color: #ffdf00">Colour</th>
-                        <th scope="col" width="120"style="color: #ffdf00">Price</th>
-                        <th scope="col" class="text-right" width="200"></th>
+                        <th scope="col" style="color: #ffdf00">Colour</th>
+                        <th scope="col" style="color: #ffdf00">Price</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -546,9 +573,10 @@
                             <td>
                                 <figure class="itemside align-items-center">
                                     <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm"
-                                                            style="max-width:150px;max-height: 100px;">
+                                                            style="max-width:120px;max-height: 100px;">
                                     </div>
-                                    <a href="#" class="title text-dark"><p style="color: #ffdf00">{{ cartitem.product.product_name }}</p></a>
+                                    <a href="#" class="title text-dark"><p
+                                            style="color: #ffdf00">{{ cartitem.product.product_name }}</p></a>
                                 </figure>
                                 <var style="color: #ffdf00">Quantity : {{ cartitem.quantity }}</var>
                             </td>
@@ -565,11 +593,12 @@
                             <td>
                                 <div class="price-wrap">
                                     <var class="price" style="color: #ffdf00">₹{{ cartitem.total }}</var>
-                                    <small class="text-muted"><p style="color: #ffdf00"> ₹{{ cartitem.product.product_price_rupees }}
+                                    <small class="text-muted"><p style="color: #ffdf00">
+                                        ₹{{ cartitem.product.product_price_rupees }}
                                         each </p></small>
                                 </div> <!-- price-wrap .// -->
-                            </td>
-                            <td class="text-right">
+
+
                                 {# <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"></a>#}
                                 {# data-toggle="tooltip"> <i class="fa fa-heart"></i></a>#}
                                 <form action="/remove_from_cart/" method="post">
@@ -659,7 +688,8 @@
                 <h4 style="color: #ffdf00">Address:</h4>
                 <p style="color: #ffdf00">520,Riidl Somaiya Vidyavihar Mumbai 400077</p>
                 <h4 style="color: #ffdf00">Email:</h4>
-                <a href="mailto:laserinnovativetechnologies@gmail.com"><p style="color: #ffdf00">laserinnovativetechnologies@gmail.com</p></a>
+                <a href="mailto:laserinnovativetechnologies@gmail.com"><p style="color: #ffdf00">
+                    laserinnovativetechnologies@gmail.com</p></a>
             </div>
         </div>
     </div>
@@ -709,7 +739,8 @@
             <li><a href="/privacy/"><p style="color: #ffdf00">Privacy Policy</p></a></li>
             <li><a href="/termsconditions/"><p style="color: #ffdf00">T&C</p></a></li>
             <li><a href="/refundPolicy/"><p style="color: #ffdf00">Cancellation/Refund Policy</p></a></li>
-            <li><a data-toggle="modal" data-target="#myModal3" href="#"><p style="color: #ffdf00">Contact us</p></a></li>
+            <li><a data-toggle="modal" data-target="#myModal3" href="#"><p style="color: #ffdf00">Contact us</p></a>
+            </li>
         </ul>
         <!--foote_bottom_ul_amrc ends here-->
         <p class="text-center" style="color: #ffdf00">Copyright @2021 | Designed With by <a href="#">LiT</a></p>
@@ -720,12 +751,8 @@
 <!-- End footer -->
 
 
-{#
-<script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>
-#}
-{#
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-#}
+{#<script type="text/javascript" src="{% static 'js/jquery-main.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>#}
 <script src="{% static 'js/wow.min.js' %}"></script>
 
 <script>

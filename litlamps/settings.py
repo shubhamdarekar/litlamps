@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'ppxe5vogau&zoxc&2z6fj#qb(-$=no2c9r67%)1h7$%9y#^lr-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['litlamp.in', 'www.litlamp.in']
 
 
 # Application definition
