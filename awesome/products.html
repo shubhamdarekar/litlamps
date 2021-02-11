@@ -140,16 +140,18 @@
             outline-color: #f00;
             -moz-outline-radius: 25px;
         }
+        .products-card:hover {
+            box-shadow: 0 4px 8px 0 #ffdf00, 0 5px 10px 0 #ffdf00;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
-
-    <div class="row">
+    <div class="row mx-0" style="margin-bottom: -40px">
         <div class="col-12">
             <div class="main_heading">
-                <h1 style="color: #ffdf00">Our Products</h1>
-                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width:15%"></span></div>
+                <h3 style="color: #ffdf00; margin-top: -50px; margin-bottom: -10px" class="mx-auto">Products</h3>
+                <div class="text-center"><span class="underline" style="background-color: #ffdf00; width: 100px"></span></div>
             </div>
         </div><!-- End col-md-12 -->
     </div>
@@ -158,7 +160,7 @@
     <div class="container-fluid row col-12 mx-auto">
         <div class="row justify-content-center col-12 mx-auto">
             {% for product in products %}
-                <div class="block text-center col-lg-3 col-sm-10 col-md-4 " style="background-color: black; border-color: #ffdf00; border-width: 1px">
+                <div class="products-card block text-center col-lg-3 col-sm-10 col-md-4 " style="background-color: black; border-color: #ffdf00; border-width: 1px">
                     <img onclick="location.href='/product/?id={{ product.id }}'"
                                                     class="image my-1" src="{{ product.image_path }}">
                     <div class="info py-2 mx-auto col-12" style="background-color: black">

@@ -67,6 +67,18 @@
     .pointers:hover {
         cursor: pointer;
     }
+
+    @media only screen and (max-width: 500px) {
+        #large-screen {
+            display: none;
+        }
+    }
+
+    @media only screen and (min-width: 500px) {
+        #small-screen {
+            display: none;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -74,9 +86,8 @@
 {% block content %}
 
 <div class="container">
-
     <div class="row justify-content-center mx-auto" style="background-color: black">
-        <aside class="col-lg-5 border">
+        <aside class="col-lg-4">
             <br>
             <article class="gallery-wrap">
                 <div class="col-lg-12">
@@ -143,7 +154,7 @@
                 </form>
             </div>
         </aside>
-        <aside class="col-lg-6 border ml-0">
+        <aside class="col-lg-5 ml-0">
             <article class="card-body">
                 <h2 class="title mb-3" style="color: #ffdf00">{{ product_details.product_name }}</h2>
 
@@ -153,6 +164,20 @@
 	</span>
                     <span>/per piece</span>
                 </p> <!-- price-detail-wrap .// -->
+                <div class="row" id="small-screen">
+                    <button class="btn col-sm-4" form="buy_now"
+                            id="button-3"
+                            style="border-radius: 10px; padding-left: 18px; padding-right: 18px; font-size: 20px; margin-bottom: 10px; background-color: #ffdf00">
+                        <i class="fa fa-credit-card"> Buy Now</i>
+                    </button>
+                    <button form="myForm" class="btn col-sm-4" type="submit"
+                            id="button-4"
+                            style="font-size: 20px; margin-left: 5px;border-radius: 10px; background-color: #ffdf00">
+                        <i class="fa fa-cart-plus"> Add to Cart</i>
+                    </button>
+
+                <br>
+                </div>
                 <dl class="item-property">
                     <dt style="color: #ffdf00">Description</dt>
                     <dd><p style="color: #ffdf00">{{ product_details.product_desc }} </p></dd>
@@ -190,30 +215,31 @@
                     </div> <!-- card-body.// -->
                 </div> <!-- card.// -->
             </article> <!-- card-body.// -->
-        </aside> <!-- col.// -->
+        </aside>
+        <aside class="col-lg-2 my-auto" id="large-screen">
+            <form class="outer_form" action="/buy_now/" method="post" id="buy_now">
+                {% csrf_token %}
+                <input type="text" name="id" hidden value="{{ product_details.id }}">
+                <input id="colorBuy" type="text" name="color" hidden value="red">
+            </form>
+            <button class="btn" form="buy_now"
+                    id="button-1"
+                    style="border-radius: 10px; padding-left: 18px; padding-right: 18px; font-size: 40px; background-color: #ffdf00">
+                <i class="fa fa-credit-card"> Buy Now</i>
+            </button>
+            <br>
+            <br>
+            <button form="myForm" class="btn" type="submit"
+                    id="button-2"
+                    style="font-size: 40px; border-radius: 10px; background-color: #ffdf00">
+                <i class="fa fa-cart-plus"> Add to Cart</i>
+            </button>
+        </aside><!-- col.// -->
     </div> <!-- row.// -->
 </div> <!-- card.// -->
 <!--container.//-->
 <hr>
-<div class="row bg-dark justify-content-center py-md-3 bottom-buttons">
-    <div class="row align-content-md-center">
-        <form class="outer_form" action="/buy_now/" method="post" id="buy_now">
-            {% csrf_token %}
-            <input type="text" name="id" hidden value="{{ product_details.id }}">
-            <input id="colorBuy" type="text" name="color" hidden value="red">
-        </form>
-        <button class="btn" form="buy_now"
-                id="button-1"
-                style="border-radius: 10px; font-size: 25px; background-color: #ffdf00">
-            <i class="fa fa-credit-card"> Buy Now</i>
-        </button>
-        <button form="myForm" class="btn" type="submit"
-                id="button-2"
-                style="margin-left: 7px; font-size: 25px; border-radius: 10px; background-color: #ffdf00">
-            <i class="fa fa-cart-plus"> Add to Cart</i>
-        </button>
-    </div>
-</div>
+
 
 {% endblock %}
 

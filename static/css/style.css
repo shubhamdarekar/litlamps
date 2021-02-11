@@ -13,12 +13,12 @@ body
 }
 
 .main_heading {
-    margin: 50px 0px;
+    margin: 50px 100px;
 }
 
-.main_heading h1
+.main_heading h3
 {
-	font-size: 45px;
+	font-size: 30px;
     font-weight: 300;
     text-align: center;
     line-height: 45px;
