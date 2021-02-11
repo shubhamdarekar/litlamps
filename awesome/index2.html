@@ -90,11 +90,7 @@
         outline-color: #f00;
         -moz-outline-radius: 25px;
     }
-
-    .second-nav {
-        background: #2a2a2a;
-    }
-
+    
     a:link {
         color: #ffdf00;
     }
@@ -125,27 +121,6 @@
 {% endblock %}
 
 {% block content %}
-
-<!-- Navbar 2 -->
-<nav class="navbar navbar-expand-sm navbar-dark second-nav">
-    <a class="navbar-brand" href="#"></a>
-    <ul class="nav container justify-content-center" id="mynavbar2">
-        <li class="nav-item">
-            <a class="nav-link-2" href="#bestSelling">Best Seller</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link-2" href="#features">Features</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link-2" href="#reviews">Reviews</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link-2" href="#FAQs">FAQs</a>
-        </li>
-    </ul>
-</nav>
-<!-- Navbar 2 end-->
-
 
 <!-- Carousel -->
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -219,7 +194,7 @@
                         <!--First slide-->
                         <div class="carousel-item active row justify-content-center mx-auto">
                             {% for best in bestselling %}
-                            <div class="col-md-4 col-lg-4 py-3" style="float:left;">
+                            <div class="col-md-4 col-lg-4 py-3" style="float:left;" onclick="location.href='/product/?id={{ best.id }}'">
                                 <div class="card carousel-card">
                                     <img class="align-self-center"
                                          src="{{ best.image_path }}"
@@ -231,51 +206,6 @@
                                     >
                                     <div class="card-body">
                                         <h4 class="card-title" style="color: #ffdf00">{{ best.product_name }}</h4>
-                                        <div class="row justify-content-around">
-                                            <form method="post" action="/add_to_cart/">
-                                                {% csrf_token %}
-                                                <input name="id" hidden value="{{ best.id }}">
-                                                <input id="colorCart{{ best.id }}" type="text" name="color" hidden
-                                                       value="red">
-                                                <button type="submit" style="margin-left: 2%; width: 100%">
-                                                    <i class="fa fa-cart-plus"> Add to Cart</i>
-                                                </button>
-                                            </form>
-                                            <form method="post" action="/buy_now/">
-                                                {% csrf_token %}
-                                                <input name="id" hidden value="{{ best.id }}">
-                                                <input id="colorCart{{ best.id }}" type="text" name="color" hidden
-                                                       value="red">
-                                                <button type="submit" style="width: 100%; margin-right: 2%">
-                                                    <i class="fa fa-credit-card"> Order Now</i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <div class="row justify-content-center" style="margin-top: 5px">
-                                            <form>
-                                                <label class="form-group">
-                                                    <input type="radio" id="red" name="color" value="red" checked
-                                                           onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;"
-                                                    >
-                                                    <img src="{% static 'images/red.jpeg' %}" width="25px" height="25px"
-                                                         style="border-radius: 12px">
-                                                </label>
-                                                <label class="form-group">
-                                                    <input type="radio" id="wooden" name="color" value="wooden"
-                                                           onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;">
-                                                    <img src="{% static 'images/wooden.jpeg' %}" width="25px"
-                                                         height="25px"
-                                                         style="border-radius: 12px; margin-left: 4px">
-                                                </label>
-                                                <label class="form-group">
-                                                    <input type="radio" id="black" name="color" value="black"
-                                                           onblur="document.getElementById('colorCart{{ best.id }}').value = this.value;document.getElementById('colorBuy{{ best.id }}').value = this.value;">
-                                                    <img src="{% static 'images/black.jpeg' %}" width="25px"
-                                                         height="25px"
-                                                         style="border-radius: 12px; margin-left: 4px">
-                                                </label>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

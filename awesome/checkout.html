@@ -81,16 +81,16 @@
             <input name="color" value="{{ color_product }}" hidden>
         {% endif %}
     </form>
-    <div class="row">
-        <aside class="col-lg-9">
-            <div class="card">
+    <div class="row mx-auto" style="background-color: black">
+        <aside class="col-lg-9 col-sm-12">
+            <div class="card" style="background-color: black">
                 <table class="table table-borderless table-shopping-cart">
                     <thead class="text-muted">
                     <tr class="small text-uppercase">
-                        <th scope="col">Product</th>
-                        <th scope="col">Color</th>
-                        <th scope="col" width="120">Quantity</th>
-                        <th scope="col" width="120">Price</th>
+                        <th scope="col" style="color: #ffdf00">Product</th>
+                        <th scope="col" style="color: #ffdf00">Color</th>
+                        <th scope="col" width="120" style="color: #ffdf00">Quantity</th>
+                        <th scope="col" width="120" style="color: #ffdf00">Price</th>
                         <th scope="col" class="text-right" width="200"></th>
                     </tr>
                     </thead>
@@ -128,13 +128,13 @@
                                     </td>
                                 {% endif %}
                                 <td>
-                                    {{ cartitem.quantity }}
+                                    <p style="color: #ffdf00 !important;">{{ cartitem.quantity }}</p>
                                 </td>
                                 <td>
                                     <div class="price-wrap">
-                                        <var class="price">₹{{ cartitem.total }}</var>
-                                        <small class="text-muted"> ₹{{ cartitem.product.product_price_rupees }}
-                                            each </small>
+                                        <var class="price" style="color: #ffdf00">₹{{ cartitem.total }}</var>
+                                        <small class="text-muted"><p style="color: #ffdf00 !important;">₹{{ cartitem.product.product_price_rupees }}
+                                            each</p></small>
                                     </div> <!-- price-wrap .// -->
                                 </td>
                                 <td class="text-right">
@@ -143,7 +143,7 @@
                                         <input type="type" hidden name="next" value="{{ request.path }}">
                                         <input type="text" hidden name="id" value="{{ cartitem.id }}">
                                     </form>
-                                    <button form="remove" class="btn btn-danger"> Remove</button>
+                                    <button form="remove" class="btn btn-danger" style="color: white"> Remove</button>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -151,7 +151,7 @@
                         <tr>
                             <td>
                                 <figure class="itemside align-items-center">
-                                    <div onclick="location.href='/product/?id={{ single_product.id }}'" class="aside">
+                                    <div onclick="location.href='/product/?id={{ single_product.id }}'" class="aside col-sm-12">
                                         <img src="{{ single_product.image_path }}" class="img-sm"
                                              style="max-width:150px;max-height: 100px;">
                                     </div>
@@ -163,28 +163,28 @@
                             </td>
                             {% if color_product == 'red' %}
                                 <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
+                                         style="border-radius: 15px"></td>
                             {% elif color_product == 'wooden' %}
                                 <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px"></br><small class="text-muted">Wooden</small>
+                                         style="border-radius: 15px">
                                 </td>
                             {% elif color_product == 'black' %}
                                 <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px"></br><small class="text-muted">Black</small>
+                                         style="border-radius: 15px">
                                 </td>
                             {% endif %}
-                            <td>
+                            <td style="color: #ffdf00">
                                 1
                             </td>
                             <td>
                                 <div class="price-wrap">
-                                    <var class="price">₹{{ single_product.product_price_rupees }}</var>
-                                    <small class="text-muted"> ₹{{ single_product.product_price_rupees }}
+                                    <var class="price" style="color: #ffdf00">₹{{ single_product.product_price_rupees }}</var>
+                                    <small class="text-muted" style="color: #ffdf00 !important;"> ₹{{ single_product.product_price_rupees }}
                                         each </small>
                                 </div> <!-- price-wrap .// -->
                             </td>
                             <td class="text-right">
-                                <a href="/products/" class="btn btn-danger"> Remove</a>
+                                <a href="/products/" class="btn btn-danger" style="color: white!important;"> Remove</a>
                             </td>
                         </tr>
                     {% endif %}
@@ -194,32 +194,27 @@
                 <div class="profile">
                     <hr>
                     <div class="row">
-                        <div class="card col-lg-8">
+                        <div class="card col-lg-8" style="background-color: black">
                             <div class="card-header"
                                  style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
                                 <div class="row">
-                                    <img src="{% static 'images/address.png' %}" width="70px" height="70px">
-                                    <h2 class="align-self-center">&nbsp&nbspSelect an address</h2>
+                                    <img src="{% static 'images/addr.png' %}" width="70px" height="70px">
+                                    <h2 class="align-self-center" style="color: #ffdf00">&nbsp&nbspSelect an address</h2>
                                 </div>
                             </div>
                             <div class="card-body">
                                 {% for address in addresses %}
                                     <div class="row address-box">
-                                        <div class="col-2">
-                                            <h5>Address {{ forloop.counter }}</h5>
+                                        <div class="col-lg-12 col-sm-12">
+                                            <h5 style="color: #ffdf00">Address {{ forloop.counter }}</h5>
                                         </div>
                                         <div class="col-1">
 
                                         </div>
                                         <div style="width: 500px;">
-                                            <strong>{{ address.first }}&nbsp;{{ address.last }}</strong><br>
-                                            <small class="text-muted">{{ address.street }}</small><br>
-                                            <small class="text-muted">{{ address.street2 }}</small><br>
-                                            <small class="text-muted">{{ address.city }}&nbsp;{{ address.region }}</small><br>
-                                            <small class="text-muted">{{ address.pin }}</small>
-                                            <b>Mobile : {{ address.mobile }}</b>
-                                        </div>
-                                        <div class="justify-content-end">
+                                            <div class="row justify-content-between" style="width: 100%">
+                                                <strong style="color: #ffdf00">{{ address.first }}&nbsp;{{ address.last }}</strong>
+                                                <div class="justify-content-end">
                                             <label class="form-group">
                                                 <input form="address_selector" type="radio" name="address_id"
                                                        name="color" value="{{ address.id }}" checked>
@@ -229,6 +224,13 @@
                                             </label>
 
                                         </div>
+                                            </div>
+                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.street }}</p></small>
+                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.street2 }}</p></small>
+                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.city }}&nbsp;{{ address.region }}</p></small>
+                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.pin }}</p></small>
+                                            <b style="color: #ffdf00">Mobile : {{ address.mobile }}</b>
+                                        </div>
                                     </div>
                                     <br>
                                 {% endfor %}
@@ -236,56 +238,57 @@
                             </div>
                         </div>
                         <div class="container pt-4 col-lg-3">
-                            <img src="{% static 'images/add_address.png' %}" width="30px" height="30px">
-                            <h5 style="color: black; padding-top: 2px; padding-bottom: 7px">
-                                &nbsp;&nbsp;Or Add a new address</h5>
+                            <div class="row">
+                                <img src="{% static 'images/add_addr.png' %}" width="30px" height="30px">
+                            <h5 style="color: #ffdf00; padding-top: 2px; padding-bottom: 7px">&nbsp;Or Add a new address</h5>
+                            </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row mx-0">
                                         <div class="col-12">
-                                            <label class="order-form-label">Name</label>
+                                            <label class="order-form-label" style="color: #ffdf00">Name</label>
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input class="order-form-input" placeholder="First" name="first" required
-                                                   form="address_form">
+                                            <input class="order-form-input" placeholder="First Name" name="first" required
+                                                   style="background-color: white" form="address_form">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input class="order-form-input" placeholder="Last" name="last" required
+                                            <input class="order-form-input" style="background-color: white" placeholder="Last Name" name="last" required
                                                    form="address_form">
                                         </div>
                                     </div>
 
                                     <div class="row mt-1 mx-0">
                                         <div class="col-12">
-                                            <label class="order-form-label">Address</label>
+                                            <label class="order-form-label" style="color: #ffdf00">Address</label>
                                         </div>
                                         <div class="col-12">
-                                            <input class="order-form-input" placeholder="Street Address" name="street"
+                                            <input class="order-form-input" placeholder="Street Address" style="background-color: white" name="street"
                                                    required form="address_form">
                                         </div>
                                         <div class="col-12 mt-2">
-                                            <input class="order-form-input" placeholder="Street Address Line 2"
+                                            <input class="order-form-input" style="background-color: white" placeholder="Street Address Line 2"
                                                    name="street2" required form="address_form">
                                         </div>
                                         <div class="col-12 col-sm-6 mt-2 pr-sm-2">
-                                            <input class="order-form-input" placeholder="City" name="city" required
+                                            <input class="order-form-input" style="background-color: white" placeholder="City" name="city" required
                                                    form="address_form">
                                         </div>
                                         <div class="col-12 col-sm-6 mt-2 pl-sm-0">
-                                            <input class="order-form-input" placeholder="Region" name="region" required
+                                            <input class="order-form-input" style="background-color: white" placeholder="Region" name="region" required
                                                    form="address_form">
                                         </div>
                                         <div class="col-12 col-sm-12 mt-2 pr-sm-12">
-                                            <input class="order-form-input" placeholder="Postal / Zip Code" name="pin"
+                                            <input class="order-form-input" style="background-color: white" placeholder="Postal / Zip Code" name="pin"
                                                    required form="address_form">
                                         </div>
                                     </div>
                                     <div class="row mt-1 mx-0">
                                         <div class="col-12">
-                                            <label class="order-form-label">Mobile Number</label>
+                                            <label style="color: #ffdf00" class="order-form-label">Mobile Number</label>
                                         </div>
                                         <div class="col-12">
-                                            <input class="order-form-input" placeholder="+91" name="mobile" required
+                                            <input class="order-form-input" style="background-color: white" placeholder="+91" name="mobile" required
                                                    form="address_form">
                                         </div>
                                     </div>
@@ -310,24 +313,24 @@
                         </div>
                     </div>
                 </div>
-
+                <br>
                 <div class="card-body border-top">
-                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                    <p class="icontext" style="color: #ffdf00"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
                 </div> <!-- card-body.// -->
 
             </div> <!-- card.// -->
         </aside> <!-- col.// -->
         <aside class="col-lg-3">
 
-            <div class="card mb-3">
+            <div class="card mb-3" style="background-color: black">
                 <div class="card-body">
                     <form>
                         <div class="form-group">
-                            <label>Have coupon?</label>
+                            <label style="color: #ffdf00">Have coupon?</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" name="" placeholder="Coupon code">
                                 <span class="input-group-append">
-				<button class="btn btn-primary">Apply</button>
+				<button style="background-color: #ffdf00; color: black" class="btn">Apply</button>
 			</span>
                             </div>
                         </div>
@@ -335,19 +338,19 @@
                 </div> <!-- card-body.// -->
             </div> <!-- card.// -->
 
-            <div class="card">
+            <div class="card" style="background-color: black">
                 <div class="card-body">
                     <dl class="dlist-align">
-                        <dt>Total:</dt>
-                        <dd class="text-right text-dark b"><strong>₹{{ totalPrice }}</strong></dd>
+                        <dt style="color: #ffdf00">Total:</dt>
+                        <dd class="text-right text-dark b"><strong style="color: #ffdf00">₹{{ totalPrice }}</strong></dd>
                     </dl>
                     <hr>
                     <p class="text-center mb-3">
                         <img src="{% static 'images/razorpay.png' %}" height="26">
                     </p>
-                    <button class="btn btn-primary btn-block" form="address_selector" type="submit">Make Purchase
+                    <button class="btn btn-block" style="color: black; background-color: #ffdf00" form="address_selector" type="submit">Make Purchase
                     </button>
-                    <a href="/products/" class="btn btn-light btn-block">Continue Shopping</a>
+                    <a href="/products/" style="background-color: #ffdf00; color: black;" class="btn btn-light btn-block"><p style="color: black; margin: 0">Continue Shopping</p></a>
                 </div> <!-- card-body.// -->
             </div> <!-- card.// -->
 
