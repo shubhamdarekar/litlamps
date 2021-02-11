@@ -1,185 +1,165 @@
 {% extends "template.html" %}
 {% load static %}
 
-{% block title %}Products{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block style %}
-    <style>
-        * {
-            font-family: Copperplate;
-        }
+<style>
+    * {
+        font-family: Copperplate;
+    }
 
-        .profile {
-            margin: 25px;
-        }
+    .profile {
+        margin: 25px;
+    }
 
-        .text {
-            color: black;
-        }
+    .text {
+        color: black;
+    }
 
-        .profile-input {
-            border-top: 0;
-            border-left: 0;
-            border-right: 0;
-        }
+    .profile-input {
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
 
-        button:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-        }
+</style>
 
+<style>
 
-    </style>
+    .order-form .container {
+        color: #4c4c4c;
+        padding: 20px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+    }
 
-    <style>
+    .order-form-label {
+        margin: 8px 0 0 0;
+        font-size: 14px;
+        font-weight: bold;
+    }
 
-        .order-form .container {
-            color: #4c4c4c;
-            padding: 20px;
-            box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
-        }
+    .order-form-input {
+        width: 100%;
+        padding: 8px 8px;
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-radius: 3px !important;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.2em;
+        background-color: transparent;
+        border-color: #cccccc;
+    }
 
-        .order-form-label {
-            margin: 8px 0 0 0;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .order-form-input {
-            width: 100%;
-            padding: 8px 8px;
-            border-width: 1px !important;
-            border-style: solid !important;
-            border-radius: 3px !important;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            font-style: normal;
-            line-height: 1.2em;
-            background-color: transparent;
-            border-color: #cccccc;
-        }
-
-        .btn-submit:hover {
-            background-color: #090909 !important;
-        }
-    </style>
+    /*.btn-submit:hover {*/
+    /*    background-color: #090909 !important;*/
+    /*}*/
+</style>
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="main_heading">
-                <h1>Profile</h1>
-                <div class="text-center"><span class="underline"
-                                               style="background-color: #ffdf00!important; width: 150px"></span></div>
-            </div>
-        </div><!-- End col-md-12 -->
-    </div>
-    <div class="profile">
-        <div class="row justify-content-start">
-            <div style="padding-top: 18px; padding-right: 30px; padding-left: 30px;
-            background-color: #ffdf00; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19); margin-left: 100px">
-                <p style="font-size: 50px; text-align: center">{{ user.username|slice:":1" }}</p>
-            </div>
-            <div class="flex-row-reverse align-self-center">
-                <h3 class="text"> &nbsp&nbsp{{ user.first_name }}&nbsp{{ user.last_name }}</h3>
-                <h4>&nbsp&nbsp{{ user.email }}</h4>
-            </div>
+<div class="row mx-auto">
+    <div class="col-md-12">
+        <div class="main_heading">
+            <h1 style="color: #ffdf00">Profile</h1>
+            <div class="text-center"><span class="underline"
+                                           style="background-color: #ffdf00!important; width: 150px"></span></div>
         </div>
-        <br>
-        <hr>
-        <div class="row">
-            <div class="col-lg-2">
-            </div>
-            <div class="card col-lg-8">
-                <div class="card-header"
-                     style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
-                    <div class="row">
-                        <img src="{% static 'images/user_profile.png' %}" width="70px" height="70px">
-                        <h2 class="align-self-center">&nbsp&nbspProfile Settings</h2>
-                    </div>
+    </div><!-- End col-md-12 -->
+</div>
+<div class="profile">
+    <div class="row justify-content-start">
+        <div class=col-sm-5"" style="padding-top: 18px; padding-right: 30px; padding-left: 30px;
+            background-color: #ffdf00; box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19); margin-left: 20px">
+            <p style="font-size: 50px; color: black; text-align: center">{{ user.username|slice:":1" }}</p>
+        </div>
+        <h3 class="text" style="color: #ffdf00; margin-top: 30px"> &nbsp&nbsp{{ user.first_name }}&nbsp{{ user.last_name }}</h3>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="card col-lg-8" style="background-color: black">
+            <div class="card-header"
+                 style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
+                <div class="row">
+                    <img src="{% static 'images/user.png' %}" width="70px" height="70px"
+                         style="background-color: black">
+                    <h2 class="align-self-center" style="color: #ffdf00">&nbsp&nbspProfile Settings</h2>
                 </div>
-                <div class="card-body">
-                    <form action="/update_profile/" method="post" class="form">
-                        {% csrf_token %}
-                        <table style="width: 100%">
-                            <tr class="form-group">
-                                <td>Email</td>
-                                {#                            <td class="col-lg-1"></td>#}
-                                <td><input type="text" name="email" value="{{ user.email }}"
-                                           class="profile-input form-control" readonly></td>
-                            </tr>
-                            <tr class="form-group">
-                                <td>First Name</td>
-                                <td><input type="text" name="first_name" value="{{ user.first_name }}"
-                                           id="input1" class="profile-input form-control" readonly required></td>
-                                <td><i class="fa fa-edit" id="btn1" style="color: black; margin-left: 20px"></i></td>
-                            </tr>
-                            {#                            <tr>#}
-                            {#                                <p>{{ first_name_error }}</p>#}
-                            {#                            </tr>#}
-                            <tr class="form-group">
-                                <td>Last Name</td>
-                                <td><input type="text" name="last_name" value="{{ user.last_name }}"
-                                           id="input2" class="profile-input form-control" required readonly></td>
-                                <td><i class="fa fa-edit" id="btn2" style="color: black; margin-left: 20px"></i></td>
-                            </tr>
-                            {#                            <tr>#}
-                            {#                                <p>{{ last_name_error }}</p>#}
-                            {#                            </tr>#}
-                            <tr class="form-group">
-                                <td>Username</td>
-                                <td><input type="text" name="username" value="{{ user.username }}"
-                                           id="input3" class="profile-input form-control" required readonly></td>
-                                <td><i class="fa fa-edit" id="btn3" style="color: black; margin-left: 20px"></i></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
+            </div>
+            <div class="card-body">
+                <form action="/update_profile/" method="post" class="form">
+                    {% csrf_token %}
+                    <table style="width: 100%">
+                        <tr class="form-group">
+                            <td style="color: #ffdf00">Email</td>
+                            <td><input type="text" name="email" value="{{ user.email }}"
+                                       class="profile-input form-control" readonly></td>
+                        </tr>
+                        <tr class="form-group">
+                            <td style="color: #ffdf00">First Name</td>
+                            <td><input type="text" name="first_name" value="{{ user.first_name }}"
+                                       id="input1" class="profile-input form-control" readonly required></td>
+                            <td><i class="fa fa-edit" id="btn1" style="color: #ffdf00; margin-left: 20px"></i></td>
+                        </tr>
+                        <tr class="form-group">
+                            <td style="color: #ffdf00">Last Name</td>
+                            <td><input type="text" name="last_name" value="{{ user.last_name }}"
+                                       id="input2" class="profile-input form-control" required readonly></td>
+                            <td><i class="fa fa-edit" id="btn2" style="color: #ffdf00; margin-left: 20px"></i></td>
+                        </tr>
+                        <tr class="form-group">
+                            <td style="color: #ffdf00">Username</td>
+                            <td><input type="text" name="username" value="{{ user.username }}"
+                                       id="input3" class="profile-input form-control" required readonly></td>
+                            <td><i class="fa fa-edit" id="btn3" style="color: #ffdf00; margin-left: 20px"></i></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
                                   <span><br><div>
                                 <button type="submit"
                                         style="background-color: #ffdf00; color: black; border: 0; border-radius: 5px; padding: 10px">
                                     <i class="fa fa-check" style="background-color: #ffdf00">&nbspSubmit</i>
                                 </button>
                             </div></span>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
         </div>
     </div>
-    <div class="profile">
-        <hr>
-        <div class="row">
-            <div class="col-lg-2">
-            </div>
-            <div class="card col-lg-8">
-                <div class="card-header"
-                     style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
-                    <div class="row">
-                        <img src="{% static 'images/address.png' %}" width="70px" height="70px">
-                        <h2 class="align-self-center">&nbsp&nbspAddress Settings</h2>
-                    </div>
+</div>
+<div class="profile">
+    <hr>
+    <div class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="card col-lg-8" style="background-color: black">
+            <div class="card-header"
+                 style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);">
+                <div class="row">
+                    <img src="{% static 'images/addr.png' %}" width="70px" height="70px">
+                    <h2 class="align-self-center" style="color: #ffdf00">&nbsp&nbspAddress Settings</h2>
                 </div>
-                <div class="card-body">
-                    {% for address in addresses %}
-                        <div class="row address-box">
-                            <div class="col-2">
-                                <h5>Address {{ forloop.counter }}</h5>
-                            </div>
-                            <div class="col-1">
-
-                            </div>
-                            <div style="width: 500px;">
-                                <strong>{{ address.first }}&nbsp;{{ address.last }}</strong><br>
-                                <small class="text-muted">{{ address.street }}</small><br>
-                                <small class="text-muted">{{ address.street2 }}</small><br>
-                                <small class="text-muted">{{ address.city }}&nbsp;{{ address.region }}</small><br>
-                                <small class="text-muted">{{ address.pin }}</small>
-                                <b>Mobile : {{ address.mobile }}</b>
-                            </div>
+            </div>
+            <div class="card-body">
+                {% for address in addresses %}
+                <div class="row address-box">
+                    <div class="col-12">
+                        <h5 style="color: #ffdf00">Address {{ forloop.counter }}</h5>
+                    </div>
+                    <div class="col-1">
+                    </div>
+                    <div style="width: 500px; color: #ffdf00">
+                        <div class="row justify-content-between" style="width: 100%;">
+                            <strong>{{ address.first }}&nbsp;{{ address.last }}</strong>
                             <div class="justify-content-end">
                                 <form action="/delete_address/" method="post" class="form">
                                     {% csrf_token %}
@@ -191,62 +171,73 @@
                                 </form>
                             </div>
                         </div>
-                        <br>
-                    {% endfor %}
-                    <hr>
-                    {#                <div class="card-header">#}
+                        <p class="text-muted" style="margin: 0; color: #ffdf00">{{ address.street }}</p>
+                        <p class="text-muted" style="margin: 0; color: #ffdf00">{{ address.street2 }}</p>
+                        <p class="text-muted" style="margin: 0; color: #ffdf00">{{ address.city }}&nbsp;{{ address.region }}</p>
+                        <p class="text-muted" style="margin: 0; color: #ffdf00">{{ address.pincode }}</p><br>
+                        <b>Mobile : {{ address.mobile }}</b>
+                    </div>
+
+                </div>
+                <br>
+                {% endfor %}
+                <hr>
+                <div class="card-header">
                     <div class="container pt-4 col-lg-12">
-                        <img src="{% static 'images/add_address.png' %}" width="30px" height="30px">
-                        <h5 style="color: black; padding-top: 2px; padding-bottom: 7px">
-                            &nbsp;&nbsp;Or Add a new address</h5>
+                        <div class="row">
+                            <img src="{% static 'images/add_addr.png' %}" width="30px" height="30px">
+                            <h5 style="color: #ffdf00; padding-top: 2px; padding-bottom: 7px">&nbsp;Or Add a new
+                                address</h5>
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="row mx-0">
                                     <div class="col-12">
-                                        <label class="order-form-label">Name</label>
+                                        <label class="order-form-label" style="color: #ffdf00">Name</label>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input class="order-form-input" placeholder="First" name="first" required
-                                               form="address_form">
+                                        <input class="order-form-input" placeholder="First Name" name="first" required
+                                               form="address_form" style="background-color: white">
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input class="order-form-input" placeholder="Last" name="last" required
-                                               form="address_form">
+                                        <input class="order-form-input" placeholder="Last Name" name="last" required
+                                               form="address_form" style="background-color: white">
                                     </div>
                                 </div>
 
                                 <div class="row mt-1 mx-0">
                                     <div class="col-12">
-                                        <label class="order-form-label">Address</label>
+                                        <label class="order-form-label" style="color: #ffdf00">Address</label>
                                     </div>
                                     <div class="col-12">
                                         <input class="order-form-input" placeholder="Street Address" name="street"
-                                               required form="address_form">
+                                               required form="address_form" style="background-color: white">
                                     </div>
                                     <div class="col-12 mt-2">
                                         <input class="order-form-input" placeholder="Street Address Line 2"
-                                               name="street2" required form="address_form">
+                                               name="street2" style="background-color: white" required
+                                               form="address_form">
                                     </div>
                                     <div class="col-12 col-sm-6 mt-2 pr-sm-2">
                                         <input class="order-form-input" placeholder="City" name="city" required
-                                               form="address_form">
+                                               form="address_form" style="background-color: white">
                                     </div>
                                     <div class="col-12 col-sm-6 mt-2 pl-sm-0">
                                         <input class="order-form-input" placeholder="Region" name="region" required
-                                               form="address_form">
+                                               form="address_form" style="background-color: white">
                                     </div>
                                     <div class="col-12 col-sm-12 mt-2 pr-sm-12">
                                         <input class="order-form-input" placeholder="Postal / Zip Code" name="pin"
-                                               required form="address_form">
+                                               required form="address_form" style="background-color: white">
                                     </div>
                                 </div>
                                 <div class="row mt-1 mx-0">
                                     <div class="col-12">
-                                        <label class="order-form-label">Mobile Number</label>
+                                        <label class="order-form-label" style="color: #ffdf00">Mobile Number</label>
                                     </div>
                                     <div class="col-12">
                                         <input class="order-form-input" placeholder="+91" name="mobile" required
-                                               form="address_form">
+                                               form="address_form" style="background-color: white">
                                     </div>
                                 </div>
 
@@ -271,9 +262,9 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
 
-{% block script %}
+    {% block script %}
     <script>
         document.getElementById('btn1').onclick = function () {
             document.getElementById('input1').removeAttribute('readonly')
@@ -287,4 +278,4 @@
             document.getElementById('input3').removeAttribute('readonly')
         }
     </script>
-{% endblock %}
+    {% endblock %}
