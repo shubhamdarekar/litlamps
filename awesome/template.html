@@ -33,7 +33,7 @@
 
     <!-- Header and carousel CSS -->
     <style>
-        a:link{
+        a:link {
             color: #ffdf00 !important;
         }
 
@@ -345,6 +345,7 @@
             .nav-img {
                 max-height: 40px;
             }
+
             #razorpay {
                 width: 150px;
             }
@@ -414,6 +415,10 @@
             z-index: 1031; /*z-index of standard bootstrap navbar is 1030*/
             background: rgba(0, 0, 0, .6);
         }
+
+        .second-nav {
+            height: 50px
+        }
     </style>
     <script type="text/javascript">
         function openSideDrawer() {
@@ -431,6 +436,30 @@
 </head>
 
 <body>
+
+<!-- Navbar 2 -->
+<nav class="navbar navbar-expand-sm navbar-dark second-nav" style="background-color: white">
+    {#    <a class="navbar-brand" href="#"></a>#}
+    {#    <ul class="nav container justify-content-center" id="mynavbar2">#}
+    {#        <li class="nav-item">#}
+    {#            <a class="nav-link-2" href="#bestSelling">Best Seller</a>#}
+    {#        </li>#}
+    {#        <li class="nav-item">#}
+    {#            <a class="nav-link-2" href="#features">Features</a>#}
+    {#        </li>#}
+    {#        <li class="nav-item">#}
+    {#            <a class="nav-link-2" href="#reviews">Reviews</a>#}
+    {#        </li>#}
+    {#        <li class="nav-item">#}
+    {#            <a class="nav-link-2" href="#FAQs">FAQs</a>#}
+    {#        </li>#}
+    {#    </ul>#}
+    <marquee style="color: black" width="60%" class="mx-auto"> 50% discount on all products! <a href="/products"
+                                                                                                style="color: red">Click
+        Here</a> to order.....
+    </marquee>
+</nav>
+<!-- Navbar 2 end-->
 
 <!-- Navbar 1 -->
 <nav class="navbar">
@@ -515,28 +544,28 @@
 <div id="side-drawer" class="position-fixed">
     <div class="h-100" style="background-color: black">
         <button type="button" class="close ml-0" onclick="closeSideDrawer()" style="color: #ffdf00"><span
-                        aria-hidden="true">&times;</span>
-                </button>
+                aria-hidden="true">&times;</span>
+        </button>
         <!-- Side Drawer Links -->
         <ul id="links" class="list-group ml-2" style="background-color: black" onclick="closeSideDrawer()">
-        <br>
-        <br>
-                <li title="Products" class="nav-item">
-                    <a href="/products"><i class="fa fa-gift fa-3x"></i>&nbsp;All Products</a>
-                </li>
+            <br>
+            <br>
+            <li title="Products" class="nav-item">
+                <a href="/products"><i class="fa fa-gift fa-3x"></i>&nbsp;All Products</a>
+            </li>
+            <li title="Contact Us" class="nav-item">
+                <a data-toggle="modal" data-target="#myModal3" href="#"><i
+                        class="fa fa-envelope-o fa-3x"></i>&nbsp;Contact Us</a>
+            </li>
+            {% if user.is_authenticated %}
                 <li title="Contact Us" class="nav-item">
-                    <a data-toggle="modal" data-target="#myModal3" href="#"><i
-                            class="fa fa-envelope-o fa-3x"></i>&nbsp;Contact Us</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li title="Contact Us" class="nav-item">
                     <a href="/profile/"><i class="fa fa-user fa-3x"></i>&nbsp;Your profile</a>
                 </li>
-                    <li title="Contact Us" class="nav-item">
+                <li title="Contact Us" class="nav-item">
                     <a href="/orders/"><i class="fa fa-shopping-cart fa-3x"></i>&nbsp;Your orders</a>
                 </li>
-                {% endif %}
-            </ul>
+            {% endif %}
+        </ul>
 
         </ul>
     </div>
@@ -566,7 +595,7 @@
                     </thead>
                     <tbody>
                     {% for cartitem in cart %}
-                        <tr>
+                        <tr id="cartitem{{ cartitem.id }}">
                             <td>
                                 <figure class="itemside align-items-center">
                                     <div class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm"
@@ -598,14 +627,9 @@
 
                                 {# <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light"></a>#}
                                 {# data-toggle="tooltip"> <i class="fa fa-heart"></i></a>#}
-                                <form action="/remove_from_cart/" method="post">
-                                    {% csrf_token %}
-                                    <input type="type" hidden name="next" value="{{ request.path }}">
-                                    <input type="text" hidden name="id" value="{{ cartitem.id }}">
-                                    <button class="btn btn-danger" type="submit">
-                                        Remove
-                                    </button>
-                                </form>
+                                <button class="btn btn-danger" onclick="ajaxRemove({{ cartitem.id }})">
+                                    Remove
+                                </button>
                                 {# <a href="" class="btn btn-light"> Remove</a>#}
                             </td>
                         </tr>
@@ -649,7 +673,8 @@
 <!-- Footer -->
 <footer class="footer" style="background-color: black !important;">
     <div class="container bottom_border">
-        <div class="row justify-content-lg-around justify-content-md-around justify-content-sm-around mx-auto" style="width: 100%;">
+        <div class="row justify-content-lg-around justify-content-md-around justify-content-sm-around mx-auto"
+             style="width: 100%;">
             <div style="margin-right: 50px">
                 <div class="row justify-content-between">
                     <i class="fa fa-credit-card" style="color: #ffdf00"> Payments Via:</i>
@@ -667,9 +692,11 @@
                 <br/>
                 <div class="row justify-content-end">
                     <a href="https://www.facebook.com/LIT_Lamps-100686534898738/"><img
-                            src="{% static 'images/facebook.png' %}" width="50px" height="50px" style="margin-right: 20px; border-radius: 5px"/></a>
+                            src="{% static 'images/facebook.png' %}" width="50px" height="50px"
+                            style="margin-right: 20px; border-radius: 5px"/></a>
                     <a href="https://www.instagram.com/lit_lamps__?r=nametag"><img
-                            src="{% static 'images/instagram.png' %}" width="50px" height="50px" style="margin-right: 20px"/></a>
+                            src="{% static 'images/instagram.png' %}" width="50px" height="50px"
+                            style="margin-right: 20px"/></a>
                 </div>
             </div>
         </div>
@@ -700,6 +727,21 @@
 
 <script>
     new WOW().init();
+</script>
+<script>
+    function ajaxRemove(cartId) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                abc = JSON.parse(this.responseText)
+                if(abc.deleted == true){
+                    document.getElementById("cartitem"+cartId).style.display = "none";
+                }
+            }
+        };
+        xhttp.open("GET", "/removeFromCartajax?id="+cartId, true);
+        xhttp.send();
+    }
 </script>
 {% block script %}
 {% endblock script %}
