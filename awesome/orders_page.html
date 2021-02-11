@@ -276,10 +276,17 @@
 {% endblock %}
 
 {% block content %}
+<div class="row mx-auto">
+    <div class="col-md-12">
+        <div class="main_heading">
+            <h1 style="color: #ffdf00">Your Orders</h1>
+            <div class="text-center"><span class="underline"
+                                           style="background-color: #ffdf00!important; width: 150px"></span></div>
+        </div>
+    </div><!-- End col-md-12 -->
+</div>
 
-
-    <div class="container-xl mx-auto" style="background-color: black">
-    <br><br><br><br>
+    <div class="container-xl mx-auto" style="background-color: black"> 
     {% for order_item in orders %}
         <div class="container my-3" style="border-style: solid;
   border-width: 2px;">
