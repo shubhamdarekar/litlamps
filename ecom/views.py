@@ -1,6 +1,6 @@
 import razorpay
 from django.db.models import Sum, F, FloatField
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.db import connection
@@ -142,6 +142,17 @@ def remove_from_cart(request):
         return redirect('/')
 
 
+def remove_from_cart_ajax(request):
+        if request.method == 'GET':
+            if request.GET['id']:
+                id = request.GET['id']
+                obj = Cart.objects.filter(id=id)
+                p_id = obj[0].product_id
+                obj.delete()
+                return JsonResponse({"deleted": True}, status=200)
+        return JsonResponse({"deleted": False}, status=400)
+
+
 def profile(request):
     if request.user.is_authenticated:
         address = Address.objects.filter(customer_id=request.user.id)
@@ -172,7 +183,7 @@ def update_profile(request):
 def create_razorpay_order(request):
     if request.method == 'POST' and request.POST['type'] == 'cart':
         order_address_id = request.POST['address_id']
-        order_address = Address.objects.get(id=order_address_id).address
+        order_address = Address.objects.get(id=order_address_id)
         # Find total price
         total_price = Cart.objects.filter(customer_id=request.user.id).aggregate(
             sumtotal=Sum(F('product__product_price_rupees') * F('quantity'), output_field=FloatField()))
@@ -180,7 +191,7 @@ def create_razorpay_order(request):
 
         # Make razorpay order
         order_currency = 'INR'
-        notes = {'shipping_address': order_address, 'amount': order_amount}
+        notes = {'shipping_address': order_address.id, 'amount': order_amount}
         temp_client = razorpay.Client(auth=("rzp_test_XgSvcOhAnzdFER", "4gwNXfK8dXaeAkkKAKGIByhT"))
         data = {'amount': order_amount * 100, 'currency': order_currency, 'notes': notes,
                 'payment_capture': '1'}
@@ -205,18 +216,18 @@ def create_razorpay_order(request):
             new_order_item.color = item.color
             new_order_item.save()
         payment['rupee'] = order_amount
-        return render(request, 'payment_completion.html', {'payment': payment})
+        return render(request, 'payment_completion.html', {'payment': payment, 'order_address': order_address})
 
     if request.method == 'POST' and request.POST['type'] == 'buy_now':
         order_address_id = request.POST['address_id']
         product_id = request.POST['product_id']
         color = request.POST['color']
-        order_address = Address.objects.get(id=order_address_id).address
+        order_address = Address.objects.get(id=order_address_id)
         # Find total price
         order_amount = Product.objects.get(id=product_id).product_price_rupees
         # Make razorpay order
         order_currency = 'INR'
-        notes = {'shipping_address': order_address, 'amount': order_amount}
+        notes = {'shipping_address': order_address.id, 'amount': order_amount}
         temp_client = razorpay.Client(auth=("rzp_test_XgSvcOhAnzdFER", "4gwNXfK8dXaeAkkKAKGIByhT"))
         data = {'amount': order_amount * 100, 'currency': order_currency, 'notes': notes,
                 'payment_capture': '1'}
@@ -238,7 +249,7 @@ def create_razorpay_order(request):
         new_order_item.color = color
         new_order_item.save()
         payment['rupee'] = order_amount
-        return render(request, 'payment_completion.html', {'payment': payment})
+        return render(request, 'payment_completion.html', {'payment': payment, 'order_address': order_address})
 
 
 def success_redirect(request):
