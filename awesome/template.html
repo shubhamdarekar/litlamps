@@ -345,6 +345,9 @@
             .nav-img {
                 max-height: 40px;
             }
+            #razorpay {
+                width: 150px;
+            }
         }
 
     </style>
@@ -433,7 +436,7 @@
 <nav class="navbar">
     <div class="container-fluid">
         <i class="fa fa-bars fa-2x" type="button" onclick="openSideDrawer()" style="color: #ffdf00"></i>
-        <a class="navbar-brand mx-auto" href="/"><img class="nav-img" src="{% static 'images/logo-full.png' %}"
+        <a class="navbar-brand ml-5" href="/"><img class="nav-img" src="{% static 'images/logo-full.png' %}"
                                                       height="auto" width="auto"></a>
         <ul class="nav">
             {% if user.is_authenticated %}
@@ -516,20 +519,6 @@
                 </button>
         <!-- Side Drawer Links -->
         <ul id="links" class="list-group ml-2" style="background-color: black" onclick="closeSideDrawer()">
-{#            <a id="link-structure" href="#" class="list-group-item list-group-item-action border-0 rounded-0 active">#}
-{#                Works#}
-{#            </a>#}
-{#            <a id="link-css" href="#" class="list-group-item list-group-item-action border-0 rounded-0">#}
-{#                About#}
-{#            </a>#}
-{#            <a id="link-javascript" href="#" class="list-group-item list-group-item-action border-0 rounded-0">#}
-{#                Contact#}
-{#            </a>#}
-{#            <a id="link-customization" href="#customization"#}
-{#               class="list-group-item list-group-item-action border-0 rounded-0">#}
-{#                Blog#}
-{#            </a>#}
-
         <br>
         <br>
                 <li title="Products" class="nav-item">
@@ -632,60 +621,6 @@
     </div><!-- modal-dialog -->
 </div>
 <!-- modal cart end-->
-<!-- Modal login -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-full" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="d-flex justify-content-center h-100">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Sign In</h3>
-                            <div class="d-flex justify-content-end social_icon" style="cursor: pointer;"
-                                 onclick="window.location='{% provider_login_url 'google' %}';">
-
-                                <span><i class="fa fa-google-plus-square"></i></span>
-
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="username">
-
-                                </div>
-                                <div class="input-group form-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-key"></i></span>
-                                    </div>
-                                    <input type="password" class="form-control" placeholder="password">
-                                </div>
-                                <div class="row align-items-center remember">
-                                    <input type="checkbox">Remember Me
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Login" class="btn float-right login_btn">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-flex justify-content-center links">
-                                <a href="#">Sign Up</a>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <a href="#">Forgot your password?</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal login end-->
 
 <!-- Modal contact us -->
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
@@ -714,15 +649,15 @@
 <!-- Footer -->
 <footer class="footer" style="background-color: black !important;">
     <div class="container bottom_border">
-        <div class="row justify-content-lg-around justify-content-md-around justify-content-sm-around">
-            <div>
+        <div class="row justify-content-lg-around justify-content-md-around justify-content-sm-around mx-auto" style="width: 100%;">
+            <div style="margin-right: 50px">
                 <div class="row justify-content-between">
                     <i class="fa fa-credit-card" style="color: #ffdf00"> Payments Via:</i>
                 </div>
                 <br/>
                 <div class="row justify-content-start">
-                    <img src="{% static 'images/razorpay.png' %}" width="200px" height="50px"
-                         onclick="location.href='https://razorpay.com/docs/payment-gateway/payment-methods/    '">
+                    <img src="{% static 'images/razorpay.png' %}" id="razorpay" width="200px" height="50px"
+                         onclick="location.href='https://razorpay.com/docs/payment-gateway/payment-methods/'">
                 </div>
             </div>
             <div>
@@ -730,11 +665,11 @@
                     <i class="fa fa-share-square-o" style="color: #ffdf00"> Follow Us:</i>
                 </div>
                 <br/>
-                <div class="row justify-content-center">
-                    <li><a href="https://www.facebook.com/LIT_Lamps-100686534898738/"><img
-                            src="{% static 'images/facebook.png' %}" width="50px" height="50px"/></a></li>
-                    <li><a href="https://www.instagram.com/lit_lamps__?r=nametag"><img
-                            src="{% static 'images/instagram.png' %}" width="50px" height="50px"/></a></li>
+                <div class="row justify-content-end">
+                    <a href="https://www.facebook.com/LIT_Lamps-100686534898738/"><img
+                            src="{% static 'images/facebook.png' %}" width="50px" height="50px" style="margin-right: 20px; border-radius: 5px"/></a>
+                    <a href="https://www.instagram.com/lit_lamps__?r=nametag"><img
+                            src="{% static 'images/instagram.png' %}" width="50px" height="50px" style="margin-right: 20px"/></a>
                 </div>
             </div>
         </div>
