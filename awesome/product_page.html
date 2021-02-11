@@ -1,253 +1,219 @@
 {% extends "template.html" %}
 {% load static %}
-{% block title %}Products{% endblock %}
+{% block title %}{{ product_details.product_name }}{% endblock %}
 
 
 {% block style %}
-    <style>
-        .gallery-wrap .img-big-wrap img {
-            height: auto;
-            width: 100%;
-            max-height: 500px;
-            display: inline-block;
-            cursor: zoom-in;
-        }
+<style>
+    .gallery-wrap .img-big-wrap img {
+        height: auto;
+        width: 100%;
+        max-height: 500px;
+        display: inline-block;
+        cursor: zoom-in;
+    }
 
-        aside {
-            background-color: black;
-        }
+    aside {
+        background-color: black;
+    }
 
 
-        .gallery-wrap .img-small-wrap .item-gallery {
-            width: 60px;
-            height: 60px;
-            border: 1px solid #ddd;
-            margin: 7px 2px;
-            display: inline-block;
-            overflow: hidden;
-        }
+    .gallery-wrap .img-small-wrap .item-gallery {
+        width: 60px;
+        height: 60px;
+        border: 1px solid #ddd;
+        margin: 7px 2px;
+        display: inline-block;
+        overflow: hidden;
+    }
 
-        .gallery-wrap .img-small-wrap {
-            text-align: center;
-        }
+    .gallery-wrap .img-small-wrap {
+        text-align: center;
+    }
 
-        .gallery-wrap .img-small-wrap img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-            cursor: zoom-in;
-        }
+    .gallery-wrap .img-small-wrap img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: zoom-in;
+    }
 
-        .bottom-buttons {
-            position: -webkit-sticky; /* Safari */
-            position: sticky;
-            bottom: 0
-        }
+    .bottom-buttons {
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        bottom: 0
+    }
 
-        [type=radio] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
+    [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
 
-        }
+    }
 
-        /* IMAGE STYLES */
-        [type=radio] + img {
-            cursor: pointer;
+    /* IMAGE STYLES */
+    [type=radio] + img {
+        cursor: pointer;
 
-        }
+    }
 
-        /* CHECKED STYLES */
-        [type=radio]:checked + img {
-            outline: 2px solid #f00;
-        }
+    /* CHECKED STYLES */
+    [type=radio]:checked + img {
+        outline: 2px solid #f00;
+    }
 
-        .pointers:hover {
-            cursor: pointer;
-        }
-    </style>
+    .pointers:hover {
+        cursor: pointer;
+    }
+</style>
 {% endblock %}
 
 
 {% block content %}
 
-    <div class="container">
+<div class="container">
 
-        <div class="row justify-content-center mx-auto" style="background-color: black">
-            <aside class="col-lg-5 border">
-                <br>
-                <article class="gallery-wrap">
-                    <div class="col-lg-12">
-                        <div class="img-big-wrap">
-                            <div><a href="#"><img id="myImage" src="{{ product_details.image_path }}"></a></div>
-                        </div> <!-- slider-product.// -->
-                    </div>
-                    <br>
-                    <div class="img-small-wrap justify-content-around">
-                        <div class="item-gallery"
-                             onclick="document.getElementById('myImage').src='{{ product_details.image_path }}'">
-                            <img class="pointers" src="{{ product_details.image_path }}"></div>
-                        {% if product_details.image_path_2 != None %}
-                            <div class="item-gallery"
-                                 onclick="document.getElementById('myImage').src='{{ product_details.image_path_2 }}'">
-                                <img class="pointers" src="{{ product_details.image_path_2 }}"
-                                     onclick="document.getElementById('myImage').src='{{ product_details.image_path_2 }}'">
-                            </div>
-                        {% endif %}
-                        {% if product_details.image_path_3 != None %}
-                            <div class="item-gallery"
-                                 onclick="document.getElementById('myImage').src='{{ product_details.image_path_3 }}'">
-                                <img class="pointers" src="{{ product_details.image_path_3 }}"
-                                     onclick="document.getElementById('myImage').src='{{ product_details.image_path_3 }}'">
-                            </div>
-                        {% endif %}
-                        {% if product_details.image_path_4 != None %}
-                            <div class="item-gallery"
-                                 onclick="document.getElementById('myImage').src='{{ product_details.image_path_4 }}'">
-                                <img class="pointers" src="{{ product_details.image_path_4 }}"
-                                     onclick="document.getElementById('myImage').src='{{ product_details.image_path_4 }}'">
-                            </div>
-                        {% endif %}
-                    </div> <!-- slider-nav.// -->
-                </article> <!-- gallery-wrap .end// -->
-                <div class="row col-12 justify-content-center">
-                    <dt class="col-12 row justify-content-center" style=" color: #ffdf00">Available Colors For Base</dt>
-                    <form class="form" id="myForm" method="post" action="/add_to_cart/">
-                        {% csrf_token %}
-                        <input type="text" hidden value="{{ product_details.id }}" name="id">
-                        <div class="row" style="margin-top: 10px">
-                            <label class="form-group">
-                                <input type="radio" id="red" name="color" value="red" checked
-                                       onblur="document.getElementById('colorBuy').value = this.value;"
-                                >
-                                <img src="{% static 'images/red.jpeg' %}" width="75px" height="75px"
-                                     style="border-radius: 37px">
-                            </label>
-                            <label class="form-group">
-                                <input type="radio" id="wooden" name="color" value="wooden"
-                                       onblur="document.getElementById('colorBuy').value = this.value;"
-                                >
-                                <img src="{% static 'images/wooden.jpeg' %}" width="75px" height="75px"
-                                     style="border-radius: 37px; margin-left: 8px">
-                            </label>
-                            <label class="form-group">
-                                <input type="radio" id="black" name="color" value="black"
-                                       onblur="document.getElementById('colorBuy').value = this.value;"
-                                >
-                                <img src="{% static 'images/black.jpeg' %}" width="75px" height="75px"
-                                     style="border-radius: 37px; margin-left: 8px">
-                            </label>
-                        </div>
-                    </form>
+    <div class="row justify-content-center mx-auto" style="background-color: black">
+        <aside class="col-lg-5 border">
+            <br>
+            <article class="gallery-wrap">
+                <div class="col-lg-12">
+                    <div class="img-big-wrap">
+                        <div><a href="#"><img id="myImage" src="{{ product_details.image_path }}"></a></div>
+                    </div> <!-- slider-product.// -->
                 </div>
-            </aside>
-            <aside class="col-lg-6 border ml-0">
-                <article class="card-body">
-                    <h2 class="title mb-3" style="color: #ffdf00">{{ product_details.product_name }}</h2>
+                <br>
+                <div class="img-small-wrap justify-content-around">
+                    <div class="item-gallery"
+                         onclick="document.getElementById('myImage').src='{{ product_details.image_path }}'">
+                        <img class="pointers" src="{{ product_details.image_path }}"></div>
+                    {% if product_details.image_path_2 != None %}
+                    <div class="item-gallery"
+                         onclick="document.getElementById('myImage').src='{{ product_details.image_path_2 }}'">
+                        <img class="pointers" src="{{ product_details.image_path_2 }}"
+                             onclick="document.getElementById('myImage').src='{{ product_details.image_path_2 }}'">
+                    </div>
+                    {% endif %}
+                    {% if product_details.image_path_3 != None %}
+                    <div class="item-gallery"
+                         onclick="document.getElementById('myImage').src='{{ product_details.image_path_3 }}'">
+                        <img class="pointers" src="{{ product_details.image_path_3 }}"
+                             onclick="document.getElementById('myImage').src='{{ product_details.image_path_3 }}'">
+                    </div>
+                    {% endif %}
+                    {% if product_details.image_path_4 != None %}
+                    <div class="item-gallery"
+                         onclick="document.getElementById('myImage').src='{{ product_details.image_path_4 }}'">
+                        <img class="pointers" src="{{ product_details.image_path_4 }}"
+                             onclick="document.getElementById('myImage').src='{{ product_details.image_path_4 }}'">
+                    </div>
+                    {% endif %}
+                </div> <!-- slider-nav.// -->
+            </article> <!-- gallery-wrap .end// -->
+            <div class="row col-12 justify-content-center">
+                <dt class="col-12 row justify-content-center" style=" color: #ffdf00">Available Colors For Base</dt>
+                <form class="form" id="myForm" method="post" action="/add_to_cart/">
+                    {% csrf_token %}
+                    <input type="text" hidden value="{{ product_details.id }}" name="id">
+                    <div class="row" style="margin-top: 10px">
+                        <label class="form-group">
+                            <input type="radio" id="red" name="color" value="red" checked
+                                   onblur="document.getElementById('colorBuy').value = this.value;"
+                            >
+                            <img src="{% static 'images/red.jpeg' %}" width="75px" height="75px"
+                                 style="border-radius: 37px">
+                        </label>
+                        <label class="form-group">
+                            <input type="radio" id="wooden" name="color" value="wooden"
+                                   onblur="document.getElementById('colorBuy').value = this.value;"
+                            >
+                            <img src="{% static 'images/wooden.jpeg' %}" width="75px" height="75px"
+                                 style="border-radius: 37px; margin-left: 8px">
+                        </label>
+                        <label class="form-group">
+                            <input type="radio" id="black" name="color" value="black"
+                                   onblur="document.getElementById('colorBuy').value = this.value;"
+                            >
+                            <img src="{% static 'images/black.jpeg' %}" width="75px" height="75px"
+                                 style="border-radius: 37px; margin-left: 8px">
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </aside>
+        <aside class="col-lg-6 border ml-0">
+            <article class="card-body">
+                <h2 class="title mb-3" style="color: #ffdf00">{{ product_details.product_name }}</h2>
 
-                    <p class="price-detail-wrap" style="color: #ffdf00">
+                <p class="price-detail-wrap" style="color: #ffdf00">
 	<span class="price h5 text-warning">
 		<span class="currency">RS ₹</span><span class="num">{{ product_details.product_price_rupees }}</span>
 	</span>
-                        <span>/per piece</span>
-                    </p> <!-- price-detail-wrap .// -->
-                    <dl class="item-property">
-                        <dt style="color: #ffdf00">Description</dt>
-                        <dd><p style="color: #ffdf00">{{ product_details.product_desc }} </p></dd>
-                    </dl>
+                    <span>/per piece</span>
+                </p> <!-- price-detail-wrap .// -->
+                <dl class="item-property">
+                    <dt style="color: #ffdf00">Description</dt>
+                    <dd><p style="color: #ffdf00">{{ product_details.product_desc }} </p></dd>
+                </dl>
 
-                    <dl class="param param-feature">
-                        <dt style="color: #ffdf00">Dimensions</dt>
-                        <dd style="color: #ffdf00">Length: 6 Inches (Base Diameter)<br>Height: 9 Inches</dd>
-                    </dl>  <!-- item-property-hor .// -->
-                    <dl class="param param-feature">
-                        <dt style="color: #ffdf00">Power</dt>
-                        <dd style="color: #ffdf00">12 Volts</dd>
-                    </dl>  <!-- item-property-hor .// -->
-                    <dl class="param param-feature">
-                        <dt style="color: #ffdf00">Warranty</dt>
-                        <dd style="color: #ffdf00">1 Year for Adapter</dd>
-                    </dl>  <!-- item-property-hor .// -->
-                    <dl class="param padram-feature">
-                        <dt style="color: #ffdf00">Delivery</dt>
-                        <dd style="color: #ffdf00">Free Shipping All over India</dd>
-                    </dl>  <!-- item-property-hor .// -->
+                <dl class="param param-feature">
+                    <dt style="color: #ffdf00">Dimensions</dt>
+                    <dd style="color: #ffdf00">Length: 6 Inches (Base Diameter)<br>Height: 9 Inches</dd>
+                </dl>  <!-- item-property-hor .// -->
+                <dl class="param param-feature">
+                    <dt style="color: #ffdf00">Power</dt>
+                    <dd style="color: #ffdf00">12 Volts</dd>
+                </dl>  <!-- item-property-hor .// -->
+                <dl class="param param-feature">
+                    <dt style="color: #ffdf00">Warranty</dt>
+                    <dd style="color: #ffdf00">1 Year for Adapter</dd>
+                </dl>  <!-- item-property-hor .// -->
+                <dl class="param padram-feature">
+                    <dt style="color: #ffdf00">Delivery</dt>
+                    <dd style="color: #ffdf00">Free Shipping All over India</dd>
+                </dl>  <!-- item-property-hor .// -->
 
-                    <hr>
-                    {#                        <div class="row">#}
-                    {#                            <div class="col-sm-7">#}
-                    {#                                <dl class="param param-inline">#}
-                    {#                                    <dt style=" color: #ffdf00">Available Color</dt>#}
-                    {#                                    <form class="form" id="myForm" method="post" action="/add_to_cart/">#}
-                    {#                                        {% csrf_token %}#}
-                    {#                                        <input type="text" hidden value="{{ product_details.id }}" name="id">#}
-                    {#                                        <div class="row" style="margin-top: 10px">#}
-                    {#                                            <label class="form-group">#}
-                    {#                                                <input type="radio" id="red" name="color" value="red" checked#}
-                    {#                                                       onblur="document.getElementById('colorBuy').value = this.value;"#}
-                    {#                                                >#}
-                    {#                                                <img src="{% static 'images/red.jpeg' %}" width="100px" height="100px"#}
-                    {#                                                     style="border-radius: 25px">#}
-                    {#                                            </label>#}
-                    {#                                            <label class="form-group">#}
-                    {#                                                <input type="radio" id="wooden" name="color" value="wooden"#}
-                    {#                                                       onblur="document.getElementById('colorBuy').value = this.value;"#}
-                    {#                                                >#}
-                    {#                                                <img src="{% static 'images/wooden.jpeg' %}" width="100px" height="100px"#}
-                    {#                                                     style="border-radius: 25px; margin-left: 8px">#}
-                    {#                                            </label>#}
-                    {#                                            <label class="form-group">#}
-                    {#                                                <input type="radio" id="black" name="color" value="black"#}
-                    {#                                                       onblur="document.getElementById('colorBuy').value = this.value;"#}
-                    {#                                                >#}
-                    {#                                                <img src="{% static 'images/black.jpeg' %}" width="100px" height="100px"#}
-                    {#                                                     style="border-radius: 25px; margin-left: 8px">#}
-                    {#                                            </label>#}
-                    {#                                        </div>#}
-                    {#                                    </form>#}
-                    {##}
-                    {#                                </dl>  <!-- item-property .// -->#}
-                    {#                            </div> <!-- col.// -->#}
-                    {#                        </div> <!-- row.// -->#}
-
-                    <div class="card mb-3" style="background-color: black">
-                        <div class="card-body" style="color: #383308">
-                            <form>
-                                <div class="form-group">
-                                    <label style="color: #ffdf00">Have coupon?</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="" placeholder="Coupon code">
-                                        <button class="btn btn-warning" style="margin-left: 10px">Apply</button>
-                                    </div>
+                <hr>
+                <div class="card mb-3" style="background-color: black">
+                    <div class="card-body" style="color: #383308">
+                        <form>
+                            <div class="form-group">
+                                <label style="color: #ffdf00">Have coupon?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" placeholder="Coupon code">
+                                    <button class="btn btn-warning" style="margin-left: 10px">Apply</button>
                                 </div>
-                            </form>
-                        </div> <!-- card-body.// -->
-                    </div> <!-- card.// -->
-                </article> <!-- card-body.// -->
-            </aside> <!-- col.// -->
-        </div> <!-- row.// -->
-    </div> <!-- card.// -->
-    <!--container.//-->
-    <hr>
-    <div class="row bg-dark justify-content-center py-md-3 bottom-buttons">
-        <div class="row align-content-md-center">
-            <form class="outer_form" action="/buy_now/" method="post" id="buy_now">
-                {% csrf_token %}
-                <input type="text" name="id" hidden value="{{ product_details.id }}">
-                <input id="colorBuy" type="text" name="color" hidden value="red">
-            </form>
-            <button class="btn" form="buy_now"
-                    style="border-radius: 10px; padding-left: 12px; padding-right: 12px; background-color: #ffdf00">
-                <i class="fa fa-credit-card fa-2x"> Buy Now</i>
-            </button>
-            <button form="myForm" class="btn" type="submit"
-                    style="margin-left: 7px; padding: 12px; border-radius: 10px; background-color: #ffdf00">
-                <i class="fa fa-cart-plus fa-2x"> Add to Cart</i>
-            </button>
-        </div>
+                            </div>
+                        </form>
+                    </div> <!-- card-body.// -->
+                </div> <!-- card.// -->
+            </article> <!-- card-body.// -->
+        </aside> <!-- col.// -->
+    </div> <!-- row.// -->
+</div> <!-- card.// -->
+<!--container.//-->
+<hr>
+<div class="row bg-dark justify-content-center py-md-3 bottom-buttons">
+    <div class="row align-content-md-center">
+        <form class="outer_form" action="/buy_now/" method="post" id="buy_now">
+            {% csrf_token %}
+            <input type="text" name="id" hidden value="{{ product_details.id }}">
+            <input id="colorBuy" type="text" name="color" hidden value="red">
+        </form>
+        <button class="btn" form="buy_now"
+                id="button-1"
+                style="border-radius: 10px; font-size: 25px; background-color: #ffdf00">
+            <i class="fa fa-credit-card"> Buy Now</i>
+        </button>
+        <button form="myForm" class="btn" type="submit"
+                id="button-2"
+                style="margin-left: 7px; font-size: 25px; border-radius: 10px; background-color: #ffdf00">
+            <i class="fa fa-cart-plus"> Add to Cart</i>
+        </button>
     </div>
+</div>
 
 {% endblock %}
 
