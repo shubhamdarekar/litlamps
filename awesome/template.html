@@ -550,17 +550,22 @@
         <ul id="links" class="list-group ml-2" style="background-color: black" onclick="closeSideDrawer()">
             <br>
             <br>
+            <br>
+            <br>
             <li title="Products" class="nav-item">
                 <a href="/products"><i class="fa fa-gift fa-3x"></i>&nbsp;All Products</a>
             </li>
+            <br>
             <li title="Contact Us" class="nav-item">
                 <a data-toggle="modal" data-target="#myModal3" href="#"><i
                         class="fa fa-envelope-o fa-3x"></i>&nbsp;Contact Us</a>
             </li>
             {% if user.is_authenticated %}
+            <br>
                 <li title="Contact Us" class="nav-item">
                     <a href="/profile/"><i class="fa fa-user fa-3x"></i>&nbsp;Your profile</a>
                 </li>
+            <br>
                 <li title="Contact Us" class="nav-item">
                     <a href="/orders/"><i class="fa fa-shopping-cart fa-3x"></i>&nbsp;Your orders</a>
                 </li>
