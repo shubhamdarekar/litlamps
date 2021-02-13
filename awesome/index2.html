@@ -138,7 +138,7 @@
 {% block content %}
 
 <!-- Carousel -->
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
     <ol class="carousel-indicators">
         <li class="active" data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         {% for item in carousel %}
@@ -146,7 +146,7 @@
         {% endfor %}
     </ol>
     <div class="carousel-inner">
-        <div class="carousel-item active" id="carousel1">
+        <div class="carousel-item active" id="carousel1" data->
             {% for item in carousel %}
             <img id="carousel-image" class="d-block" src="{{ item.image_path }}" alt="{{forloop.counter}} slide" width="100%"
                  height="725px" onclick="location.href='/product/?id={{ item.id }}'">
@@ -199,7 +199,7 @@
                 </a>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-12">
-                <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+                <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel" data-interval="3000">
                     <br>
                     <!--Slides-->
 
@@ -304,12 +304,12 @@
                 </a>
             </div>
             <div class="col-lg-10 col-md-10">
-                <div id="multi-item-example2" class="carousel slide carousel-multi-item" data-ride="carousel">
+                <div id="multi-item-example2" class="carousel slide carousel-multi-item" data-ride="carousel" data-interval="3000">
                     <br>
                     <!--Slides-->
                     <div class="carousel-inner" role="listbox">
                         <!--First slide-->
-                        <div class="carousel-item active justify-content-center">
+                        <div class="carousel-item active justify-content-center" data-interval="500">
                             {% for review in reviews %}
                             <div class="col-md-5 col-lg-4 col-sm-8 py-3" style="float:left;color: black">
                                 <div class="card carousel-card">
@@ -343,7 +343,7 @@
                             </div>
                             {% if forloop.counter|divisibleby:3 and forloop.counter < reviews|length %}
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item" data-interval="500">
                             {% endif %}
                             {% endfor %}
                         </div>

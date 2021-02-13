@@ -203,16 +203,17 @@
                 <hr>
                 <div class="card mb-3" style="background-color: black">
                     <div class="card-body" style="color: #383308">
-                        <form>
+<!--                        <form>-->
                             <div class="form-group">
                                 <label style="color: #ffdf00">Have coupon?</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="" placeholder="Coupon code">
-                                    <button class="btn btn-warning" style="margin-left: 10px">Apply</button>
+                                    <input type="text" class="form-control" name="id" placeholder="Coupon code">
+                                    <button class="btn btn-warning" style="margin-left: 10px" onclick="myFunction()">Apply</button>
                                 </div>
+                                <p id="not-valid" style="color: red; margin-top: 5px; display: none">Not valid!!</p>
                             </div>
-                        </form>
-                    </div> <!-- card-body.// -->
+<!--                        </form>-->
+                    </div> <!-- car d-body.// -->
                 </div> <!-- card.// -->
             </article> <!-- card-body.// -->
         </aside>
@@ -244,5 +245,10 @@
 {% endblock %}
 
 {% block script %}
-
+<script>
+    function myFunction() {
+        let x = document.getElementById("not-valid");
+        x.style.display = "block";
+    }
+</script>
 {% endblock %}

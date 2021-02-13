@@ -60,10 +60,6 @@
             border-color: #cccccc;
         }
 
-        .btn-submit:hover {
-            background-color: #090909 !important;
-        }
-
         .avatar {
             vertical-align: middle;
             margin: 20px;
@@ -96,8 +92,21 @@
             <div class="card" style="background-color: black">
                 {% if cart != None %}
                     {% if cart|length == 0 %}
-                        <a href="/products/"><h3 class="center-block center">Your cart is Empty!!! Start
-                            Shopping</h3></a>
+                        <div class="row" style="margin-bottom: -40px">
+            <div class="col-md-12">
+                <div class="main_heading">
+                    <h3 style="color: #ffdf00; margin-top: -50px; margin-bottom: -10px">Your cart is empty :( </h3>
+                    </div>
+                </div>
+            </div><!-- End col-md-12 -->
+        </div>
+            <br>
+        <div class="row justify-content-center">
+        <a href="/products/" style="background-color: #ffdf00; color: black; padding: 20px"
+           class="btn btn-light btn-block col-lg-5 col-sm-auto col-md-8"><p
+                style="color: black; margin: 0">Shop for More products</p></a>
+        </div>
+        <br>
                     {% endif %}
                     {% for cartitem in cart %}
                         <div class="container">
@@ -338,7 +347,7 @@
                                             <label style="color: #ffdf00" class="order-form-label">Mobile Number</label>
                                         </div>
                                         <div class="col-12">
-                                            <input class="order-form-input" style="background-color: white"
+                                            <input class="order-form-input" maxlength="10" minlength="10" style="background-color: white"
                                                    placeholder="+91" name="mobile" required type="number"
                                                    form="address_form">
                                         </div>
