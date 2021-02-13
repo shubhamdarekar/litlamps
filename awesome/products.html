@@ -160,7 +160,7 @@
     <div class="container-fluid row col-12 mx-auto">
         <div class="row justify-content-center col-12 mx-auto">
             {% for product in products %}
-                <div class="products-card block text-center col-lg-3 col-sm-10 col-md-4 " style="background-color: black; border-color: #ffdf00; border-width: 1px">
+                <div class="products-card block text-center col-lg-4 col-sm-10 col-md-4 " style="background-color: black; border-color: #ffdf00; border-width: 1px">
                     <img onclick="location.href='/product/?id={{ product.id }}'"
                                                     class="image my-1" src="{{ product.image_path }}">
                     <div class="info py-2 mx-auto col-12" style="background-color: black">

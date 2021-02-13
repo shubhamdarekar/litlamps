@@ -5,216 +5,244 @@
 
 
 {% block style %}
-    <style>
-        [type=radio] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
+<style>
+    [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
 
-        }
+    }
 
-        /* IMAGE STYLES */
-        [type=radio] + div {
-            width: 80px;
-            height: 45px;
-            cursor: pointer;
-            background-color: grey;
-            padding: 10px;
-        }
+    /* IMAGE STYLES */
+    [type=radio] + div {
+        width: 80px;
+        height: 45px;
+        cursor: pointer;
+        background-color: grey;
+        padding: 10px;
+    }
 
-        /* CHECKED STYLES */
-        [type=radio]:checked + div {
-        {#outline: 5px solid #000;#} background-color: #42ba96;
-        }
-    </style>
-    <style>
-        body {
-            color: #383308;
-        }
+    /* CHECKED STYLES */
+    [type=radio]:checked + div {
 
-        .order-form .container {
-            color: #4c4c4c;
-            padding: 20px;
-            box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
-        }
+    {
+        #outline: 5px solid #000
+    ;
+        #
+    }
+    background-color: #42ba96
 
-        .order-form-label {
-            margin: 8px 0 0 0;
-            font-size: 14px;
-            font-weight: bold;
-        }
+    ;
+    }
+</style>
+<style>
+    body {
+        color: #383308;
+    }
 
-        .order-form-input {
-            width: 100%;
-            padding: 8px 8px;
-            border-width: 1px !important;
-            border-style: solid !important;
-            border-radius: 3px !important;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            font-style: normal;
-            line-height: 1.2em;
-            background-color: transparent;
-            border-color: #cccccc;
-        }
+    .order-form .container {
+        color: #4c4c4c;
+        padding: 20px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+    }
 
-        .btn-submit:hover {
-            background-color: #090909 !important;
-        }
-    </style>
+    .order-form-label {
+        margin: 8px 0 0 0;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .order-form-input {
+        width: 100%;
+        padding: 8px 8px;
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-radius: 3px !important;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.2em;
+        background-color: transparent;
+        border-color: #cccccc;
+    }
+
+    .btn-submit:hover {
+        background-color: #090909 !important;
+    }
+
+    .avatar {
+        vertical-align: middle;
+        margin: 20px;
+        width: 90%;
+        height: 80%;
+        object-fit: cover;
+        border-width: 2px;
+        border-color: black;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-    <br>
-    <br>
-    <br>
-    <hr>
-    <form action="/createRzpOrder/" method="post" class="form" id="address_selector">
-        {% csrf_token %}
-        {% if cart != None %}
-            <input name="type" value="cart" hidden>
-        {% else %}
-            <input name="type" value="buy_now" hidden>
-            <input name="product_id" value="{{ single_product.id }}" hidden>
-            <input name="color" value="{{ color_product }}" hidden>
-        {% endif %}
-    </form>
-    <div class="row mx-auto" style="background-color: black">
-        <aside class="col-lg-9 col-sm-12">
-            <div class="card" style="background-color: black">
-                <table class="table table-borderless table-shopping-cart">
-                    <thead class="text-muted">
-                    <tr class="small text-uppercase">
-                        <th scope="col" style="color: #ffdf00">Product</th>
-                        <th scope="col" style="color: #ffdf00">Color</th>
-                        <th scope="col" width="120" style="color: #ffdf00">Quantity</th>
-                        <th scope="col" width="120" style="color: #ffdf00">Price</th>
-                        <th scope="col" class="text-right" width="200"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {% if cart != None %}
-                        {% if cart|length == 0 %}
-                            <a href="/products/"><h3 class="center-block center">Your cart is Empty!!! Start
-                                Shopping</h3></a>
+<br>
+<br>
+<br>
+<hr>
+<form action="/createRzpOrder/" method="post" class="form" id="address_selector">
+    {% csrf_token %}
+    {% if cart != None %}
+    <input name="type" value="cart" hidden>
+    {% else %}
+    <input name="type" value="buy_now" hidden>
+    <input name="product_id" value="{{ single_product.id }}" hidden>
+    <input name="color" value="{{ color_product }}" hidden>
+    {% endif %}
+</form>
+<div class="row mx-auto" style="background-color: black">
+    <aside class="col-lg-9 col-sm-12">
+        <div class="card" style="background-color: black">
+            {% if cart != None %}
+            {% if cart|length == 0 %}
+            <a href="/products/"><h3 class="center-block center">Your cart is Empty!!! Start
+                Shopping</h3></a>
+            {% endif %}
+            {% for cartitem in cart %}
+            <div class="container">
+                <div class="row border justify-content-between">
+                    <div class="col-lg-3 col-md-2 col-sm-4 my-auto">
+                        <p style="color: #ffdf00">{{ cartitem.product.product_name }}</p>
+                    </div>
+                    <div class="col-lg-1 col-sm-6">
+                        <strong style="color: #ffdf00">Total</strong><br>
+                        <p style="color: #ffdf00">₹{{ cartitem.total }}</p>
+                    </div>
+                </div>
+                <div class="row border justify-content-between">
+                    <div class="col-lg-3 col-md-4 col-sm-3 px-auto">
+                        <a href="/product/?id={{ cartitem.product.id }}"><img
+                                src="{{ cartitem.product.image_path }}"
+                                class="avatar"
+                                alt="Avatar"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 my-3">
+                        {% if cartitem.color == 'red' %}
+                        <div class="row"><p style="color: #ffdf00">&nbsp;&nbsp;Color: &nbsp;&nbsp;</p>
+                            <div class="flex-row-reverse"><img src="{% static 'images/red.jpeg' %}" width="30px"
+                                                               height="30px"
+                                                               style="border-radius: 15px"><br><small
+                                    class="text-muted">&nbsp;Red</small></div>
+                        </div>
+                        {% elif cartitem.color == 'wooden' %}\
+                        <div class="row"><p style="color: #ffdf00">&nbsp;&nbsp;Color: &nbsp;&nbsp;</p>
+                            <div class="flex-row-reverse"><img src="{% static 'images/wooden.jpeg' %}" width="30px"
+                                                               height="30px"
+                                                               style="border-radius: 15px"><br><small
+                                    class="text-muted">&nbsp;Wooden</small></div>
+                        </div>
+                        {% elif cartitem.color == 'black' %}
+                        <div class="row"><p style="color: #ffdf00">&nbsp;&nbsp;Color: &nbsp;&nbsp;</p>
+                            <div class="flex-row-reverse"><img src="{% static 'images/black.jpeg' %}" width="30px"
+                                                               height="30px"
+                                                               style="border-radius: 15px"><br><small
+                                    class="text-muted">&nbsp;Black</small></div>
+                        </div>
                         {% endif %}
-                        {% for cartitem in cart %}
-                            <tr>
-                                <td>
-                                    <figure class="itemside align-items-center">
-                                        <div onclick="location.href='/product/?id={{ cartitem.product.id }}'"
-                                             class="aside"><img src="{{ cartitem.product.image_path }}" class="img-sm"
-                                                                style="max-width:150px;max-height: 100px;">
-                                        </div>
-                                        <figcaption class="info">
-                                            <a href="#" class="title text-dark">{{ cartitem.product.product_name }}</a>
-                                            {#                                        <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>#}
-                                        </figcaption>
-                                    </figure>
-                                </td>
-                                {% if cartitem.color == 'red' %}
-                                    <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
-                                             style="border-radius: 15px"><br><small class="text-muted">Red</small></td>
-                                {% elif cartitem.color == 'wooden' %}
-                                    <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
-                                             style="border-radius: 15px"></br><small class="text-muted">Wooden</small>
-                                    </td>
-                                {% elif cartitem.color == 'black' %}
-                                    <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
-                                             style="border-radius: 15px"></br><small class="text-muted">Black</small>
-                                    </td>
-                                {% endif %}
-                                <td>
-                                    <p style="color: #ffdf00 !important;">{{ cartitem.quantity }}</p>
-                                </td>
-                                <td>
-                                    <div class="price-wrap">
-                                        <var class="price" style="color: #ffdf00">₹{{ cartitem.total }}</var>
-                                        <small class="text-muted"><p style="color: #ffdf00 !important;">₹{{ cartitem.product.product_price_rupees }}
-                                            each</p></small>
-                                    </div> <!-- price-wrap .// -->
-                                </td>
-                                <td class="text-right">
-                                    <form action="/remove_from_cart/" method="post" id="remove">
-                                        {% csrf_token %}
-                                        <input type="type" hidden name="next" value="{{ request.path }}">
-                                        <input type="text" hidden name="id" value="{{ cartitem.id }}">
-                                    </form>
-                                    <button form="remove" class="btn btn-danger" style="color: white"> Remove</button>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    {% else %}
-                        <tr>
-                            <td>
-                                <figure class="itemside align-items-center">
-                                    <div onclick="location.href='/product/?id={{ single_product.id }}'" class="aside col-sm-12">
-                                        <img src="{{ single_product.image_path }}" class="img-sm"
-                                             style="max-width:150px;max-height: 100px;">
-                                    </div>
-                                    <figcaption class="info">
-                                        <a href="#" class="title text-dark">{{ single_product.product_name }}</a>
-                                        {#                                        <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>#}
-                                    </figcaption>
-                                </figure>
-                            </td>
-                            {% if color_product == 'red' %}
-                                <td><img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px"></td>
-                            {% elif color_product == 'wooden' %}
-                                <td><img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px">
-                                </td>
-                            {% elif color_product == 'black' %}
-                                <td><img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
-                                         style="border-radius: 15px">
-                                </td>
-                            {% endif %}
-                            <td style="color: #ffdf00">
-                                1
-                            </td>
-                            <td>
-                                <div class="price-wrap">
-                                    <var class="price" style="color: #ffdf00">₹{{ single_product.product_price_rupees }}</var>
-                                    <small class="text-muted" style="color: #ffdf00 !important;"> ₹{{ single_product.product_price_rupees }}
-                                        each </small>
-                                </div> <!-- price-wrap .// -->
-                            </td>
-                            <td class="text-right">
-                                <a href="/products/" class="btn btn-danger" style="color: white!important;"> Remove</a>
-                            </td>
-                        </tr>
-                    {% endif %}
-                    </tbody>
-                </table>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 my-3">
+                        <p style="color: #ffdf00 !important;">Quantity: &nbsp;{{ cartitem.quantity }}</p>
+                    </div>
+                    <div class="col-lg-3 col-sm-3 col-md-3">
+                        <div class="price-wrap">
+                            <var class="price" style="color: #ffdf00">₹{{ cartitem.total }}</var>
+                            <small class="text-muted"><p style="color: #ffdf00 !important;">₹{{ cartitem.product.product_price_rupees }}
+                                each</p></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+            {% else %}
+            <div class="container">
+                <div class="row border justify-content-between">
+                    <div class="col-lg-3 col-md-2 col-sm-4 my-auto">
+                        <p style="color: #ffdf00">{{ single_product.product_name }}</p>
+                    </div>
+                    <div class="col-lg-1 col-sm-6">
+                        <strong style="color: #ffdf00">Total</strong><br>
+                        <p style="color: #ffdf00">₹{{ single_product.product_price_rupees }}</p>
+                    </div>
+                </div>
+                <div class="row border justify-content-between">
+                    <div class="col-lg-3 col-md-4 col-sm-3 px-auto">
+                        <a href="/product/?id={{ single_product.id }}"><img
+                                src="{{ single_product.image_path }}"
+                                class="avatar"
+                                alt="Avatar"></a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 my-3">
+                        {% if color_product == 'red' %}
+                        <div class="row"><p style="color: #ffdf00">&nbsp;&nbsp;Color: &nbsp;&nbsp;</p>
+                            <div class="flex-row-reverse"><img src="{% static 'images/red.jpeg' %}" width="30px"
+                                                               height="30px"
+                                                               style="border-radius: 15px"><br><small
+                                    class="text-muted">&nbsp;Red</small></div>
+                        </div>
+                        {% elif color_product == 'wooden' %}\
+                        <div class="row"><p style="color: #ffdf00">&nbsp;&nbsp;Color: &nbsp;&nbsp;</p>
+                            <div class="flex-row-reverse"><img src="{% static 'images/wooden.jpeg' %}" width="30px"
+                                                               height="30px"
+                                                               style="border-radius: 15px"><br><small
+                                    class="text-muted">&nbsp;Wooden</small></div>
+                        </div>
+                        {% elif color_product == 'black' %}
+                        <div class="row"><p style="color: #ffdf00">&nbsp;&nbsp;Color: &nbsp;&nbsp;</p>
+                            <div class="flex-row-reverse"><img src="{% static 'images/black.jpeg' %}" width="30px"
+                                                               height="30px"
+                                                               style="border-radius: 15px"><br><small
+                                    class="text-muted">&nbsp;Black</small></div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 my-3">
+                        <p style="color: #ffdf00 !important;">Quantity: &nbsp;1</p>
+                    </div>
+                    <div class="col-lg-3 col-sm-3 col-md-3">
+                        <div class="price-wrap">
+                            <var class="price" style="color: #ffdf00">₹{{ single_product.product_price_rupees }}</var>
+                            <small class="text-muted"><p style="color: #ffdf00 !important;">₹{{ single_product.product_price_rupees }}
+                                each</p></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
 
-                <div class="profile">
-                    <hr>
-                    <div class="row">
-                        <div class="card col-lg-8" style="background-color: black">
-                            <div class="card-header"
-                                 style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
-                                <div class="row">
-                                    <img src="{% static 'images/addr.png' %}" width="70px" height="70px">
-                                    <h2 class="align-self-center" style="color: #ffdf00">&nbsp&nbspSelect an address</h2>
-                                </div>
+            <div class="profile">
+                <hr>
+                <div class="row">
+                    <div class="card col-lg-8" style="background-color: black">
+                        <div class="card-header"
+                             style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19)">
+                            <div class="row">
+                                <img src="{% static 'images/addr.png' %}" width="70px" height="70px">
+                                <h2 class="align-self-center" style="color: #ffdf00">&nbsp&nbspSelect an address</h2>
                             </div>
-                            <div class="card-body">
-                                {% for address in addresses %}
-                                    <div class="row address-box">
-                                        <div class="col-lg-12 col-sm-12">
-                                            <h5 style="color: #ffdf00">Address {{ forloop.counter }}</h5>
-                                        </div>
-                                        <div class="col-1">
+                        </div>
+                        <div class="card-body">
+                            {% for address in addresses %}
+                            <div class="row address-box">
+                                <div class="col-lg-12 col-sm-12">
+                                    <h5 style="color: #ffdf00">Address {{ forloop.counter }}</h5>
+                                </div>
+                                <div class="col-1">
 
-                                        </div>
-                                        <div style="width: 500px;">
-                                            <div class="row justify-content-between" style="width: 100%">
-                                                <strong style="color: #ffdf00">{{ address.first }}&nbsp;{{ address.last }}</strong>
-                                                <div class="justify-content-end">
+                                </div>
+                                <div style="width: 500px;">
+                                    <div class="row justify-content-between" style="width: 100%">
+                                        <strong style="color: #ffdf00">{{ address.first }}&nbsp;{{ address.last }}</strong>
+                                        <div class="justify-content-end">
                                             <label class="form-group">
                                                 <input form="address_selector" type="radio" name="address_id"
                                                        name="color" value="{{ address.id }}" checked>
@@ -224,139 +252,152 @@
                                             </label>
 
                                         </div>
-                                            </div>
-                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.street }}</p></small>
-                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.street2 }}</p></small>
-                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.city }}&nbsp;{{ address.region }}</p></small>
-                                            <small class="text-muted"><p style="color: #ffdf00">{{ address.pin }}</p></small>
-                                            <b style="color: #ffdf00">Mobile : {{ address.mobile }}</b>
-                                        </div>
                                     </div>
-                                    <br>
-                                {% endfor %}
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="container pt-4 col-lg-3">
-                            <div class="row">
-                                <img src="{% static 'images/add_addr.png' %}" width="30px" height="30px">
-                            <h5 style="color: #ffdf00; padding-top: 2px; padding-bottom: 7px">&nbsp;Or Add a new address</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row mx-0">
-                                        <div class="col-12">
-                                            <label class="order-form-label" style="color: #ffdf00">Name</label>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <input class="order-form-input" placeholder="First Name" name="first" required
-                                                   style="background-color: white" form="address_form">
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <input class="order-form-input" style="background-color: white" placeholder="Last Name" name="last" required
-                                                   form="address_form">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-1 mx-0">
-                                        <div class="col-12">
-                                            <label class="order-form-label" style="color: #ffdf00">Address</label>
-                                        </div>
-                                        <div class="col-12">
-                                            <input class="order-form-input" placeholder="Street Address" style="background-color: white" name="street"
-                                                   required form="address_form">
-                                        </div>
-                                        <div class="col-12 mt-2">
-                                            <input class="order-form-input" style="background-color: white" placeholder="Street Address Line 2"
-                                                   name="street2" required form="address_form">
-                                        </div>
-                                        <div class="col-12 col-sm-6 mt-2 pr-sm-2">
-                                            <input class="order-form-input" style="background-color: white" placeholder="City" name="city" required
-                                                   form="address_form">
-                                        </div>
-                                        <div class="col-12 col-sm-6 mt-2 pl-sm-0">
-                                            <input class="order-form-input" style="background-color: white" placeholder="Region" name="region" required
-                                                   form="address_form">
-                                        </div>
-                                        <div class="col-12 col-sm-12 mt-2 pr-sm-12">
-                                            <input class="order-form-input" style="background-color: white" placeholder="Postal / Zip Code" name="pin"
-                                                   required form="address_form">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-1 mx-0">
-                                        <div class="col-12">
-                                            <label style="color: #ffdf00" class="order-form-label">Mobile Number</label>
-                                        </div>
-                                        <div class="col-12">
-                                            <input class="order-form-input" style="background-color: white" placeholder="+91" name="mobile" required
-                                                   form="address_form">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-1 mx-0">
-                                        <div class="col-12">
-                                            <form action="/add_address/" method="post" class="form" id="address_form">
-                                                {% csrf_token %}
-                                                <input type="type" hidden name="next" value="{{ request.path }}">
-                                                <br>
-                                                <button type="submit"
-                                                        class="btn d-block mx-auto btn-submit"
-                                                        style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0;">
-                                                    <i class="fa fa-plus"> Add</i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-
+                                    <small class="text-muted"><p style="color: #ffdf00">{{ address.street }}</p></small>
+                                    <small class="text-muted"><p style="color: #ffdf00">{{ address.street2 }}</p>
+                                    </small>
+                                    <small class="text-muted"><p style="color: #ffdf00">{{ address.city }}&nbsp;{{
+                                        address.region }}</p></small>
+                                    <small class="text-muted"><p style="color: #ffdf00">{{ address.pin }}</p></small>
+                                    <b style="color: #ffdf00">Mobile : {{ address.mobile }}</b>
                                 </div>
+                            </div>
+                            <br>
+                            {% endfor %}
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="container pt-4 col-lg-3">
+                        <div class="row">
+                            <img src="{% static 'images/add_addr.png' %}" width="30px" height="30px">
+                            <h5 style="color: #ffdf00; padding-top: 2px; padding-bottom: 7px">&nbsp;Or Add a new
+                                address</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row mx-0">
+                                    <div class="col-12">
+                                        <label class="order-form-label" style="color: #ffdf00">Name</label>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input class="order-form-input" placeholder="First Name" name="first" required
+                                               style="background-color: white" form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input class="order-form-input" style="background-color: white"
+                                               placeholder="Last Name" name="last" required
+                                               form="address_form">
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1 mx-0">
+                                    <div class="col-12">
+                                        <label class="order-form-label" style="color: #ffdf00">Address</label>
+                                    </div>
+                                    <div class="col-12">
+                                        <input class="order-form-input" placeholder="Street Address"
+                                               style="background-color: white" name="street"
+                                               required form="address_form">
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <input class="order-form-input" style="background-color: white"
+                                               placeholder="Street Address Line 2"
+                                               name="street2" required form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-2 pr-sm-2">
+                                        <input class="order-form-input" style="background-color: white"
+                                               placeholder="City" name="city" required
+                                               form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-2 pl-sm-0">
+                                        <input class="order-form-input" style="background-color: white"
+                                               placeholder="Region" name="region" required
+                                               form="address_form">
+                                    </div>
+                                    <div class="col-12 col-sm-12 mt-2 pr-sm-12">
+                                        <input class="order-form-input" style="background-color: white"
+                                               placeholder="Postal / Zip Code" name="pin"
+                                               required form="address_form">
+                                    </div>
+                                </div>
+                                <div class="row mt-1 mx-0">
+                                    <div class="col-12">
+                                        <label style="color: #ffdf00" class="order-form-label">Mobile Number</label>
+                                    </div>
+                                    <div class="col-12">
+                                        <input class="order-form-input" style="background-color: white"
+                                               placeholder="+91" name="mobile" required
+                                               form="address_form">
+                                    </div>
+                                </div>
+
+                                <div class="row mt-1 mx-0">
+                                    <div class="col-12">
+                                        <form action="/add_address/" method="post" class="form" id="address_form">
+                                            {% csrf_token %}
+                                            <input type="type" hidden name="next" value="{{ request.path }}">
+                                            <br>
+                                            <button type="submit"
+                                                    class="btn d-block mx-auto btn-submit"
+                                                    style="background-color: #ffdf00; color: black; border-radius: 10px; border: 0;">
+                                                <i class="fa fa-plus"> Add</i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <br>
-                <div class="card-body border-top">
-                    <p class="icontext" style="color: #ffdf00"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
-                </div> <!-- card-body.// -->
+            </div>
+            <br>
+            <div class="card-body border-top">
+                <p class="icontext" style="color: #ffdf00"><i class="icon text-success fa fa-truck"></i> Free Delivery
+                    within 1-2 weeks</p>
+            </div> <!-- card-body.// -->
 
-            </div> <!-- card.// -->
-        </aside> <!-- col.// -->
-        <aside class="col-lg-3">
+        </div> <!-- card.// -->
+    </aside> <!-- col.// -->
+    <aside class="col-lg-3">
 
-            <div class="card mb-3" style="background-color: black">
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label style="color: #ffdf00">Have coupon?</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="" placeholder="Coupon code">
-                                <span class="input-group-append">
+        <div class="card mb-3" style="background-color: black">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label style="color: #ffdf00">Have coupon?</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="" placeholder="Coupon code">
+                            <span class="input-group-append">
 				<button style="background-color: #ffdf00; color: black" class="btn">Apply</button>
 			</span>
-                            </div>
                         </div>
-                    </form>
-                </div> <!-- card-body.// -->
-            </div> <!-- card.// -->
+                    </div>
+                </form>
+            </div> <!-- card-body.// -->
+        </div> <!-- card.// -->
 
-            <div class="card" style="background-color: black">
-                <div class="card-body">
-                    <dl class="dlist-align">
-                        <dt style="color: #ffdf00">Total:</dt>
-                        <dd class="text-right text-dark b"><strong style="color: #ffdf00">₹{{ totalPrice }}</strong></dd>
-                    </dl>
-                    <hr>
-                    <p class="text-center mb-3">
-                        <img src="{% static 'images/razorpay.png' %}" height="26">
-                    </p>
-                    <button class="btn btn-block" style="color: black; background-color: #ffdf00" form="address_selector" type="submit">Make Purchase
-                    </button>
-                    <a href="/products/" style="background-color: #ffdf00; color: black;" class="btn btn-light btn-block"><p style="color: black; margin: 0">Continue Shopping</p></a>
-                </div> <!-- card-body.// -->
-            </div> <!-- card.// -->
+        <div class="card" style="background-color: black">
+            <div class="card-body">
+                <dl class="dlist-align">
+                    <dt style="color: #ffdf00">Total:</dt>
+                    <dd class="text-right text-dark b"><strong style="color: #ffdf00">₹{{ totalPrice }}</strong></dd>
+                </dl>
+                <hr>
+                <p class="text-center mb-3">
+                    <img src="{% static 'images/razorpay.png' %}" height="26">
+                </p>
+                <button class="btn btn-block" style="color: black; background-color: #ffdf00" form="address_selector"
+                        type="submit">Make Purchase
+                </button>
+                <a href="/products/" style="background-color: #ffdf00; color: black;" class="btn btn-light btn-block"><p
+                        style="color: black; margin: 0">Continue Shopping</p></a>
+            </div> <!-- card-body.// -->
+        </div> <!-- card.// -->
 
-        </aside> <!-- col.// -->
+    </aside> <!-- col.// -->
 
-    </div>
+</div>
 {% endblock %}
 
 {% block script %}

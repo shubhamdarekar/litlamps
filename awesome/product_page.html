@@ -216,7 +216,7 @@
                 </div> <!-- card.// -->
             </article> <!-- card-body.// -->
         </aside>
-        <aside class="col-lg-2 my-auto" id="large-screen">
+        <aside class="col-lg-2 my-5" id="large-screen">
             <form class="outer_form" action="/buy_now/" method="post" id="buy_now">
                 {% csrf_token %}
                 <input type="text" name="id" hidden value="{{ product_details.id }}">
@@ -224,7 +224,7 @@
             </form>
             <button class="btn" form="buy_now"
                     id="button-1"
-                    style="border-radius: 10px; padding-left: 18px; padding-right: 18px; font-size: 40px; background-color: #ffdf00">
+                    style="border-radius: 10px; padding-left: 25px; padding-right: 25px; font-size: 40px; background-color: #ffdf00">
                 <i class="fa fa-credit-card"> Buy Now</i>
             </button>
             <br>
