@@ -25,5 +25,7 @@ urlpatterns = [
     path('privacy/', views.privacy_policy),
     path('termsconditions/', views.term_condition),
     path('refundPolicy/', views.refund_policy),
+    path('accounts/google/login/callback/<str:path>/', views.redirection),
+
 
 ]

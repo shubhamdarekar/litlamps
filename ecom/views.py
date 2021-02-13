@@ -43,14 +43,15 @@ def product_page(request):
 def checkout(request):
     cart = cart_items(request)
     address = Address.objects.filter(customer_id=request.user.id)
-    totalPrice = Cart.objects.filter(customer_id=request.user.id).aggregate(sumtotal=Sum(F('product__product_price_rupees')*F('quantity'), output_field=FloatField()))
+    totalPrice = Cart.objects.filter(customer_id=request.user.id).aggregate(
+        sumtotal=Sum(F('product__product_price_rupees') * F('quantity'), output_field=FloatField()))
     return render(request, 'checkout.html',
                   {'cart': cart, 'totalPrice': totalPrice['sumtotal'], 'addresses': address})
 
 
-def checkout_product(request):
+def checkout_product(request, product_id=None, color=None):
     if request.user.is_authenticated:
-        if request.method == 'POST':
+        if request.method == 'POST' and not product_id:
             if request.POST['id']:
                 product_id = request.POST['id']
                 color = request.POST['color']
@@ -60,8 +61,18 @@ def checkout_product(request):
                 return render(request, 'checkout.html',
                               {'single_product': single_product, 'totalPrice': total_price,
                                'addresses': address, 'color_product': color})
+
+        single_product = Product.objects.get(id=product_id)
+        total_price = Product.objects.get(id=product_id).product_price_rupees
+        address = Address.objects.filter(customer_id=request.user.id)
+        print("Here")
+        return render(request, 'checkout.html',
+                      {'single_product': single_product, 'totalPrice': total_price,
+                       'addresses': address, 'color_product': color})
     else:
-        return redirect('/accounts/google/login')
+        product_id = request.POST['id']
+        color = request.POST['color']
+        return redirect('/accounts/google/login?next=checkout' + product_id + "." + color)
 
 
 def homepage(request):
@@ -83,7 +94,8 @@ def homepage(request):
     recently_viewed = recent_viewed()
     cart = cart_items(request)
     return render(request, 'index2.html',
-                  {'bestselling': bestselling, 'faqs': faq, 'payment': payment, 'cart': cart, 'reviews': reviews, 'carousel': carousel})
+                  {'bestselling': bestselling, 'faqs': faq, 'payment': payment, 'cart': cart, 'reviews': reviews,
+                   'carousel': carousel})
 
 
 def cart_items(request):
@@ -101,13 +113,14 @@ def products(request):
     return render(request, 'products.html', {'products': products, 'cart': cart, 'cart_visible': cart_visible});
 
 
-def add_to_cart(request):
+def add_to_cart(request, color=None, product_id=None):
     if request.user.is_authenticated:
         if request.method == 'POST':
             if request.POST['id']:
                 # cursor = connection.cursor()
                 color = request.POST['color']
                 product_id = request.POST['id']
+                customer_id = request.user.id
                 customer_id = request.user.id
                 row = Cart.objects.filter(product_id=product_id).filter(customer_id=customer_id).filter(color=color)
                 if row:
@@ -119,8 +132,22 @@ def add_to_cart(request):
                     cart.color = color
                     cart.save()
                 return redirect('/products/?cart=true')
+
+        customer_id = request.user.id
+        row = Cart.objects.filter(product_id=product_id).filter(customer_id=customer_id).filter(color=color)
+        if row:
+            Cart.objects.filter(id=row.first().id).update(quantity=row.first().quantity + 1)
+        else:
+            cart = Cart()
+            cart.product_id = product_id
+            cart.customer_id = request.user.id
+            cart.color = color
+            cart.save()
+        return redirect('/products/?cart=true')
     else:
-        return redirect('/accounts/google/login')
+        color = request.POST['color']
+        product_id = request.POST['id']
+        return redirect('/accounts/google/login?next=addtocart' + product_id + "." + color)
 
 
 def remove_from_cart(request):
@@ -136,21 +163,21 @@ def remove_from_cart(request):
                 p_id = obj[0].product_id
                 obj.delete()
                 if next == "/product/":
-                    return HttpResponseRedirect(next + '?cart=true&id='+str(p_id))
+                    return HttpResponseRedirect(next + '?cart=true&id=' + str(p_id))
                 return HttpResponseRedirect(next + '?cart=true')
     else:
         return redirect('/')
 
 
 def remove_from_cart_ajax(request):
-        if request.method == 'GET':
-            if request.GET['id']:
-                id = request.GET['id']
-                obj = Cart.objects.filter(id=id)
-                p_id = obj[0].product_id
-                obj.delete()
-                return JsonResponse({"deleted": True}, status=200)
-        return JsonResponse({"deleted": False}, status=400)
+    if request.method == 'GET':
+        if request.GET['id']:
+            id = request.GET['id']
+            obj = Cart.objects.filter(id=id)
+            p_id = obj[0].product_id
+            obj.delete()
+            return JsonResponse({"deleted": True}, status=200)
+    return JsonResponse({"deleted": False}, status=400)
 
 
 def profile(request):
@@ -292,9 +319,14 @@ def add_address(request):
             last = request.POST['last']
             first = request.POST['first']
             next = request.POST.get('next', '/')
-            address = Address(street=street, street2=street2, region=region, city=city, mobile=mobile, pincode=pincode, first=first, last=last)
+            address = Address(street=street, street2=street2, region=region, city=city, mobile=mobile, pincode=pincode,
+                              first=first, last=last)
             address.customer_id = request.user.id
             address.save()
+            if next == '/buy_now/':
+                product_id = request.POST['product_id']
+                color = request.POST['color']
+                return checkout_product(request, product_id=product_id, color=color)
     return redirect(next)
 
 
@@ -328,5 +360,19 @@ def privacy_policy(request):
 def term_condition(request):
     return render(request, "term_conditions.html")
 
+
 def refund_policy(request):
     return render(request, 'refund_policy.html')
+
+
+def redirection(request, path=""):
+    if path[:8] == "checkout":
+        ind = path.find(".")
+        product_id = int(path[8:ind])
+        color = path[ind + 1:]
+        return checkout_product(request, product_id=product_id, color=color)
+    elif path[:9] == "addtocart":
+        ind = path.find(".")
+        product_id = int(path[9:ind])
+        color = path[ind + 1:]
+        return add_to_cart(request, color=color, product_id=product_id)
