@@ -193,7 +193,8 @@
             width: 60px;
             height: 60px;
         }
-        .avatar{
+
+        .avatar {
             vertical-align: middle;
             margin: 20px;
             width: 200px;
@@ -276,87 +277,114 @@
 {% endblock %}
 
 {% block content %}
-<div class="row" style="margin-bottom: -40px">
-    <div class="col-md-12">
-        <div class="main_heading">
-            <h3 style="color: #ffdf00; margin-top: -50px; margin-bottom: -10px">Your Orders</h3>
-            <div class="text-center"><span class="underline"
-                                           style="background-color: #ffdf00!important; width: 150px"></span></div>
+    {% if orders|length == 0 %}
+        <div class="row" style="margin-bottom: -40px">
+            <div class="col-md-12">
+                <div class="main_heading">
+                    <h3 style="color: #ffdf00; margin-top: -50px; margin-bottom: -10px">Seems like you have not ordered anything.. :( </h3>
+                    </div>
+                </div>
+            </div><!-- End col-md-12 -->
         </div>
-    </div><!-- End col-md-12 -->
-</div>
+        <br>
+        <div class="row justify-content-center">
+        <a href="/products/" style="background-color: #ffdf00; color: black; padding: 20px"
+           class="btn btn-light btn-block col-lg-5 col-sm-auto col-md-8"><p
+                style="color: black; margin: 0">Shop for More products</p></a>
+        </div>
+        <br>
 
-    <div class="container-xl mx-auto" style="background-color: black">
-    {% for order_item in orders %}
-        <div class="container my-3" style="border-style: solid;
-  border-width: 2px;">
-            <div class="row border" >
-                <div class="col-lg-2 col-md-2 col-sm-4">
-                    <strong style="color: #ffdf00">Order Placed</strong><br><p style="color: #ffdf00">{{ order_item.order.time }}</p>
+    {% else %}
+        <div class="row" style="margin-bottom: -40px">
+            <div class="col-md-12">
+                <div class="main_heading">
+                    <h3 style="color: #ffdf00; margin-top: -50px; margin-bottom: -10px">Your Orders</h3>
+                    <div class="text-center"><span class="underline"
+                                                   style="background-color: #ffdf00!important; width: 150px"></span>
+                    </div>
                 </div>
-                <div class="col-1">
-                    <strong style="color: #ffdf00">Total</strong><br><p style="color: #ffdf00">₹{{ order_item.total }}</p>
-                </div>
-                <div class="col">
-                    <div class="float-right"><strong style="color: #ffdf00">ORDER #</strong><p style="color: #ffdf00">
-                        &nbsp;{{ order_item.order.razorpay_order_id }}</p></div>
-                </div>
-            </div>
-            <div class="row border">
-                <br>
-                <br>
-                <div class="col-lg-3 col-md-4 col-sm-3 px-auto">
-                    <a href="/product/?id={{ order_item.product.id }}"><img
-                            src="{{ order_item.product.image_path }}"
-                            class="avatar"
-                            alt="Avatar"></a>
-                </div>
-                <div class="col-lg-2 col-md-2 col-sm-3">
-                    <br>
-                    <h6 class="mb-0 mt-2" style="color: #ffdf00; text-decoration:none"><a href="/product/?id={{ order_item.product.id }}">{{ order_item.product.product_name }}</a></h6>
-                    <p style="color: #ffdf00">₹<a>{{ order_item.product.product_price_rupees }}</a></p>
-                    <form action="/buy_now/" method="post" id="buy_now">
-                        {% csrf_token %}
-                        <input type="text" name="id" hidden value="{{ order_item.product.id }}">
-                        <input id="colorBuy{{ order_item.product.id }}" type="text" name="color" hidden
-                               value="{{ order_item.color }}">
-                        <button class="order" type="submit" style="background-color: #ffdf00; border-radius: 10px; border: 0; padding: 10px">
-                            <i class="fa fa-credit-card sm-font"> Order Again </i>
-                        </button>
-                    </form>
-                </div>
-                <div class="col-lg-1 col-md-1 col-sm-3">
-                    <br>
-                    {% if order_item.color == 'red' %}
-                        <img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
-                             style="border-radius: 15px">
-                    {% elif order_item.color == 'wooden' %}
-                        <img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
-                             style="border-radius: 15px"></br>
-                    {% elif order_item.color == 'black' %}
-                        <img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
-                             style="border-radius: 15px">
-                    {% endif %}
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-2">
-                    <br>
-                    <form action="/submitReview/" method="post" id="review">
-                        {% csrf_token %}
-                        <input type="text" name="id" hidden value="{{ order_item.product.id }}">
-                        <input id="color" type="text" name="color" hidden
-                               value="{{ order_item.color }}">
-                        <textarea name="reviewField" form="review" required>Write a Review....
-                        </textarea>
-                        <br>
-                        <button class="order" type="submit" style="border: 0; border-radius: 10px; padding: 10px; background-color: #ffdf00">
-                            <i class="fa fa-street-view sm-font"> Submit review </i>
-                        </button>
-                    </form>
-                    <br>
-                </div>
-            </div>
+            </div><!-- End col-md-12 -->
         </div>
-    {% endfor %}
+
+        <div class="container-xl mx-auto" style="background-color: black">
+        {% for order_item in orders %}
+            <div class="container my-3" style="border-style: solid;
+  border-width: 2px;">
+                <div class="row border">
+                    <div class="col-lg-2 col-md-2 col-sm-4">
+                        <strong style="color: #ffdf00">Order Placed</strong><br>
+                        <p style="color: #ffdf00">{{ order_item.order.time }}</p>
+                    </div>
+                    <div class="col-1">
+                        <strong style="color: #ffdf00">Total</strong><br>
+                        <p style="color: #ffdf00">₹{{ order_item.total }}</p>
+                    </div>
+                    <div class="col">
+                        <div class="float-right"><strong style="color: #ffdf00">ORDER #</strong>
+                            <p style="color: #ffdf00">
+                                &nbsp;{{ order_item.order.razorpay_order_id }}</p></div>
+                    </div>
+                </div>
+                <div class="row border">
+                    <br>
+                    <br>
+                    <div class="col-lg-3 col-md-4 col-sm-3 px-auto">
+                        <a href="/product/?id={{ order_item.product.id }}"><img
+                                src="{{ order_item.product.image_path }}"
+                                class="avatar"
+                                alt="Avatar"></a>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3">
+                        <br>
+                        <h6 class="mb-0 mt-2" style="color: #ffdf00; text-decoration:none"><a
+                                href="/product/?id={{ order_item.product.id }}">{{ order_item.product.product_name }}</a>
+                        </h6>
+                        <p style="color: #ffdf00">₹<a>{{ order_item.product.product_price_rupees }}</a></p>
+                        <form action="/buy_now/" method="post" id="buy_now">
+                            {% csrf_token %}
+                            <input type="text" name="id" hidden value="{{ order_item.product.id }}">
+                            <input id="colorBuy{{ order_item.product.id }}" type="text" name="color" hidden
+                                   value="{{ order_item.color }}">
+                            <button class="order" type="submit"
+                                    style="background-color: #ffdf00; border-radius: 10px; border: 0; padding: 10px">
+                                <i class="fa fa-credit-card sm-font"> Order Again </i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-3">
+                        <br>
+                        {% if order_item.color == 'red' %}
+                            <img src="{% static 'images/red.jpeg' %}" width="30px" height="30px"
+                                 style="border-radius: 15px">
+                        {% elif order_item.color == 'wooden' %}
+                            <img src="{% static 'images/wooden.jpeg' %}" width="30px" height="30px"
+                                 style="border-radius: 15px"></br>
+                        {% elif order_item.color == 'black' %}
+                            <img src="{% static 'images/black.jpeg' %}" width="30px" height="30px"
+                                 style="border-radius: 15px">
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-2">
+                        <br>
+                        <form action="/submitReview/" method="post" id="review">
+                            {% csrf_token %}
+                            <input type="text" name="id" hidden value="{{ order_item.product.id }}">
+                            <input id="color" type="text" name="color" hidden
+                                   value="{{ order_item.color }}">
+                            <textarea name="reviewField" form="review" required>Write a Review....
+                        </textarea>
+                            <br>
+                            <button class="order" type="submit"
+                                    style="border: 0; border-radius: 10px; padding: 10px; background-color: #ffdf00">
+                                <i class="fa fa-street-view sm-font"> Submit review </i>
+                            </button>
+                        </form>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block script %}

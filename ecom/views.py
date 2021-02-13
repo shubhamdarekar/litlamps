@@ -302,7 +302,7 @@ def orders_page(request):
     orders = []
     reviews = []
     if request.user.is_authenticated:
-        orders = Order_item.objects.filter(order__customer_id=request.user.id)
+        orders = Order_item.objects.filter(order__customer_id=request.user.id).filter(order__payment=True)
         reviews = Customer_review.objects.filter(customer_id=request.user.id)
     return render(request, "orders_page.html", {"orders": orders, "reviews": reviews})
 
