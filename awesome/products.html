@@ -143,6 +143,12 @@
         .products-card:hover {
             box-shadow: 0 4px 8px 0 #ffdf00, 0 5px 10px 0 #ffdf00;
         }
+
+        @media only screen and (max-width: 500px) {
+            #product-name  {
+                font-size: 22px;
+            }
+        }
     </style>
 {% endblock %}
 
@@ -184,7 +190,7 @@
 
                         </div>
                         <div class="text-left" onclick="location.href='/product/?id={{ product.id }}'">
-                            <h5 class="mb-0 mt-2" style="color: #ffdf00">{{ product.product_name }}</h5> <small
+                            <h5 id="product-name" class="mb-0 mt-2" style="color: #ffdf00">{{ product.product_name }}</h5> <small
                                 class="text-muted mb-1"><p style="color: #ffdf00">{{ product.small_desc }}</p></small>
                         </div>
                         <div class="row px-3">
