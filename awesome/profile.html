@@ -104,19 +104,19 @@
                         <tr class="form-group">
                             <td style="color: #ffdf00">First Name</td>
                             <td><input type="text" name="first_name" value="{{ user.first_name }}"
-                                       id="input1" class="profile-input form-control" readonly required></td>
+                                       id="input1" class="profile-input form-control" readonly required style="background-color: black; border: 0; color: #ffdf00"></td>
                             <td><i class="fa fa-edit" id="btn1" style="color: #ffdf00; margin-left: 20px"></i></td>
                         </tr>
                         <tr class="form-group">
                             <td style="color: #ffdf00">Last Name</td>
                             <td><input type="text" name="last_name" value="{{ user.last_name }}"
-                                       id="input2" class="profile-input form-control" required readonly></td>
+                                       id="input2" class="profile-input form-control" required readonly style="background-color: black; border: 0; color: #ffdf00"></td>
                             <td><i class="fa fa-edit" id="btn2" style="color: #ffdf00; margin-left: 20px"></i></td>
                         </tr>
                         <tr class="form-group">
                             <td style="color: #ffdf00">Username</td>
                             <td><input type="text" name="username" value="{{ user.username }}"
-                                       id="input3" class="profile-input form-control" required readonly></td>
+                                       id="input3" class="profile-input form-control" required readonly style="background-color: black; border: 0; color: #ffdf00"></td>
                             <td><i class="fa fa-edit" id="btn3" style="color: #ffdf00; margin-left: 20px"></i></td>
                         </tr>
                         <tr>
@@ -268,14 +268,20 @@
     <script>
         document.getElementById('btn1').onclick = function () {
             document.getElementById('input1').removeAttribute('readonly')
+            document.getElementById('input1').style.backgroundColor = "white";
+            document.getElementById('input1').style.color = "black";
         }
 
         document.getElementById('btn2').onclick = function () {
             document.getElementById('input2').removeAttribute('readonly')
+            document.getElementById('input2').style.backgroundColor = "white";
+            document.getElementById('input2').style.color = "black";
         }
 
         document.getElementById('btn3').onclick = function () {
             document.getElementById('input3').removeAttribute('readonly')
+            document.getElementById('input3').style.backgroundColor = "white";
+            document.getElementById('input3').style.color = "black";
         }
     </script>
     {% endblock %}
