@@ -144,10 +144,12 @@
         <div class="card col-lg-8" style="background-color: black">
             <div class="card-header"
                  style="box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);">
+                {% if addresses|length != 0 %}
                 <div class="row">
                     <img src="{% static 'images/addr.png' %}" width="70px" height="70px">
                     <h2 class="align-self-center" style="color: #ffdf00">&nbsp&nbspAddress Settings</h2>
                 </div>
+                {% endif %}
             </div>
             <div class="card-body">
                 {% for address in addresses %}
