@@ -18,7 +18,6 @@ colorama==0.4.3
 cryptography==2.8
 dbus-python==1.2.16
 decorator==4.4.2
-defer==1.0.6
 defusedxml==0.6.0
 dialogflow==1.1.0
 distlib==0.3.0
